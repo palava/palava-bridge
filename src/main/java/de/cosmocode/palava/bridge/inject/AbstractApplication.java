@@ -26,10 +26,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.Module;
-import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import com.google.inject.internal.UniqueAnnotations;
 import com.google.inject.multibindings.Multibinder;
@@ -40,14 +38,14 @@ import de.cosmocode.palava.bridge.command.Alias;
 import de.cosmocode.palava.bridge.command.Aliases;
 import de.cosmocode.palava.bridge.command.Command;
 import de.cosmocode.palava.bridge.request.RequestFilter;
-import de.cosmocode.palava.core.Service;
+import de.cosmocode.palava.core.ServiceModule;
 
 /**
  * Abstract module for applications.
  *
  * @author Willi Schoenborn
  */
-public abstract class AbstractApplication extends AbstractModule {
+public abstract class AbstractApplication extends ServiceModule {
     
     private final List<FilterDefinition> filterDefinitions = Lists.newArrayList();
     private final Map<Key<Filter>, Filter> filterInstances = Maps.newLinkedHashMap();
@@ -75,34 +73,12 @@ public abstract class AbstractApplication extends AbstractModule {
     protected abstract void configureApplication();
 
     /**
-     * Binds a service key.
-     * 
-     * @param <S> the generic service type
-     * @param key the service key
-     * @return a {@link ServiceBinder}
-     */
-    protected <S extends Service> ServiceBinder<S> serve(Key<S> key) {
-        return new InternalServiceBinder<S>(key);
-    }
-    
-    /**
-     * Binds a service key.
-     * 
-     * @param <S> the generic service type
-     * @param type the service type
-     * @return a {@link ServiceBinder}
-     */
-    protected <S extends Service> ServiceBinder<S> serve(Class<S> type) {
-        return serve(Key.get(type));
-    }
-    
-    /**
      * Binds a filter.
      * 
      * @param matcher the matcher the filter uses
      * @return a {@link FilterBinder}
      */
-    protected FilterBinder filter(Predicate<Command> matcher) {
+    protected final FilterBinder filter(Predicate<Command> matcher) {
         return new InternalFilterBinder(matcher);
     }
     
@@ -112,7 +88,7 @@ public abstract class AbstractApplication extends AbstractModule {
      * @param packageName the package name the alias stands for
      * @return an {@link AliasBinder}
      */
-    protected AliasBinder alias(String packageName) {
+    protected final AliasBinder alias(String packageName) {
         return new InternalAliasBinder(packageName);
     }
     
@@ -121,41 +97,8 @@ public abstract class AbstractApplication extends AbstractModule {
      * 
      * @param type the filter's class literal
      */
-    protected void filterRequestsWith(Class<? extends RequestFilter> type) {
+    protected final void filterRequestsWith(Class<? extends RequestFilter> type) {
         Multibinder.newSetBinder(binder(), RequestFilter.class).addBinding().to(type);
-    }
-    
-    /**
-     * Private implementation of the {@link ServiceBinder} interface
-     * which holds a reference to the enclosing {@link Module}.
-     *
-     * @author Willi Schoenborn
-     * @param <S> the generic service type
-     */
-    private class InternalServiceBinder<S extends Service> implements ServiceBinder<S> {
-        
-        private final Key<S> key;
-        
-        public InternalServiceBinder(Key<S> key) {
-            this.key = Preconditions.checkNotNull(key, "Key");
-            Multibinder.newSetBinder(binder(), Service.class).addBinding().to(key).in(Singleton.class);
-        }
-        
-        @Override
-        public void with(Class<? extends S> serviceKey) {
-            binder().bind(key).to(serviceKey).in(Singleton.class);            
-        }
-        
-        @Override
-        public void with(Key<? extends S> serviceKey) {
-            binder().bind(key).to(serviceKey).in(Singleton.class);       
-        }
-        
-        @Override
-        public void with(S service) {
-            binder().bind(key).toInstance(service);
-        }
-        
     }
     
     /**
@@ -165,7 +108,7 @@ public abstract class AbstractApplication extends AbstractModule {
      * @author Willi Schoenborn
      * @param <F> the generic filter type
      */
-    private class InternalFilterBinder implements FilterBinder {
+    private final class InternalFilterBinder implements FilterBinder {
         
         private final Predicate<Command> matcher;
         
@@ -209,7 +152,7 @@ public abstract class AbstractApplication extends AbstractModule {
      *
      * @author Willi Schoenborn
      */
-    private class InternalAliasBinder implements AliasBinder {
+    private final class InternalAliasBinder implements AliasBinder {
         
         private final String packageName;
         
