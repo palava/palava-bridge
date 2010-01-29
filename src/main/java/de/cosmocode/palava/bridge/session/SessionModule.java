@@ -32,7 +32,6 @@ public final class SessionModule implements Module {
     @Override
     public void configure(Binder binder) {
         binder.bind(HttpSessionManager.class).to(DefaultHttpSessionManager.class);
-//        binder.bind(HttpSession.class).toProvider(HttpSessionManager.class);
     }
 
 }

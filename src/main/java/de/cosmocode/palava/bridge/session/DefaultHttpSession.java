@@ -42,7 +42,7 @@ import de.cosmocode.palava.bridge.scope.Destroyable;
  */
 final class DefaultHttpSession implements HttpSession {
     
-    public static final Logger log = Logger.getLogger(DefaultHttpSession.class);
+    public static final Logger LOG = Logger.getLogger(DefaultHttpSession.class);
 
     private String sessionId;
 

@@ -44,6 +44,7 @@ public class initialize implements Command {
 
     @Override
     public Content execute(Call call) throws CommandException {
+        // TODO should fail
         return new TextContent(provider.get().getSessionId());
     }
     

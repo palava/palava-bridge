@@ -23,7 +23,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -45,7 +45,7 @@ import de.cosmocode.palava.core.lifecycle.Disposable;
 @Singleton
 final class DefaultHttpSessionManager implements HttpSessionManager, Disposable {
     
-    private static final Logger log = LoggerFactory.getLogger(DefaultHttpSessionManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultHttpSessionManager.class);
     
     private final Map<String, HttpSession> sessions = new HashMap<String, HttpSession>();
 
@@ -77,7 +77,7 @@ final class DefaultHttpSessionManager implements HttpSessionManager, Disposable 
         
         synchronized (sessions) {
             final Collection<HttpSession> oldSessions = Collections2.filter(sessions.values(), predicate);
-            log.info("Destroying {} sessions", oldSessions.size());
+            LOG.info("Destroying {} sessions", oldSessions.size());
             for (HttpSession session : oldSessions) {
                 session.destroy();
             }
@@ -89,24 +89,18 @@ final class DefaultHttpSessionManager implements HttpSessionManager, Disposable 
     public HttpSession get() {
         final HttpSession cached = Scopes.getCurrentSession();
         if (cached == null) {
-            final StringBuilder builder = new StringBuilder();
-            final Random rnd = new Random();
-            for (int n = 0; n < 64;  n++) {
-                builder.append(rnd.nextInt(10));
-            }
-            final String sessionId = builder.toString();
-            log.debug("Creating new session with id {}", sessionId);
+            final String sessionId = UUID.randomUUID().toString();
+            LOG.debug("Creating new session with id {}", sessionId);
             final HttpSession session = new DefaultHttpSession(sessionId);
             
             synchronized (sessions) {
                 sessions.put(sessionId, session);
             }
             
-            log.debug("{} sessions currently in progess", sessions.size());
-            
+            LOG.debug("{} sessions currently in progess", sessions.size());
             return session;
         } else {
-            log.debug("Found old session");
+            LOG.debug("Found old session");
             return cached;
         }
     }

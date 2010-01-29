@@ -58,9 +58,11 @@ public interface Call {
     Command getCommand();
 
     /**
-     * Provides the underlying inputstream.
+     * Provides an optional binary inputstream.
      * 
      * @return the inputstream
+     * @throws UnsupportedOperationException if this call does not provide
+     *         a binary stream
      */
     InputStream getInputStream();
     
@@ -74,9 +76,12 @@ public interface Call {
     /**
      * Discard all bytes left in the stream without parsing them.
      * 
+     * @deprecated don't use
+     * 
      * @throws ConnectionLostException if stream has been closed
      * @throws IOException if an error occurs during read
      */
+    @Deprecated
     void discard() throws ConnectionLostException, IOException;
     
 }

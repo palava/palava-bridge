@@ -44,7 +44,7 @@ import de.cosmocode.palava.bridge.session.HttpSession;
  */
 final class DefaultHttpRequest implements HttpRequest {
     
-    private static final Logger log = LoggerFactory.getLogger(DefaultHttpRequest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultHttpRequest.class);
     
     private static final String REQUEST_URI = "REQUEST_URI";
     private static final String HTTP_REFERER = "HTTP_REFERER";
@@ -125,7 +125,7 @@ final class DefaultHttpRequest implements HttpRequest {
     public void destroy() {
         final Iterable<Destroyable> destroyables = Iterables.filter(context.values(), Destroyable.class);
         for (Destroyable destroyable : destroyables) {
-            log.debug("Destryoing {}", destroyable);
+            LOG.debug("Destryoing {}", destroyable);
             destroyable.destroy();
         }
         context.clear();
