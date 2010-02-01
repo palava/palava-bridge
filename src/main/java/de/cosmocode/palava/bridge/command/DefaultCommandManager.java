@@ -37,7 +37,7 @@ import de.cosmocode.palava.bridge.Server;
  *
  * @author Willi Schoenborn
  */
-final class DefaultCommandManager implements CommandManager {
+public final class DefaultCommandManager implements CommandManager {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultCommandManager.class);
 
@@ -48,9 +48,11 @@ final class DefaultCommandManager implements CommandManager {
     private final Set<Alias> aliases;
     
     private final Map<String, Class<?>> cache = Maps.newHashMap();
-    
+
     @Inject
     public DefaultCommandManager(Injector injector, Server server, Set<Alias> aliases) {
+        // TODO make aliases "optional" (no error if non registered)
+        // TODO checkNotNull required? guice will error out without the objects..?
         this.injector = Preconditions.checkNotNull(injector, "Injector");
         this.server = Preconditions.checkNotNull(server, "Server");
         this.aliases = Preconditions.checkNotNull(aliases, "Aliases");

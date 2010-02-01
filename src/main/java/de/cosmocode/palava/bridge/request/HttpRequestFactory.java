@@ -22,13 +22,14 @@ package de.cosmocode.palava.bridge.request;
 import java.util.Map;
 
 import de.cosmocode.palava.bridge.session.HttpSession;
+import de.cosmocode.palava.core.Service;
 
 /**
  * A factory for {@link HttpRequest}s.
  *
  * @author Willi Schoenborn
  */
-public interface HttpRequestFactory {
+public interface HttpRequestFactory extends Service {
 
     /**
      * Creates a new {@link HttpRequest} which will be associated with the specified

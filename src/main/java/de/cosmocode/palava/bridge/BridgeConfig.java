@@ -17,23 +17,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package de.cosmocode.palava.bridge.request;
+package de.cosmocode.palava.bridge;
 
-import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import de.cosmocode.palava.bridge.session.HttpSession;
+public class BridgeConfig {
+    private BridgeConfig() {}
 
-/**
- * Default implementation of the {@link HttpRequestFactory} which creates
- * {@link DefaultHttpRequest}s.
- *
- * @author Willi Schoenborn
- */
-public final class DefaultHttpRequestFactory implements HttpRequestFactory {
+    public static final String Prefix = "bridge.";
 
-    @Override
-    public HttpRequest create(HttpSession session, Map<String, String> serverVariable) {
-        return new DefaultHttpRequest(session, serverVariable);
-    }
+    public static final String Host = Prefix + "host";
+
+    public static final String Port = Prefix + "port";
 
 }

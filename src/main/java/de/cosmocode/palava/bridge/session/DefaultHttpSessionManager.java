@@ -43,7 +43,7 @@ import de.cosmocode.palava.core.lifecycle.Disposable;
  * @author Willi Schoenborn
  */
 @Singleton
-final class DefaultHttpSessionManager implements HttpSessionManager, Disposable {
+public final class DefaultHttpSessionManager implements HttpSessionManager, Disposable {
     
     private static final Logger LOG = LoggerFactory.getLogger(DefaultHttpSessionManager.class);
     
