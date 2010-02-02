@@ -78,7 +78,7 @@ public final class DefaultCommandManager implements CommandManager {
         }
         if (Job.class.isAssignableFrom(type)) {
             final Job job = injector.getInstance(type.asSubclass(Job.class));
-            return new JobCommand(server, job);
+            return Commands.adaptJob(job, server);
         } else {
             return injector.getInstance(type.asSubclass(Command.class));
         }

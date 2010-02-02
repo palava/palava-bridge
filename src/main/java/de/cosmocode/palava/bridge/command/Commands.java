@@ -21,6 +21,8 @@ package de.cosmocode.palava.bridge.command;
 
 import com.google.common.base.Function;
 
+import de.cosmocode.palava.bridge.Server;
+
 /**
  * Static utility class for working with {@link Command}s.
  *
@@ -55,6 +57,17 @@ public final class Commands {
      */
     public static Class<?> getClass(Command command) {
         return GET_CLASS.apply(command);
+    }
+    
+    /**
+     * Creates a {@link Command}-adapter for a Job, using the given server.
+     * @param job the job to adapt from
+     * @param server the server to use for the job's process method
+     * @return a Command that adapts the given Job
+     */
+    @SuppressWarnings("deprecation")
+    public static Command adaptJob(final Job job, final Server server) {
+        return new JobCommand(server, job);
     }
 
 }
