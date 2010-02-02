@@ -44,5 +44,6 @@ public class BridgeModule  extends ServiceModule {
         install(new RequestModule());
         install(new ScopeModule());
         install(new SessionModule());
+        install(new ServerModule());
     }
 }
