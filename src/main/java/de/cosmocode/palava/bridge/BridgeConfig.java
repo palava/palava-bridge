@@ -19,16 +19,21 @@
 
 package de.cosmocode.palava.bridge;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+/**
+ * 
+ * @author Tobias Sarnowski
+ * @author Willi Schoenborn
+ */
+public final class BridgeConfig {
 
-public class BridgeConfig {
-    private BridgeConfig() {}
+    public static final String PREFIX = "bridge.";
 
-    public static final String Prefix = "bridge.";
+    public static final String HOST = PREFIX + "host";
 
-    public static final String Host = Prefix + "host";
-
-    public static final String Port = Prefix + "port";
+    public static final String PORT = PREFIX + "port";
+    
+    private BridgeConfig() {
+        
+    }
 
 }
