@@ -22,6 +22,8 @@ package de.cosmocode.palava.bridge.command;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.multibindings.Multibinder;
+import de.cosmocode.palava.bridge.inject.AbstractApplication;
+import de.cosmocode.palava.core.ServiceModule;
 
 
 /**
@@ -29,13 +31,13 @@ import com.google.inject.multibindings.Multibinder;
  *
  * @author Willi Schoenborn
  */
-public final class CommandModule implements Module {
+public final class CommandModule extends AbstractApplication {
 
     @Override
-    public void configure(Binder binder) {
-        Multibinder.newSetBinder(binder, Alias.class).addBinding().toInstance(
-            Aliases.of("@palava", "de.cosmocode.palava.jobs")
-        );
+    protected void configureApplication() {
+        serve(CommandManager.class).with(DefaultCommandManager.class);
+
+        alias("de.cosmocode.palava.jobs").as("@palava");
     }
 
 }
