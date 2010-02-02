@@ -133,7 +133,7 @@ final class DefaultHttpSession implements HttpSession {
     @Override
     @SuppressWarnings("unchecked")
     public <K, V> V remove(K key) {
-        return (V) context.get(key);
+        return (V) context.remove(key);
     }
 
     @Override

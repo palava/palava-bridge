@@ -58,7 +58,7 @@ public class ErrorContent extends AbstractContent {
         builder.append("</pre>");
         builder.append("</div>");
 
-        bytes = builder.toString().getBytes();
+        bytes = builder.toString().getBytes(CHARSET);
     }
 
     private String htmlspecialchars(String text) {

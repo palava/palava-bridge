@@ -19,24 +19,32 @@
 
 package de.cosmocode.palava.bridge;
 
-import de.cosmocode.palava.bridge.command.*;
-import de.cosmocode.palava.bridge.request.DefaultHttpRequestFactory;
-import de.cosmocode.palava.bridge.request.HttpRequestFactory;
+import de.cosmocode.palava.bridge.call.CallModule;
+import de.cosmocode.palava.bridge.call.filter.FilterModule;
+import de.cosmocode.palava.bridge.command.CommandManager;
+import de.cosmocode.palava.bridge.command.CommandModule;
+import de.cosmocode.palava.bridge.command.DefaultCommandManager;
 import de.cosmocode.palava.bridge.request.RequestModule;
-import de.cosmocode.palava.bridge.session.DefaultHttpSessionManager;
-import de.cosmocode.palava.bridge.session.HttpSessionManager;
+import de.cosmocode.palava.bridge.scope.ScopeModule;
 import de.cosmocode.palava.bridge.session.SessionModule;
 import de.cosmocode.palava.core.ServiceModule;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ *
+ * @author Willi Schoenborn
+ */
 public class BridgeModule  extends ServiceModule {
 
     @Override
     protected void configure() {
+        install(new CallModule());
+        install(new FilterModule());
         install(new CommandModule());
-        install(new SessionModule());
         install(new RequestModule());
-        install(new ServerModule());
+        install(new ScopeModule());
+        install(new SessionModule());
+        serve(CommandManager.class).with(DefaultCommandManager.class);
+        serve(Server.class).with(DefaultServer.class);
     }
 }

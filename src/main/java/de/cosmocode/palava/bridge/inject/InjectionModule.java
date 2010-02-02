@@ -42,7 +42,7 @@ import com.google.inject.spi.TypeConverter;
  */
 public final class InjectionModule implements Module {
 
-    private static final Logger log = LoggerFactory.getLogger(InjectionModule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(InjectionModule.class);
     
     private static final TypeConverter FILE_CONVERTER = new TypeConverter() {
         
@@ -79,9 +79,9 @@ public final class InjectionModule implements Module {
 
     @Override
     public void configure(Binder binder) {
-        log.debug("Registering file type converter");
+        LOG.debug("Registering file type converter");
         binder.convertToTypes(subclasseOf(File.class), FILE_CONVERTER);
-        log.debug("Registering url type converter");
+        LOG.debug("Registering url type converter");
         binder.convertToTypes(subclasseOf(URL.class), URL_CONVERTER);
     }
 

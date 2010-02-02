@@ -271,7 +271,8 @@ public class UpdateResult implements Convertible, JSONEncoder {
         return values;
     }
     public Long lookupLong(Map<String, Object> args, String field) {
-        String value = (String) args.get(field) ;
+        final Object v = args.get(field);
+        String value = v == null ? null : v.toString();
         if ( value != null && ( value = value.trim()).length() == 0 ) return null;
         try {
             return Long.parseLong( value ) ;
@@ -291,7 +292,8 @@ public class UpdateResult implements Convertible, JSONEncoder {
         
     }
     public String lookupString(Map<String, Object> args, String field, boolean mandatory) {
-        String value = (String) args.get(field);
+        final Object v = args.get(field);
+        String value = v == null ? null : v.toString();
         if ( value != null ) value = value.trim();
         
         if ( mandatory ) return validateString(field, value ) ? value : null;

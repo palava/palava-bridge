@@ -53,7 +53,7 @@ public class PhpContent extends AbstractContent {
         final PHPConverter converter = new PHPConverter();
         final StringBuffer buf = new StringBuffer();
         converter.convert(buf, object);
-        bytes = buf.toString().getBytes();
+        bytes = buf.toString().getBytes(CHARSET);
     }
     
     @Override

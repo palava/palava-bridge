@@ -45,48 +45,48 @@ public class JsonContent extends AbstractContent {
 
     public static final JsonContent EMPTY = new JsonContent(new JSONObject());
     
-    private static final byte[] NULL = "null".getBytes();
+    private static final byte[] NULL = "null".getBytes(CHARSET);
     
     private final byte[] bytes;
     
     public JsonContent(JSONRenderer renderer) {
         super(MimeType.JSON);
-        bytes = renderer == null ? NULL : renderer.toString().getBytes();
+        bytes = renderer == null ? NULL : renderer.toString().getBytes(CHARSET);
     }
     
     public JsonContent(JSONObject object) {
         super(MimeType.JSON);
-        bytes = object == null ? NULL : object.toString().getBytes();
+        bytes = object == null ? NULL : object.toString().getBytes(CHARSET);
     }
     
     public JsonContent(JSONArray array) {
         super(MimeType.JSON);
-        bytes = array == null ? NULL : array.toString().getBytes();
+        bytes = array == null ? NULL : array.toString().getBytes(CHARSET);
     }
     
     public JsonContent(JSONConstructor constructor) {
         super(MimeType.JSON);
-        bytes = constructor == null ? NULL : constructor.toString().getBytes();
+        bytes = constructor == null ? NULL : constructor.toString().getBytes(CHARSET);
     }
     
     public JsonContent(JSONMapable mapable) {
         super(MimeType.JSON);
-        bytes = mapable == null ? NULL : JSON.createJSONRenderer().object(mapable).toString().getBytes();
+        bytes = mapable == null ? NULL : JSON.createJSONRenderer().object(mapable).toString().getBytes(CHARSET);
     }
     
     public JsonContent(JSONEncoder encoder) {
         super(MimeType.JSON);
-        bytes = encoder == null ? NULL : JSON.createJSONRenderer().object(encoder).toString().getBytes();
+        bytes = encoder == null ? NULL : JSON.createJSONRenderer().object(encoder).toString().getBytes(CHARSET);
     }
     
     public <E> JsonContent(Iterable<E> iterable) {
         super(MimeType.JSON);
-        bytes = iterable == null ? NULL : JSON.createJSONRenderer().array(iterable).toString().getBytes();
+        bytes = iterable == null ? NULL : JSON.createJSONRenderer().array(iterable).toString().getBytes(CHARSET);
     }
     
     public <K, V> JsonContent(Map<K, V> map) {
         super(MimeType.JSON);
-        bytes = map == null ? NULL : JSON.createJSONRenderer().object(map).toString().getBytes();
+        bytes = map == null ? NULL : JSON.createJSONRenderer().object(map).toString().getBytes(CHARSET);
     }
     
     @Override

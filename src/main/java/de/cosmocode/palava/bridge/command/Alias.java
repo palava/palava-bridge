@@ -21,7 +21,6 @@ package de.cosmocode.palava.bridge.command;
 
 import com.google.common.base.Function;
 
-import de.cosmocode.palava.core.Service;
 import de.cosmocode.patterns.Immutable;
 
 /**
@@ -30,7 +29,7 @@ import de.cosmocode.patterns.Immutable;
  * @author Willi Schoenborn
  */
 @Immutable
-public interface Alias extends Function<String, String>, Service {
+public interface Alias extends Function<String, String> {
 
     /**
      * Provides the names of this alias.

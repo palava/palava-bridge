@@ -21,6 +21,7 @@ package de.cosmocode.palava.bridge;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 
 
 /**
@@ -31,6 +32,8 @@ import java.io.OutputStream;
  * @author Willi Schoenborn
  */
 public interface Content {
+    
+    Charset CHARSET = Charset.forName("UTF-8");
     
     /**
      * Provide the mimetype.

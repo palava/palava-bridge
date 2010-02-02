@@ -35,7 +35,7 @@ public class TextContent extends AbstractContent {
 
     public TextContent(String text) {
         super(MimeType.TEXT);
-        bytes = text == null ? "null".getBytes() : text.getBytes();
+        bytes = text == null ? "null".getBytes(CHARSET) : text.getBytes(CHARSET);
     }
 
     @Override
