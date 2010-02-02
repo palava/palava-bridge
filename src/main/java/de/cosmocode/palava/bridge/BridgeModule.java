@@ -44,7 +44,5 @@ public class BridgeModule  extends ServiceModule {
         install(new RequestModule());
         install(new ScopeModule());
         install(new SessionModule());
-        serve(CommandManager.class).with(DefaultCommandManager.class);
-        serve(Server.class).with(DefaultServer.class);
     }
 }
