@@ -26,7 +26,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
@@ -42,7 +43,7 @@ import de.cosmocode.palava.bridge.scope.Destroyable;
  */
 final class DefaultHttpSession implements HttpSession {
     
-    public static final Logger LOG = Logger.getLogger(DefaultHttpSession.class);
+    public static final Logger LOG = LoggerFactory.getLogger(DefaultHttpSession.class);
 
     private String sessionId;
 
@@ -145,6 +146,7 @@ final class DefaultHttpSession implements HttpSession {
     public void destroy() {
         final Iterable<Destroyable> destroyables = Iterables.filter(context.values(), Destroyable.class);
         for (Destroyable destroyable : destroyables) {
+            LOG.debug("Destryoing {} in session", destroyable);
             destroyable.destroy(); 
         }
         context.clear();

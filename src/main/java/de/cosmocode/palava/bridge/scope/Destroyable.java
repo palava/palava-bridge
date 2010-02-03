@@ -20,7 +20,8 @@
 package de.cosmocode.palava.bridge.scope;
 
 /**
- * Lifecycle class for scoped objects.
+ * Lifecycle class for scoped objects. The {@link Destroyable#destroy()}
+ * method will be called on the end of the surrounding scope which.
  * 
  * @author Detlef Hüttemann
  * @author Willi Schoenborn
