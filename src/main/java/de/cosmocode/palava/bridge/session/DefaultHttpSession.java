@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
-import com.google.inject.internal.Maps;
+import com.google.common.collect.Maps;
 
 import de.cosmocode.json.JSONRenderer;
 import de.cosmocode.palava.bridge.scope.Destroyable;

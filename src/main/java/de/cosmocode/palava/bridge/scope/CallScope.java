@@ -22,11 +22,11 @@ package de.cosmocode.palava.bridge.scope;
 import java.util.Map;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 import com.google.inject.Key;
 import com.google.inject.OutOfScopeException;
 import com.google.inject.Provider;
 import com.google.inject.Scope;
-import com.google.inject.internal.Maps;
 
 /**
  * Custom {@link Scope} implementation for one call.

@@ -31,8 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
-import com.google.inject.internal.Maps;
-import com.google.inject.internal.Nullable;
+import com.google.common.collect.Maps;
 
 import de.cosmocode.palava.bridge.scope.Destroyable;
 import de.cosmocode.palava.bridge.session.HttpSession;
@@ -57,7 +56,7 @@ final class DefaultHttpRequest implements HttpRequest {
     
     private final Map<String, String> serverVariable = Maps.newHashMap();
     
-    public DefaultHttpRequest(@Nullable HttpSession httpSession, Map<String, String> serverVariable) {
+    public DefaultHttpRequest(HttpSession httpSession, Map<String, String> serverVariable) {
         this.httpSession = httpSession;
         Preconditions.checkNotNull(serverVariable, "SserverVariable");
         this.serverVariable.putAll(serverVariable);
