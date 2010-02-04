@@ -24,6 +24,11 @@ import java.util.Map;
 
 public interface DataCall extends Call {
  
+    /**
+     * @deprecated use {@link Call#getArguments()} instead
+     * @return
+     */
+    @Deprecated
     Map<String, String> getStringedArguments();
     
 }
