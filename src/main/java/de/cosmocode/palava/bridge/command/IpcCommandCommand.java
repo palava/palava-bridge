@@ -19,21 +19,26 @@
 
 package de.cosmocode.palava.bridge.command;
 
+import java.util.Map;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
+
 import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.content.JsonContent;
 import de.cosmocode.palava.ipc.IpcCommand;
 import de.cosmocode.palava.ipc.IpcCommandExecutionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import de.cosmocode.patterns.Adapter;
 
-import java.util.Map;
-
+/**
+ * An {@link IpcCommand} to {@link Command} adapter.
+ *
+ * @author Willi Schoenborn
+ */
+@Adapter(Command.class)
 public class IpcCommandCommand implements Command {
-    private static final Logger LOG = LoggerFactory.getLogger(IpcCommandCommand.class);
-
+    
     private final IpcCommand ipcCommand;
 
     public IpcCommandCommand(IpcCommand ipcCommand) {
@@ -42,7 +47,7 @@ public class IpcCommandCommand implements Command {
 
     @Override
     public Content execute(Call call) throws CommandException {
-        Map<String,Object> result = Maps.newLinkedHashMap();
+        final Map<String, Object> result = Maps.newLinkedHashMap();
 
         try {
             ipcCommand.execute(call, result);
