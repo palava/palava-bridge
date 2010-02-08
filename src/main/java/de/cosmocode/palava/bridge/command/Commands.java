@@ -22,6 +22,7 @@ package de.cosmocode.palava.bridge.command;
 import com.google.common.base.Function;
 
 import de.cosmocode.palava.bridge.Server;
+import de.cosmocode.palava.ipc.IpcCommand;
 
 /**
  * Static utility class for working with {@link Command}s.
@@ -70,4 +71,7 @@ public final class Commands {
         return new JobCommand(server, job);
     }
 
+    public static Command adaptIpcCommand(IpcCommand ipcCommand) {
+        return new IpcCommandCommand(ipcCommand);
+    }
 }

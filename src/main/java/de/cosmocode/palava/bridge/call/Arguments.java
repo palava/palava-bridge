@@ -19,7 +19,7 @@
 
 package de.cosmocode.palava.bridge.call;
 
-import de.cosmocode.collections.utility.UtilityMap;
+import de.cosmocode.palava.ipc.IpcArguments;
 
 /**
  * Argument map providing useful methods for type checking
@@ -27,7 +27,7 @@ import de.cosmocode.collections.utility.UtilityMap;
  *
  * @author Willi Schoenborn
  */
-public interface Arguments extends UtilityMap<String, Object> {
+public interface Arguments extends IpcArguments {
 
     /**
      * Checks whether all specified keys exist in these arguments.

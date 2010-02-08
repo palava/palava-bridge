@@ -19,15 +19,16 @@
 
 package de.cosmocode.palava.bridge.session;
 
+import de.cosmocode.json.JSONMapable;
+import de.cosmocode.json.JSONRenderer;
+import de.cosmocode.palava.bridge.scope.Destroyable;
+import de.cosmocode.palava.ipc.IpcSession;
+
 import java.text.Collator;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
-
-import de.cosmocode.json.JSONMapable;
-import de.cosmocode.json.JSONRenderer;
-import de.cosmocode.palava.bridge.scope.Destroyable;
 
 /**
  * A {@link HttpSession} represents an browser session,
@@ -35,7 +36,7 @@ import de.cosmocode.palava.bridge.scope.Destroyable;
  *
  * @author Willi Schoenborn
  */
-public interface HttpSession extends Destroyable, JSONMapable {
+public interface HttpSession extends IpcSession, Destroyable, JSONMapable {
     
     String LANGUAGE = "lang";
     

@@ -22,6 +22,7 @@ package de.cosmocode.palava.bridge.command;
 import java.util.Map;
 import java.util.Set;
 
+import de.cosmocode.palava.ipc.IpcCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,6 +80,9 @@ public final class DefaultCommandManager implements CommandManager {
         if (Job.class.isAssignableFrom(type)) {
             final Job job = injector.getInstance(type.asSubclass(Job.class));
             return Commands.adaptJob(job, server);
+        } else if (IpcCommand.class.isAssignableFrom(type)) {
+            final IpcCommand ipcCommand = injector.getInstance(type.asSubclass(IpcCommand.class));
+            return Commands.adaptIpcCommand(ipcCommand);
         } else {
             return injector.getInstance(type.asSubclass(Command.class));
         }

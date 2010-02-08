@@ -19,25 +19,19 @@
 
 package de.cosmocode.palava.bridge.command;
 
+import de.cosmocode.palava.ipc.IpcCommandExecutionException;
+
 /**
  * Indicates an error during {@link Command} executing.
  *
  * @author Willi Schoenborn
  */
-public final class CommandException extends Exception {
+public final class CommandException extends IpcCommandExecutionException {
 
     private static final long serialVersionUID = -7091237906330777228L;
-
-    public CommandException(String message) {
-        super(message);
-    }
     
     public CommandException(Throwable throwable) {
         super(throwable);
-    }
-    
-    public CommandException(String message, Throwable throwable) {
-        super(message, throwable);
     }
 
 }
