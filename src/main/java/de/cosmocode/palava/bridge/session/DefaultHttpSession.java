@@ -24,6 +24,7 @@ import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -31,7 +32,9 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
+import com.google.common.collect.UnmodifiableIterator;
 
 import de.cosmocode.json.JSONRenderer;
 import de.cosmocode.palava.bridge.scope.Destroyable;
@@ -142,6 +145,11 @@ final class DefaultHttpSession implements HttpSession {
         context.put(key, value);
     }
 
+    @Override
+    public UnmodifiableIterator<Entry<Object, Object>> iterator() {
+        return Iterators.unmodifiableIterator(context.entrySet().iterator());
+    }
+    
     @Override
     public void destroy() {
         final Iterable<Destroyable> destroyables = Iterables.filter(context.values(), Destroyable.class);

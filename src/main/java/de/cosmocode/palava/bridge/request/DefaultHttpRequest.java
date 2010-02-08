@@ -58,7 +58,7 @@ final class DefaultHttpRequest implements HttpRequest {
     
     public DefaultHttpRequest(HttpSession httpSession, Map<String, String> serverVariable) {
         this.httpSession = httpSession;
-        Preconditions.checkNotNull(serverVariable, "SserverVariable");
+        Preconditions.checkNotNull(serverVariable, "ServerVariable");
         this.serverVariable.putAll(serverVariable);
     }
 
