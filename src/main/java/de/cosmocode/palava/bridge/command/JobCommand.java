@@ -55,9 +55,10 @@ final class JobCommand implements Command {
     public Content execute(Call call) throws CommandException {
         
         final Response response = new DummyResponse();
-        final HttpRequest request = Scopes.getCurrentRequest();
+        final HttpRequest request = call.getHttpRequest();
         log.debug("Local request: {}", request);
-        final HttpSession session = request.getHttpSession();
+        // TODO needed????
+        final HttpSession session = request == null ? null : request.getHttpSession();
         log.debug("Local session: {}", session);
 
         try {
