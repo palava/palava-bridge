@@ -21,6 +21,7 @@ package de.cosmocode.palava.jobs.session;
 
 import com.google.inject.Singleton;
 
+import de.cosmocode.json.JSONMapable;
 import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.command.Command;
@@ -37,7 +38,7 @@ public class dump implements Command {
 
     @Override
     public Content execute(Call call) throws CommandException {
-        return new JsonContent(call.getHttpRequest().getHttpSession());
+        return new JsonContent(JSONMapable.class.cast(call.getHttpRequest().getHttpSession()));
     }
     
 }
