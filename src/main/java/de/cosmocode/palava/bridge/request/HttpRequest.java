@@ -24,13 +24,14 @@ import java.net.URL;
 
 import de.cosmocode.palava.bridge.scope.Destroyable;
 import de.cosmocode.palava.bridge.session.HttpSession;
+import de.cosmocode.palava.ipc.IpcConnection;
 
 /**
  * Encapsulates http related data access and scoping issues.
  *
  * @author Willi Schoenborn
  */
-public interface HttpRequest extends Destroyable {
+public interface HttpRequest extends IpcConnection, Destroyable {
 
     /**
      * Provide the requested {@link URI}.

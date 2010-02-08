@@ -24,6 +24,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -31,10 +32,13 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
+import com.google.common.collect.UnmodifiableIterator;
 
 import de.cosmocode.palava.bridge.scope.Destroyable;
 import de.cosmocode.palava.bridge.session.HttpSession;
+import de.cosmocode.palava.ipc.IpcSession;
 
 /**
  * Default implementation of the {@link HttpRequest}.
@@ -103,6 +107,11 @@ final class DefaultHttpRequest implements HttpRequest {
     public HttpSession getHttpSession() {
         return httpSession;
     }
+    
+    @Override
+    public IpcSession getSession() {
+        return getHttpSession();
+    }
 
     @Override
     public <K, V> void set(K key, V value) {
@@ -120,6 +129,22 @@ final class DefaultHttpRequest implements HttpRequest {
         return (V) context.get(key);
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public <K, V> V remove(K key) {
+        return (V) context.remove(key);
+    }
+
+    @Override
+    public <K, V> void putAll(Map<? extends K, ? extends V> map) {
+        context.putAll(map);
+    }
+
+    @Override
+    public UnmodifiableIterator<Entry<Object, Object>> iterator() {
+        return Iterators.unmodifiableIterator(context.entrySet().iterator());
+    }
+    
     @Override
     public void destroy() {
         final Iterable<Destroyable> destroyables = Iterables.filter(context.values(), Destroyable.class);
