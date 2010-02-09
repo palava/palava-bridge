@@ -46,7 +46,7 @@ public class PhpContent extends AbstractContent {
         }
     };
     
-    private final byte [] bytes;
+    private final byte[] bytes;
     
     public PhpContent(Object object) throws ConversionException {
         super(MimeType.PHP);
