@@ -68,7 +68,7 @@ public class PhpContent extends AbstractContent {
     
     @Override
     public String toString() {
-        return new String(bytes);
+        return new String(bytes, CHARSET);
     }
     
 }

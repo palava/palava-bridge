@@ -99,4 +99,9 @@ public class JsonContent extends AbstractContent {
         out.write(bytes, 0, bytes.length);
     }
     
+    @Override
+    public String toString() {
+        return new String(bytes, CHARSET);
+    }
+    
 }

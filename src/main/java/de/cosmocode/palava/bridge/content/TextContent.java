@@ -47,5 +47,10 @@ public class TextContent extends AbstractContent {
     public void write(OutputStream out) throws IOException {
         out.write(bytes, 0, bytes.length);
     }
+    
+    @Override
+    public String toString() {
+        return new String(bytes, CHARSET);
+    }
 
 }
