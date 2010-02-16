@@ -80,7 +80,7 @@ final class DefaultHttpRequest implements HttpRequest {
     @Override
     public URL getReferer() {
         final String referer = serverVariable.get(HTTP_REFERER);
-        if (StringUtils.isAlpha(referer)) {
+        if (StringUtils.isBlank(referer)) {
             return null;
         } else {
             try {
