@@ -26,9 +26,12 @@ import de.cosmocode.palava.bridge.call.filter.definition.FilterDefinition;
 
 /**
  * Binds a filter to a key/class/instance.
- *
+ * 
+ * @deprecated dont use anymore
+ * 
  * @author Willi Schoenborn
  */
+@Deprecated
 public interface FilterBinder {
 
     /**
@@ -46,12 +49,5 @@ public interface FilterBinder {
      * @param filterKey the key
      */
     void through(Key<? extends Filter> filterKey);
-    
-    /**
-     * Binds the associated predicate to the specifed instance.
-     * 
-     * @param filter the target filter
-     */
-    void through(Filter filter);
     
 }

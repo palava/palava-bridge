@@ -57,34 +57,4 @@ public final class ScopeModule extends AbstractApplication {
         binder().bind(SessionScope.class).toInstance(sessionScope);
     }
     
-//    /**
-//     * Provides the current call.
-//     * 
-//     * @return the current call
-//     */
-//    @Provides
-//    Call provideCall() {
-//        return Scopes.getCurrentCall();
-//    }
-//    
-//    /**
-//     * Provides the current request.
-//     * 
-//     * @return the current request
-//     */
-//    @Provides
-//    HttpRequest provideHttpRequest() {
-//        return Scopes.getCurrentRequest();
-//    }
-//    
-//    /**
-//     * Provides the current session.
-//     * 
-//     * @return the current session
-//     */
-//    @Provides
-//    HttpSession provideHttpSession() {
-//        return Scopes.getCurrentSession();
-//    }
-
 }

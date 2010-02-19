@@ -20,12 +20,10 @@
 package de.cosmocode.palava.bridge.inject;
 
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.Module;
@@ -48,15 +46,10 @@ import de.cosmocode.palava.bridge.request.RequestFilter;
 public abstract class AbstractApplication extends AbstractModule {
     
     private final List<FilterDefinition> filterDefinitions = Lists.newArrayList();
-    private final Map<Key<Filter>, Filter> filterInstances = Maps.newLinkedHashMap();
     
     @Override
     protected final void configure() {
         configureApplication();
-        
-        for (Map.Entry<Key<Filter>, Filter> entry : filterInstances.entrySet()) {
-            bind(entry.getKey()).toInstance(entry.getValue());
-        }
         
         final TypeLiteral<List<FilterDefinition>> literal = new TypeLiteral<List<FilterDefinition>>() { };
         bind(Key.get(literal, UniqueAnnotations.create())).toInstance(filterDefinitions);
@@ -75,9 +68,12 @@ public abstract class AbstractApplication extends AbstractModule {
     /**
      * Binds a filter.
      * 
+     * @deprecated do not use
+     * 
      * @param matcher the matcher the filter uses
      * @return a {@link FilterBinder}
      */
+    @Deprecated
     protected final FilterBinder filter(Predicate<Command> matcher) {
         return new InternalFilterBinder(matcher);
     }
@@ -135,14 +131,6 @@ public abstract class AbstractApplication extends AbstractModule {
                     return matcher.apply(command);
                 }
             });
-        }
-        
-        @Override
-        public void through(Filter filter) {
-            Preconditions.checkNotNull(filter, "Filter");
-            final Key<Filter> key = Key.get(Filter.class, UniqueAnnotations.create());
-            filterInstances.put(key, filter);
-            through(key);
         }
         
     }
