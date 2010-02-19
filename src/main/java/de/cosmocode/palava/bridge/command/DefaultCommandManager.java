@@ -30,6 +30,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Singleton;
 
 import de.cosmocode.palava.bridge.Server;
 
@@ -38,6 +39,7 @@ import de.cosmocode.palava.bridge.Server;
  *
  * @author Willi Schoenborn
  */
+@Singleton
 public final class DefaultCommandManager implements CommandManager {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultCommandManager.class);

@@ -19,31 +19,31 @@
 
 package de.cosmocode.palava.bridge;
 
+import com.google.inject.Binder;
+import com.google.inject.Module;
+
 import de.cosmocode.palava.bridge.call.CallModule;
 import de.cosmocode.palava.bridge.call.filter.FilterModule;
-import de.cosmocode.palava.bridge.command.CommandManager;
 import de.cosmocode.palava.bridge.command.CommandModule;
-import de.cosmocode.palava.bridge.command.DefaultCommandManager;
 import de.cosmocode.palava.bridge.request.RequestModule;
 import de.cosmocode.palava.bridge.scope.ScopeModule;
 import de.cosmocode.palava.bridge.session.SessionModule;
-import de.cosmocode.palava.core.ServiceModule;
 
 /**
  * 
  *
  * @author Willi Schoenborn
  */
-public class BridgeModule  extends ServiceModule {
+public class BridgeModule implements Module {
 
     @Override
-    protected void configure() {
-        install(new CallModule());
-        install(new FilterModule());
-        install(new CommandModule());
-        install(new RequestModule());
-        install(new ScopeModule());
-        install(new SessionModule());
-        install(new ServerModule());
+    public void configure(Binder binder) {
+        binder.install(new CallModule());
+        binder.install(new FilterModule());
+        binder.install(new CommandModule());
+        binder.install(new RequestModule());
+        binder.install(new ScopeModule());
+        binder.install(new SessionModule());
+        binder.install(new ServerModule());
     }
 }

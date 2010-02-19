@@ -26,6 +26,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.TypeLiteral;
@@ -38,14 +39,13 @@ import de.cosmocode.palava.bridge.command.Alias;
 import de.cosmocode.palava.bridge.command.Aliases;
 import de.cosmocode.palava.bridge.command.Command;
 import de.cosmocode.palava.bridge.request.RequestFilter;
-import de.cosmocode.palava.core.ServiceModule;
 
 /**
  * Abstract module for applications.
  *
  * @author Willi Schoenborn
  */
-public abstract class AbstractApplication extends ServiceModule {
+public abstract class AbstractApplication extends AbstractModule {
     
     private final List<FilterDefinition> filterDefinitions = Lists.newArrayList();
     private final Map<Key<Filter>, Filter> filterInstances = Maps.newLinkedHashMap();
