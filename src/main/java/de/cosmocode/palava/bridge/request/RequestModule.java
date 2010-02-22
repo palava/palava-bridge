@@ -21,6 +21,7 @@ package de.cosmocode.palava.bridge.request;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
+import com.google.inject.Singleton;
 
 /**
  * A {@link Module} for the {@link de.cosmocode.palava.bridge.request} package.
@@ -31,7 +32,7 @@ public final class RequestModule implements Module {
 
     @Override
     public void configure(Binder binder) {
-        binder.bind(HttpRequestFactory.class).to(DefaultHttpRequestFactory.class);
+        binder.bind(HttpRequestFactory.class).to(DefaultHttpRequestFactory.class).in(Singleton.class);
     }
     
 }

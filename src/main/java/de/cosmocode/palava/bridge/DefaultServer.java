@@ -22,14 +22,12 @@ package de.cosmocode.palava.bridge;
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Singleton;
 
 /**
  * Default implementation of the {@link Server} interface.
  *
  * @author Willi Schoenborn
  */
-@Singleton
 final class DefaultServer implements Server, ServiceManager {
 
     private final Injector injector;

@@ -31,7 +31,6 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import com.google.inject.Singleton;
 
 import de.cosmocode.palava.bridge.scope.Scopes;
 import de.cosmocode.palava.core.lifecycle.Disposable;
@@ -42,8 +41,7 @@ import de.cosmocode.palava.core.lifecycle.Disposable;
  * @author Detlef Hüttemann
  * @author Willi Schoenborn
  */
-@Singleton
-public final class DefaultHttpSessionManager implements HttpSessionManager, Disposable {
+final class DefaultHttpSessionManager implements HttpSessionManager, Disposable {
     
     private static final Logger LOG = LoggerFactory.getLogger(DefaultHttpSessionManager.class);
     

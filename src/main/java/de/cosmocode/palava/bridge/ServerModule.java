@@ -21,9 +21,7 @@ package de.cosmocode.palava.bridge;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
-import com.google.inject.multibindings.Multibinder;
-
-import de.cosmocode.palava.core.Service;
+import com.google.inject.Singleton;
 
 /**
  * A {@link Module} for the {@link de.cosmocode.palava.legacy.server} package.
@@ -34,8 +32,7 @@ public final class ServerModule implements Module {
 
     @Override
     public void configure(Binder binder) {
-        binder.bind(Server.class).to(DefaultServer.class);
-        Multibinder.newSetBinder(binder, Service.class).addBinding().to(Server.class);
+        binder.bind(Server.class).to(DefaultServer.class).in(Singleton.class);
     }
 
 }

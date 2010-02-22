@@ -21,6 +21,7 @@ package de.cosmocode.palava.bridge.call.filter;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
+import com.google.inject.Singleton;
 import com.google.inject.multibindings.Multibinder;
 
 /**
@@ -33,7 +34,7 @@ public final class FilterModule implements Module {
     @Override
     public void configure(Binder binder) {
         Multibinder.newSetBinder(binder, Filter.class);
-        binder.bind(FilterChainFactory.class).to(DefaultFilterChainFactory.class);
+        binder.bind(FilterChainFactory.class).to(DefaultFilterChainFactory.class).in(Singleton.class);
     }
     
 }

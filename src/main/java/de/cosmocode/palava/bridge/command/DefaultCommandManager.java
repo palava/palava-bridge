@@ -39,10 +39,9 @@ import de.cosmocode.palava.bridge.Server;
  *
  * @author Willi Schoenborn
  */
-@Singleton
-public final class DefaultCommandManager implements CommandManager {
+final class DefaultCommandManager implements CommandManager {
 
-    private static final Logger log = LoggerFactory.getLogger(DefaultCommandManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultCommandManager.class);
 
     private final Injector injector;
     
@@ -59,7 +58,7 @@ public final class DefaultCommandManager implements CommandManager {
         this.injector = Preconditions.checkNotNull(injector, "Injector");
         this.server = Preconditions.checkNotNull(server, "Server");
         this.aliases = Preconditions.checkNotNull(aliases, "Aliases");
-        log.debug("Aliases {}", aliases);
+        LOG.debug("Aliases {}", aliases);
     }
     
     @Override

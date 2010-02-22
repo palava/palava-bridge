@@ -29,7 +29,6 @@ import com.google.inject.Binding;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Key;
-import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 
 import de.cosmocode.palava.bridge.call.filter.definition.FilterDefinition;
@@ -39,7 +38,6 @@ import de.cosmocode.palava.bridge.call.filter.definition.FilterDefinition;
  *
  * @author Willi Schoenborn
  */
-@Singleton
 final class DefaultFilterChainFactory implements FilterChainFactory {
 
     private final ImmutableList<Filter> filters;

@@ -21,6 +21,7 @@ package de.cosmocode.palava.bridge.session;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
+import com.google.inject.Singleton;
 
 /**
  * A {@link Module} for the {@link de.cosmocode.palava.bridge.session} package.
@@ -31,7 +32,7 @@ public final class SessionModule implements Module {
 
     @Override
     public void configure(Binder binder) {
-        binder.bind(HttpSessionManager.class).to(DefaultHttpSessionManager.class);
+        binder.bind(HttpSessionManager.class).to(DefaultHttpSessionManager.class).in(Singleton.class);
         binder.bind(HttpSession.class).toProvider(HttpSessionManager.class);
     }
 

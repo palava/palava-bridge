@@ -20,6 +20,7 @@
 package de.cosmocode.palava.bridge.command;
 
 import com.google.inject.Module;
+import com.google.inject.Singleton;
 
 import de.cosmocode.palava.bridge.inject.AbstractApplication;
 
@@ -33,7 +34,7 @@ public final class CommandModule extends AbstractApplication {
 
     @Override
     protected void configureApplication() {
-        bind(CommandManager.class).to(DefaultCommandManager.class);
+        bind(CommandManager.class).to(DefaultCommandManager.class).in(Singleton.class);
 
         alias("de.cosmocode.palava.jobs").as("@palava");
     }

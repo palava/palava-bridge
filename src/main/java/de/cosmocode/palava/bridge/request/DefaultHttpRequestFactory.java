@@ -29,7 +29,7 @@ import de.cosmocode.palava.bridge.session.HttpSession;
  *
  * @author Willi Schoenborn
  */
-public final class DefaultHttpRequestFactory implements HttpRequestFactory {
+final class DefaultHttpRequestFactory implements HttpRequestFactory {
 
     @Override
     public HttpRequest create(HttpSession session, Map<String, String> serverVariable) {
