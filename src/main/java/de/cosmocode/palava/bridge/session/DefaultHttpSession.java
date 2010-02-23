@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -50,7 +51,13 @@ final class DefaultHttpSession implements HttpSession {
 
     private String sessionId;
 
+    private final long startTime = System.currentTimeMillis();
+    
     private long accessTime;
+    
+    private long timeout;
+    
+    private TimeUnit timeoutUnit;
 
     private final Map<Object, Object> context = Maps.newHashMap();
     
@@ -66,6 +73,7 @@ final class DefaultHttpSession implements HttpSession {
 
     @Override
     public Locale getLocale() {
+        touch();
         final Object langValue = context.get(LANGUAGE);
         if (locale == null || !locale.getLanguage().equals(langValue)) {
             
@@ -89,6 +97,7 @@ final class DefaultHttpSession implements HttpSession {
 
     @Override
     public NumberFormat getNumberFormat() {
+        touch();
         if (format == null) {
             format = NumberFormat.getInstance(getLocale());
         }
@@ -97,12 +106,18 @@ final class DefaultHttpSession implements HttpSession {
 
     @Override
     public Collator getCollator() {
+        touch();
         if (collator == null) {
             collator = Collator.getInstance(getLocale());
         }
         return collator;
     }
 
+    @Override
+    public Date startedAt() {
+        return new Date(startTime);
+    }
+    
     @Override
     public void updateAccessTime() {
         accessTime = System.currentTimeMillis();
@@ -112,41 +127,70 @@ final class DefaultHttpSession implements HttpSession {
     public Date getAccessTime() {
         return new Date(accessTime);
     }
+    
+    @Override
+    public Date lastAccessTime() {
+        return getAccessTime();
+    }
+    
+    @Override
+    public void touch() {
+        updateAccessTime();
+    }
 
     @Override
     public String getSessionId() {
         return sessionId;
     }
+    
+    @Override
+    public long getTimeout(TimeUnit unit) {
+        Preconditions.checkNotNull(unit, "Unit");
+        return unit.convert(timeout, timeoutUnit);
+    }
+    
+    @Override
+    public void setTimeout(long newTimeout, TimeUnit unit) {
+        Preconditions.checkNotNull(unit, "Unit");
+        this.timeout = newTimeout;
+        this.timeoutUnit = unit;
+    }
 
     @Override
     public <K> boolean contains(K key) {
+        touch();
         return context.containsKey(key);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public <K, V> V get(K key) {
+        touch();
         return (V) context.get(key);
     }
 
     @Override
     public <K, V> void putAll(Map<? extends K, ? extends V> map) {
+        touch();
         context.putAll(map);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public <K, V> V remove(K key) {
+        touch();
         return (V) context.remove(key);
     }
 
     @Override
     public <K, V> void set(K key, V value) {
+        touch();
         context.put(key, value);
     }
 
     @Override
     public UnmodifiableIterator<Entry<Object, Object>> iterator() {
+        touch();
         return Iterators.unmodifiableIterator(context.entrySet().iterator());
     }
     
