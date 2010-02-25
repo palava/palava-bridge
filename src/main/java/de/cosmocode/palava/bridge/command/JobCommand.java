@@ -28,7 +28,6 @@ import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.request.HttpRequest;
-import de.cosmocode.palava.bridge.scope.Scopes;
 import de.cosmocode.palava.bridge.session.HttpSession;
 import de.cosmocode.patterns.Adapter;
 

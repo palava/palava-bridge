@@ -22,7 +22,6 @@ package de.cosmocode.palava.bridge.command;
 import java.util.Map;
 import java.util.Set;
 
-import de.cosmocode.palava.ipc.IpcCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,9 +29,9 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Singleton;
 
 import de.cosmocode.palava.bridge.Server;
+import de.cosmocode.palava.ipc.IpcCommand;
 
 /**
  * Default implementation of the {@link CommandManager} interface.

@@ -19,14 +19,14 @@
 
 package de.cosmocode.palava.bridge.call;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import de.cosmocode.palava.bridge.ConnectionLostException;
 import de.cosmocode.palava.bridge.Header;
 import de.cosmocode.palava.bridge.command.Command;
 import de.cosmocode.palava.bridge.request.HttpRequest;
 import de.cosmocode.palava.ipc.IpcCall;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * A Call represents one single access.

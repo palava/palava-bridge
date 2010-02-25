@@ -19,6 +19,8 @@
 
 package de.cosmocode.palava.bridge.command;
 
+import org.junit.runner.manipulation.Filterable;
+
 import com.google.common.base.Function;
 
 import de.cosmocode.palava.bridge.Server;
