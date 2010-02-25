@@ -19,8 +19,6 @@
 
 package de.cosmocode.palava.bridge.command;
 
-import org.junit.runner.manipulation.Filterable;
-
 import com.google.common.base.Function;
 
 import de.cosmocode.palava.bridge.Server;
@@ -53,7 +51,7 @@ public final class Commands {
     /**
      * Returns the real class of a {@link Command}, which may differ from
      * {@link Object#getClass()} in case the given {@link Command} is
-     * {@linkplain Filterable filterable}.
+     * a {@link JobCommand}.
      * 
      * @param command the command
      * @return the underlying class
