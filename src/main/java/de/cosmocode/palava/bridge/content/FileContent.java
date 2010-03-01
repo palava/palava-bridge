@@ -35,7 +35,7 @@ import de.cosmocode.palava.bridge.MimeTypes;
 public class FileContent extends StreamContent {
     
     public FileContent(File file) throws IOException {
-        super(new FileInputStream(file), file.length(), MimeTypes.SINGLETON.byName(file.toString()));
+        super(new FileInputStream(file), file.length(), MimeTypes.SINGLETON.byName(file.getAbsolutePath()));
     }
     
 }
