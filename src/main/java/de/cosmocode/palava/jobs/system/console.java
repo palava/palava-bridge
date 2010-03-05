@@ -27,6 +27,8 @@ import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.Undefined;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import de.cosmocode.palava.bridge.ConnectionLostException;
 import de.cosmocode.palava.bridge.Server;
@@ -42,8 +44,9 @@ import de.cosmocode.palava.bridge.session.HttpSession;
  * 
  * @author Tobias Sarnowski
  */
-public class console implements Job
-{
+public class console implements Job {
+    
+    private static final Logger LOG = LoggerFactory.getLogger(console.class);
 
     public void process(Call request, Response response, HttpSession session, Server server, Map<String,Object> caddy) throws ConnectionLostException, Exception
     {
@@ -78,17 +81,17 @@ public class console implements Job
         // FIXME use a real ScriptReturnObject to transmit the results
         //       this is also ugly, let php or the binclient do the formating
         try {
-            Object returned = script.exec(context, scope);
+            final Object returned = script.exec(context, scope);
             if (returned != null && returned.toString().length() > 0 && ! (returned instanceof Undefined))
                 sout.write("\n%%GREEN+%%" + returned.toString() + "%%+GREEN%%");
             sout.write("\n%%GREY+%%Script successful executed.%%+GREY%%");
         } catch (Exception e) {
+            LOG.error("Scripting error", e);
             String msg = e.getMessage();
             if (msg == null)
                 msg = e.toString();
             sout.write("\n%%RED+%%" + htmlspecialchars(msg) + "%%+RED%%");
-        }
-        finally {
+        } finally {
             context.exit();
         }
 
