@@ -37,6 +37,8 @@ public final class Commands {
         public Class<?> apply(Command command) {
             if (command instanceof JobCommand) {
                 return JobCommand.class.cast(command).getConcreteClass();
+            } else if (command instanceof IpcCommandCommand) {
+                return IpcCommandCommand.class.cast(command).getConcreteClass();
             } else {
                 return command.getClass();
             }
