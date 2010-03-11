@@ -38,11 +38,16 @@ public final class Scopes {
     
     /**
      * Sets the current call.
+     * <strong>USE WITH CAUTION</strong>
      * 
      * @param call the new current call
      */
-    static void setCurrentCall(Call call) {
+    public static void setCurrentCall(Call call) {
         CALL.set(call);
+    }
+    
+    public static void clean() {
+        CALL.remove();
     }
     
     /**
