@@ -36,7 +36,6 @@ import de.cosmocode.palava.bridge.call.filter.definition.FilterDefinition;
 import de.cosmocode.palava.bridge.command.Alias;
 import de.cosmocode.palava.bridge.command.Aliases;
 import de.cosmocode.palava.bridge.command.Command;
-import de.cosmocode.palava.bridge.request.RequestFilter;
 
 /**
  * Abstract module for applications.
@@ -86,15 +85,6 @@ public abstract class AbstractApplication extends AbstractModule {
      */
     protected final AliasBinder alias(String packageName) {
         return new InternalAliasBinder(packageName);
-    }
-    
-    /**
-     * Binds a request filter.
-     * 
-     * @param type the filter's class literal
-     */
-    protected final void filterRequestsWith(Class<? extends RequestFilter> type) {
-        Multibinder.newSetBinder(binder(), RequestFilter.class).addBinding().to(type);
     }
     
     /**
