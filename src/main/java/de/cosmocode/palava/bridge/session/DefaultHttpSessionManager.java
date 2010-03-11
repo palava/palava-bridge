@@ -29,11 +29,14 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.inject.Inject;
 
 import de.cosmocode.palava.bridge.scope.Scopes;
 import de.cosmocode.palava.core.lifecycle.Disposable;
+import de.cosmocode.palava.ipc.IpcSessionScope;
 
 /**
  * Manages all sessions.
@@ -47,6 +50,13 @@ final class DefaultHttpSessionManager implements HttpSessionManager, Disposable 
     
     private final Map<String, HttpSession> sessions = new HashMap<String, HttpSession>();
 
+    private final IpcSessionScope scope;
+    
+    @Inject
+    public DefaultHttpSessionManager(IpcSessionScope scope) {
+        this.scope = Preconditions.checkNotNull(scope, "Scope");
+    }
+    
     @Override
     public HttpSession get(String sessionId) {
         synchronized (sessions) {
@@ -78,6 +88,8 @@ final class DefaultHttpSessionManager implements HttpSessionManager, Disposable 
             LOG.info("Destroying {} sessions", oldSessions.size());
             for (HttpSession session : oldSessions) {
                 session.destroy();
+                // TODO exit won't work without connection/call
+//                scope.exit();
             }
             sessions.values().removeAll(oldSessions);
         }
