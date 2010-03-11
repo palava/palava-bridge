@@ -149,7 +149,7 @@ final class DefaultHttpRequest implements HttpRequest {
     public void destroy() {
         final Iterable<Destroyable> destroyables = Iterables.filter(context.values(), Destroyable.class);
         for (Destroyable destroyable : destroyables) {
-            LOG.trace("Destryoing {} in request", destroyable);
+            LOG.trace("Destroying {} in request", destroyable);
             destroyable.destroy();
         }
         context.clear();
