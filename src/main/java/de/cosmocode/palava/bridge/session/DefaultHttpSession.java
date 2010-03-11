@@ -38,7 +38,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.UnmodifiableIterator;
 
 import de.cosmocode.json.JSONRenderer;
-import de.cosmocode.palava.bridge.scope.Destroyable;
+import de.cosmocode.palava.core.scope.Destroyable;
 
 /**
  * Default implementation of the {@link HttpSession} interface.

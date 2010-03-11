@@ -22,8 +22,8 @@ package de.cosmocode.palava.bridge.request;
 import java.net.URI;
 import java.net.URL;
 
-import de.cosmocode.palava.bridge.scope.Destroyable;
 import de.cosmocode.palava.bridge.session.HttpSession;
+import de.cosmocode.palava.core.scope.Destroyable;
 import de.cosmocode.palava.ipc.IpcConnection;
 
 /**

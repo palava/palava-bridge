@@ -25,8 +25,8 @@ import com.google.inject.Module;
 import de.cosmocode.palava.bridge.call.filter.FilterModule;
 import de.cosmocode.palava.bridge.command.CommandModule;
 import de.cosmocode.palava.bridge.request.RequestModule;
-import de.cosmocode.palava.bridge.scope.ScopeModule;
 import de.cosmocode.palava.bridge.session.SessionModule;
+import de.cosmocode.palava.ipc.IpcModule;
 
 /**
  * 
@@ -40,7 +40,7 @@ public class BridgeModule implements Module {
         binder.install(new FilterModule());
         binder.install(new CommandModule());
         binder.install(new RequestModule());
-        binder.install(new ScopeModule());
+        binder.install(new IpcModule());
         binder.install(new SessionModule());
         binder.install(new ServerModule());
     }

@@ -36,8 +36,8 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 import com.google.common.collect.UnmodifiableIterator;
 
-import de.cosmocode.palava.bridge.scope.Destroyable;
 import de.cosmocode.palava.bridge.session.HttpSession;
+import de.cosmocode.palava.core.scope.Destroyable;
 import de.cosmocode.palava.ipc.IpcSession;
 
 /**

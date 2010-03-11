@@ -27,7 +27,7 @@ import java.util.Map;
 
 import de.cosmocode.json.JSONMapable;
 import de.cosmocode.json.JSONRenderer;
-import de.cosmocode.palava.bridge.scope.Destroyable;
+import de.cosmocode.palava.core.scope.Destroyable;
 import de.cosmocode.palava.ipc.IpcSession;
 
 /**
