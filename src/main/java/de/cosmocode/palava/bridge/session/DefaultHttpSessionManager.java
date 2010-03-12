@@ -34,6 +34,7 @@ import com.google.common.collect.Collections2;
 
 import de.cosmocode.palava.bridge.scope.Scopes;
 import de.cosmocode.palava.core.lifecycle.Disposable;
+import de.cosmocode.palava.core.scope.ScopeManagement;
 
 /**
  * Manages all sessions.
@@ -77,7 +78,7 @@ final class DefaultHttpSessionManager implements HttpSessionManager, Disposable 
             final Collection<HttpSession> oldSessions = Collections2.filter(sessions.values(), predicate);
             LOG.info("Destroying {} sessions", oldSessions.size());
             for (HttpSession session : oldSessions) {
-                session.destroy();
+                ScopeManagement.destroy(session);
             }
             sessions.values().removeAll(oldSessions);
         }

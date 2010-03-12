@@ -24,40 +24,27 @@ import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
-import com.google.common.collect.UnmodifiableIterator;
 
 import de.cosmocode.json.JSONRenderer;
-import de.cosmocode.palava.core.scope.Destroyable;
+import de.cosmocode.palava.ipc.AbstractIpcSession;
 
 /**
  * Default implementation of the {@link HttpSession} interface.
  *
  * @author Willi Schoenborn
  */
-final class DefaultHttpSession implements HttpSession {
+final class DefaultHttpSession extends AbstractIpcSession implements HttpSession {
     
     public static final Logger LOG = LoggerFactory.getLogger(DefaultHttpSession.class);
 
     private String sessionId;
-
-    private final long startTime = System.currentTimeMillis();
-    
-    private long accessTime;
-    
-    private long timeout;
-    
-    private TimeUnit timeoutUnit;
 
     private final Map<Object, Object> context = Maps.newHashMap();
     
@@ -72,15 +59,20 @@ final class DefaultHttpSession implements HttpSession {
     }
 
     @Override
+    protected Map<Object, Object> context() {
+        return context;
+    }
+    
+    @Override
     public Locale getLocale() {
         touch();
-        final Object langValue = context.get(LANGUAGE);
+        final Object langValue = get(LANGUAGE);
         if (locale == null || !locale.getLanguage().equals(langValue)) {
             
             format = null;
             collator = null;
             
-            final Object countryValue = context.get(COUNTRY);
+            final Object countryValue = get(COUNTRY);
             
             if (langValue instanceof String && StringUtils.isNotBlank(String.class.cast(langValue))) {
                 if (countryValue instanceof String && StringUtils.isNotBlank(String.class.cast(countryValue))) {
@@ -114,101 +106,25 @@ final class DefaultHttpSession implements HttpSession {
     }
 
     @Override
-    public Date startedAt() {
-        return new Date(startTime);
-    }
-    
-    @Override
     public void updateAccessTime() {
-        accessTime = System.currentTimeMillis();
+        touch();
     }
 
     @Override
     public Date getAccessTime() {
-        return new Date(accessTime);
+        return lastAccessTime();
     }
     
-    @Override
-    public Date lastAccessTime() {
-        return getAccessTime();
-    }
-    
-    @Override
-    public void touch() {
-        updateAccessTime();
-    }
-
     @Override
     public String getSessionId() {
         return sessionId;
     }
     
     @Override
-    public long getTimeout(TimeUnit unit) {
-        Preconditions.checkNotNull(unit, "Unit");
-        return unit.convert(timeout, timeoutUnit);
-    }
-    
-    @Override
-    public void setTimeout(long newTimeout, TimeUnit unit) {
-        Preconditions.checkNotNull(unit, "Unit");
-        this.timeout = newTimeout;
-        this.timeoutUnit = unit;
-    }
-
-    @Override
-    public <K> boolean contains(K key) {
-        touch();
-        return context.containsKey(key);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public <K, V> V get(K key) {
-        touch();
-        return (V) context.get(key);
-    }
-
-    @Override
-    public <K, V> void putAll(Map<? extends K, ? extends V> map) {
-        touch();
-        context.putAll(map);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public <K, V> V remove(K key) {
-        touch();
-        return (V) context.remove(key);
-    }
-
-    @Override
-    public <K, V> void set(K key, V value) {
-        touch();
-        context.put(key, value);
-    }
-
-    @Override
-    public UnmodifiableIterator<Entry<Object, Object>> iterator() {
-        touch();
-        return Iterators.unmodifiableIterator(context.entrySet().iterator());
-    }
-    
-    @Override
-    public void destroy() {
-        final Iterable<Destroyable> destroyables = Iterables.filter(context.values(), Destroyable.class);
-        for (Destroyable destroyable : destroyables) {
-            LOG.debug("Destryoing {} in session", destroyable);
-            destroyable.destroy(); 
-        }
-        context.clear();
-    }
-
-    @Override
     public JSONRenderer renderAsMap(JSONRenderer renderer) {
         return renderer.
             key("id").value(sessionId).
-            key("accesstime").value(accessTime).
+            key("accesstime").value(lastAccessTime()).
             key("data").object(context);
     }
 

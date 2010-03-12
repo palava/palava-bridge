@@ -23,7 +23,6 @@ import java.net.URI;
 import java.net.URL;
 
 import de.cosmocode.palava.bridge.session.HttpSession;
-import de.cosmocode.palava.core.scope.Destroyable;
 import de.cosmocode.palava.ipc.IpcConnection;
 
 /**
@@ -31,7 +30,7 @@ import de.cosmocode.palava.ipc.IpcConnection;
  *
  * @author Willi Schoenborn
  */
-public interface HttpRequest extends IpcConnection, Destroyable {
+public interface HttpRequest extends IpcConnection {
 
     /**
      * Provide the requested {@link URI}.

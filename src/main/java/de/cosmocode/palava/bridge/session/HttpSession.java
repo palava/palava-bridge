@@ -27,7 +27,6 @@ import java.util.Map;
 
 import de.cosmocode.json.JSONMapable;
 import de.cosmocode.json.JSONRenderer;
-import de.cosmocode.palava.core.scope.Destroyable;
 import de.cosmocode.palava.ipc.IpcSession;
 
 /**
@@ -36,7 +35,7 @@ import de.cosmocode.palava.ipc.IpcSession;
  *
  * @author Willi Schoenborn
  */
-public interface HttpSession extends IpcSession, Destroyable, JSONMapable {
+public interface HttpSession extends IpcSession, JSONMapable {
     
     String LANGUAGE = "lang";
     

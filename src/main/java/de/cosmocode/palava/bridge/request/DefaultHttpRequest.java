@@ -27,17 +27,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 import com.google.common.collect.UnmodifiableIterator;
 
 import de.cosmocode.palava.bridge.session.HttpSession;
-import de.cosmocode.palava.core.scope.Destroyable;
 import de.cosmocode.palava.ipc.IpcSession;
 
 /**
@@ -46,8 +42,6 @@ import de.cosmocode.palava.ipc.IpcSession;
  * @author Willi Schoenborn
  */
 final class DefaultHttpRequest implements HttpRequest {
-    
-    private static final Logger LOG = LoggerFactory.getLogger(DefaultHttpRequest.class);
     
     private static final String REQUEST_URI = "REQUEST_URI";
     private static final String HTTP_REFERER = "HTTP_REFERER";
@@ -145,15 +139,4 @@ final class DefaultHttpRequest implements HttpRequest {
         return Iterators.unmodifiableIterator(context.entrySet().iterator());
     }
     
-    @Override
-    public void destroy() {
-        final Iterable<Destroyable> destroyables = Iterables.filter(context.values(), Destroyable.class);
-        for (Destroyable destroyable : destroyables) {
-            LOG.trace("Destroying {} in request", destroyable);
-            destroyable.destroy();
-        }
-        context.clear();
-        serverVariable.clear();
-    }
-
 }
