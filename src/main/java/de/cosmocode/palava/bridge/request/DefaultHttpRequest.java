@@ -24,16 +24,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
-import com.google.common.collect.UnmodifiableIterator;
 
 import de.cosmocode.palava.bridge.session.HttpSession;
+import de.cosmocode.palava.core.scope.AbstractScopeContext;
 import de.cosmocode.palava.ipc.IpcSession;
 
 /**
@@ -41,7 +39,7 @@ import de.cosmocode.palava.ipc.IpcSession;
  *
  * @author Willi Schoenborn
  */
-final class DefaultHttpRequest implements HttpRequest {
+final class DefaultHttpRequest extends AbstractScopeContext implements HttpRequest {
     
     private static final String REQUEST_URI = "REQUEST_URI";
     private static final String HTTP_REFERER = "HTTP_REFERER";
@@ -108,35 +106,8 @@ final class DefaultHttpRequest implements HttpRequest {
     }
 
     @Override
-    public <K, V> void set(K key, V value) {
-        context.put(key, value);
-    }
-
-    @Override
-    public <K> boolean contains(K key) {
-        return context.containsKey(key);
-    }
-    
-    @Override
-    @SuppressWarnings("unchecked")
-    public <K, V> V get(K key) {
-        return (V) context.get(key);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public <K, V> V remove(K key) {
-        return (V) context.remove(key);
-    }
-
-    @Override
-    public <K, V> void putAll(Map<? extends K, ? extends V> map) {
-        context.putAll(map);
-    }
-
-    @Override
-    public UnmodifiableIterator<Entry<Object, Object>> iterator() {
-        return Iterators.unmodifiableIterator(context.entrySet().iterator());
+    protected Map<Object, Object> context() {
+        return context;
     }
     
 }

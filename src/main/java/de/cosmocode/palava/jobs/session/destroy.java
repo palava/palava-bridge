@@ -30,7 +30,6 @@ import de.cosmocode.palava.bridge.command.Command;
 import de.cosmocode.palava.bridge.command.CommandException;
 import de.cosmocode.palava.bridge.content.PhpContent;
 import de.cosmocode.palava.bridge.session.HttpSession;
-import de.cosmocode.palava.core.scope.ScopeManagement;
 
 /**
  * Deletes the actual session.
@@ -49,7 +48,7 @@ public class destroy implements Command {
             LOG.warn("No session found, cant destroy.");
         } else {
             LOG.debug("Destroying sessiong {}", session);
-            ScopeManagement.destroy(session);
+            session.clear();
         }
         return PhpContent.OK;
     }
