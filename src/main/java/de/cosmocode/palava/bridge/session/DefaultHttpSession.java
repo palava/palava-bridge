@@ -59,6 +59,11 @@ final class DefaultHttpSession extends AbstractIpcSession implements HttpSession
     }
 
     @Override
+    public String getIdentifier() {
+        return null;
+    }
+    
+    @Override
     protected Map<Object, Object> context() {
         return context;
     }
