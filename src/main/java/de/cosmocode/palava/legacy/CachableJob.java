@@ -29,7 +29,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.cosmocode.palava.bridge.ConnectionLostException;
 import de.cosmocode.palava.bridge.Content;
@@ -81,7 +82,7 @@ public abstract class CachableJob extends UtilityJobImpl implements Job {
     // Static items used for caching
     // ----------------------
 
-    private static final Logger logger = Logger.getLogger(CachableJob.class);
+    private static final Logger logger = LoggerFactory.getLogger(CachableJob.class);
     private static final Map<CacheItem, Content> cache = new ConcurrentHashMap<CacheItem, Content>();
     private static final Queue<CacheItem> cacheQueue = new ConcurrentLinkedQueue<CacheItem>();
     
@@ -299,7 +300,7 @@ public abstract class CachableJob extends UtilityJobImpl implements Job {
                     content instanceof JsonContent) {
                     final ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     content.write(stream);
-                    logger.trace(stream);
+                    logger.trace("{}", stream);
                 }
             }
         } else {
