@@ -31,8 +31,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
 import de.cosmocode.palava.bridge.session.HttpSession;
-import de.cosmocode.palava.core.scope.AbstractScopeContext;
 import de.cosmocode.palava.ipc.IpcSession;
+import de.cosmocode.palava.scope.AbstractScopeContext;
 
 /**
  * Default implementation of the {@link HttpRequest}.
