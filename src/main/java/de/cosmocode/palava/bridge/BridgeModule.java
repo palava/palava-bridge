@@ -29,11 +29,11 @@ import de.cosmocode.palava.bridge.session.SessionModule;
 import de.cosmocode.palava.ipc.IpcModule;
 
 /**
- * 
+ * Binds the default bridge modules.
  *
  * @author Willi Schoenborn
  */
-public class BridgeModule implements Module {
+public final class BridgeModule implements Module {
 
     @Override
     public void configure(Binder binder) {
