@@ -250,6 +250,21 @@ public class Asset implements AssetBase, Copyable<Asset>, JSONEncoder, Convertib
         }
     }
     
+    @Override
+    public void setExpired() {
+        throw new UnsupportedOperationException();
+    }
+    
+    @Override
+    public boolean isExpiring() {
+        throw new UnsupportedOperationException();
+    }
+    
+    @Override
+    public boolean isUnexpiring() {
+        throw new UnsupportedOperationException();
+    }
+    
     public Date getCreationDate() {
         return creationDate;
     }

@@ -51,7 +51,7 @@ public class AssetManager {
     }
 
     public Asset getAsset( Long id, boolean withContent ) throws Exception {
-        Asset asset = (Asset) session.load(Asset.class, id);
+        Asset asset = (Asset) session.get(Asset.class, id);
 
         if ( asset != null && withContent ) {
             StreamContent content = store.load(asset.getStoreKey());
@@ -164,7 +164,7 @@ public class AssetManager {
     }
 
     public Directory getDirectory( Long id ) throws Exception {
-        return (Directory) session.load(Directory.class, id);
+        return (Directory) session.get(Directory.class, id);
     }
     
     /**
@@ -201,7 +201,7 @@ public class AssetManager {
      */
     public Boolean removeAssetFromDirectory ( Long directoryId, Long assetId) throws Exception {
         Directory directory = (Directory) session.load(Directory.class, directoryId);
-        Asset asset = (Asset) session.load(Asset.class, assetId);
+        Asset asset = (Asset) session.get(Asset.class, assetId);
         if (!directory.getAssets().remove(asset)) {
             log.warn("Could not remove asset {} from directory {}", asset, directoryId);
             return Boolean.FALSE;
@@ -224,7 +224,7 @@ public class AssetManager {
     
     public Directory addAssetToDirectory ( long directoryId, long assetId) throws Exception {
 
-        Directory directory = (Directory) session.load(Directory.class, directoryId);
+        Directory directory = (Directory) session.get(Directory.class, directoryId);
 
         if (directory == null) 
             throw new NullPointerException("Directory not found");
@@ -251,7 +251,7 @@ public class AssetManager {
     public Directory addAssetToDirectory(Long directoryId, String name, Long assetId) throws Exception {
         Directory directory = null;
         if (directoryId != null)
-            directory = (Directory) session.load(Directory.class, directoryId);
+            directory = (Directory) session.get(Directory.class, directoryId);
 
         final boolean newDir = directory == null;
         
@@ -299,7 +299,7 @@ public class AssetManager {
     {
         final List<Asset> assets = new LinkedList<Asset>();
         for (final Iterator<Long> i = assetIds.iterator(); i.hasNext(); ) {
-            assets.add((Asset) session.load(Asset.class, i.next()));
+            assets.add((Asset) session.get(Asset.class, i.next()));
         }
         directory.setAssets(assets);
         final Transaction tx = session.beginTransaction();
@@ -326,7 +326,7 @@ public class AssetManager {
      */
     public Directory useAssetlistForDirectory(List<Long> assetIds, long directoryId) throws HibernateException
     {
-        final Directory directory = (Directory) session.load(Directory.class, directoryId);
+        final Directory directory = (Directory) session.get(Directory.class, directoryId);
         return this.useAssetlistForDirectory(assetIds, directory);
     }
 
