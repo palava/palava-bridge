@@ -49,7 +49,7 @@ import de.cosmocode.palava.bridge.content.ContentConverter;
 import de.cosmocode.palava.bridge.content.ConversionException;
 import de.cosmocode.palava.bridge.content.Convertible;
 import de.cosmocode.palava.bridge.content.KeyValueState;
-import de.cosmocode.palava.media.DirectoryBase;
+import de.cosmocode.palava.media.directory.DirectoryBase;
 
 /**
  * A directory is just a collection/list of Asset Ids.

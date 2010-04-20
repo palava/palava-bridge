@@ -47,9 +47,9 @@ import de.cosmocode.palava.bridge.content.ConversionException;
 import de.cosmocode.palava.bridge.content.Convertible;
 import de.cosmocode.palava.bridge.content.KeyValueState;
 import de.cosmocode.palava.bridge.content.StreamContent;
-import de.cosmocode.palava.media.AbstractAsset;
-import de.cosmocode.palava.media.AssetBase;
-import de.cosmocode.palava.media.DirectoryBase;
+import de.cosmocode.palava.media.asset.AbstractAsset;
+import de.cosmocode.palava.media.asset.AssetBase;
+import de.cosmocode.palava.media.directory.DirectoryBase;
 import de.cosmocode.palava.model.base.Copyable;
 import de.cosmocode.palava.model.base.EntityBase;
 
