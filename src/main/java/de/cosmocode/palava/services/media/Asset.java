@@ -251,7 +251,7 @@ public class Asset implements AssetBase, Copyable<Asset>, JSONEncoder, Convertib
     }
     
     @Override
-    public void setExpired() {
+    public void setExpired(boolean expired) {
         throw new UnsupportedOperationException();
     }
     
@@ -380,7 +380,6 @@ public class Asset implements AssetBase, Copyable<Asset>, JSONEncoder, Convertib
         
         asset.setCreatedAt(this.getCreatedAt());
         asset.setModifiedAt(this.getModifiedAt());
-        asset.setDeletedAt(this.getDeletedAt());
         asset.setExpiresAt(this.getExpiresAt());
         asset.setExpiresNever(this.getExpiresNever());
         asset.metaData = this.metaData;

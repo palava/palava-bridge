@@ -117,6 +117,29 @@ public class AssetManager {
             throw e;
         }
     }
+    
+    public void createAsset(Asset asset, boolean transaction) throws Exception {
+        Content content = asset.getContent();
+        if ( content == null ) throw new NullPointerException("content");
+
+        String key = store.store(content);
+
+        Transaction tx = transaction ? session.beginTransaction() : null;
+        
+        try {
+            asset.setStoreKey(key);
+            session.save(asset);            
+            session.flush();
+            if (transaction) tx.commit();
+        } catch (HibernateException e) {
+            log.error("Saving asset failed", e);
+            store.remove(key);
+            asset.setStoreKey(null);
+            if (transaction) tx.rollback();
+            throw e;
+        }
+        
+    }
 
     public Boolean removeAssetById (Long id) throws Exception {
         Asset asset = this.getAsset (id, false);
