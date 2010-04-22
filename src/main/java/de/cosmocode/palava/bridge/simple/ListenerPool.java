@@ -14,27 +14,25 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA  02110-1301, USA.
  */
 
 package de.cosmocode.palava.bridge.simple;
 
-import de.cosmocode.palava.bridge.BridgeConfig;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-/**
- * 
- * @author Tobias Sarnowski
- * @author Willi Schoenborn
- */
-public final class SimpleBridgeConfig {
+import com.google.inject.BindingAnnotation;
 
-    public static final String PREFIX = BridgeConfig.PREFIX + "simple.";
+@Retention(RetentionPolicy.RUNTIME)
+@Target({
+    ElementType.METHOD,
+    ElementType.PARAMETER
+})
+@BindingAnnotation
+@interface ListenerPool {
 
-    public static final String SOCKET_TIMEOUT = PREFIX + "socketTimeout";
-
-    public static final String SOCKET_TIMEOUT_UNIT = PREFIX + "socketTimeoutUnit";
-
-    private SimpleBridgeConfig() {
-        
-    }
 }

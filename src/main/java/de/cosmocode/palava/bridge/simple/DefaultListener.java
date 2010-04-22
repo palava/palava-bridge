@@ -39,7 +39,6 @@ import com.google.inject.name.Named;
 
 import de.cosmocode.commons.State;
 import de.cosmocode.palava.bridge.BridgeConfig;
-import de.cosmocode.palava.concurrent.ExecutorServiceFactory;
 import de.cosmocode.palava.core.Registry;
 import de.cosmocode.palava.core.event.PostFrameworkStart;
 import de.cosmocode.palava.core.event.PreFrameworkStop;
@@ -63,10 +62,6 @@ final class DefaultListener implements Listener, PostFrameworkStart, PreFramewor
 
     private final TimeUnit socketTimeoutUnit;
     
-    private final long shutdownTimeout;
-
-    private final TimeUnit shutdownTimeoutUnit;
-    
     private final ExecutorService service;
     
     private State state = State.NEW;
@@ -75,29 +70,22 @@ final class DefaultListener implements Listener, PostFrameworkStart, PreFramewor
     public DefaultListener(
         Registry registry,
         Communicator communicator,
-        ExecutorServiceFactory executorFactory,
         @Named(BridgeConfig.PORT) int port,
         @Named(SimpleBridgeConfig.SOCKET_TIMEOUT) long socketTimeout,
         @Named(SimpleBridgeConfig.SOCKET_TIMEOUT_UNIT) TimeUnit socketTimeoutUnit,
-        @Named(SimpleBridgeConfig.EXECUTOR) String executorName,
-        @Named(SimpleBridgeConfig.SHUTDOWN_TIMEOUT) long shutdownTimeout,
-        @Named(SimpleBridgeConfig.SHUTDOWN_TIMEOUT_UNIT) TimeUnit shutdownTimeoutUnit) {
+        @ListenerPool ExecutorService service) {
         
         Preconditions.checkNotNull(registry, "Registry");
         
         this.communicator = Preconditions.checkNotNull(communicator, "Communicator");
-        
-        Preconditions.checkNotNull(executorFactory, "ExecutorServiceFactory");
         
         Preconditions.checkArgument(port >= 0, "Port must be positive, but was %s", port);
         this.port = port;
         
         this.socketTimeout = socketTimeout;
         this.socketTimeoutUnit = socketTimeoutUnit;
-        this.shutdownTimeout = shutdownTimeout;
-        this.shutdownTimeoutUnit = shutdownTimeoutUnit;
 
-        this.service = executorFactory.getExecutorService(executorName);
+        this.service = service;
         
         registry.register(PostFrameworkStart.class, this);
         registry.register(PreFrameworkStop.class, this);
@@ -186,11 +174,7 @@ final class DefaultListener implements Listener, PostFrameworkStart, PreFramewor
             
         }
         
-        try {
-            socket.close();
-        } finally {
-            shutdown();
-        }
+        socket.close();
     }
 
     @Override
@@ -202,23 +186,6 @@ final class DefaultListener implements Listener, PostFrameworkStart, PreFramewor
     public void stop() {
         LOG.debug("Stopping {}", this);
         state = State.STOPPING;
-    }
-    
-    private void shutdown() {
-        LOG.info("Shutting down");
-        service.shutdown();
-        
-        try {
-            if (service.awaitTermination(shutdownTimeout, shutdownTimeoutUnit)) {
-                LOG.debug("Shutdown of {} successful", service);
-            } else {
-                LOG.warn("Forced shutdown of {}", service);
-            }
-            state = State.TERMINATED;
-        } catch (InterruptedException e) {
-            LOG.error("Interrupted while shutting down", e);
-            state = State.FAILED;
-        }
     }
     
 }
