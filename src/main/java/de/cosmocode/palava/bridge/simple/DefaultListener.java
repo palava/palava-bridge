@@ -70,7 +70,7 @@ final class DefaultListener implements Listener, PostFrameworkStart, PreFramewor
         @Named(BridgeConfig.PORT) int port,
         @Named(SimpleBridgeConfig.SOCKET_TIMEOUT) long socketTimeout,
         @Named(SimpleBridgeConfig.SOCKET_TIMEOUT_UNIT) TimeUnit socketTimeoutUnit,
-        @ListenerPool ExecutorService service) {
+        @WorkerThreads ExecutorService service) {
         
         Preconditions.checkNotNull(registry, "Registry");
         

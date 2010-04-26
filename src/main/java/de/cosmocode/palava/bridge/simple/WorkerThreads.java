@@ -29,6 +29,8 @@ import com.google.inject.BindingAnnotation;
     ElementType.PARAMETER
 })
 @BindingAnnotation
-@interface ListenerPool {
+@interface WorkerThreads {
 
+    String NAME = "worker-threads";
+    
 }

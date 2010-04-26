@@ -20,6 +20,8 @@ import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.Singleton;
 
+import de.cosmocode.palava.concurrent.ExecutorModule;
+
 /**
  * A {@link Module} for the {@link de.cosmocode.palava.bridge.simple} package.
  *
@@ -31,6 +33,7 @@ public final class SimpleBridgeModule implements Module {
     public void configure(Binder binder) {
         binder.bind(ProtocolAlgorithm.class).to(DefaultProtocolAlgorithm.class).in(Singleton.class);
         binder.bind(Listener.class).to(DefaultListener.class).in(Singleton.class);
+        binder.install(new ExecutorModule(WorkerThreads.class, WorkerThreads.NAME));
         binder.bind(Communicator.class).to(DefaultCommunicator.class).in(Singleton.class);
     }
 
