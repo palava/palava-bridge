@@ -305,6 +305,11 @@ public class Asset implements AssetBase, Copyable<Asset>, JSONEncoder, Convertib
     public void setStream(InputStream stream) {
         throw new UnsupportedOperationException();        
     }
+    
+    @Override
+    public boolean hasStream() {
+        throw new UnsupportedOperationException();
+    }
 
     public void setId(long id) {
         this.id = id;
