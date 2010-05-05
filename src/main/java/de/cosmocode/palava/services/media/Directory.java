@@ -41,12 +41,16 @@ import org.json.extension.JSONEncoder;
 import com.google.inject.internal.Lists;
 
 import de.cosmocode.json.JSON;
+import de.cosmocode.json.JSONMapable;
 import de.cosmocode.json.JSONRenderer;
 import de.cosmocode.palava.bridge.content.ContentConverter;
 import de.cosmocode.palava.bridge.content.ConversionException;
 import de.cosmocode.palava.bridge.content.Convertible;
 import de.cosmocode.palava.bridge.content.KeyValueState;
 import de.cosmocode.palava.media.directory.DirectoryBase;
+import de.cosmocode.rendering.Renderer;
+import de.cosmocode.rendering.RenderingException;
+import de.cosmocode.rendering.RenderingLevel;
 
 /**
  * A directory is just a collection/list of Asset Ids.
@@ -74,7 +78,7 @@ import de.cosmocode.palava.media.directory.DirectoryBase;
     )
 })
 @Entity
-public class Directory implements DirectoryBase, JSONEncoder, Convertible, Iterable<Asset> {
+public class Directory implements DirectoryBase, JSONMapable, JSONEncoder, Convertible, Iterable<Asset> {
 
     public static final String BY_ASSET_ID = "Directory by Asset id";
     
@@ -182,6 +186,11 @@ public class Directory implements DirectoryBase, JSONEncoder, Convertible, Itera
         Collections.sort(assets, comparator);
     }
 
+    @Override
+    public void render(Renderer renderer, RenderingLevel level) throws RenderingException {
+        throw new UnsupportedOperationException();
+    }
+    
     @Override
     public void encodeJSON(JSONConstructor json) throws JSONException {
         json.array();            

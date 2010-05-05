@@ -37,6 +37,7 @@ import org.json.extension.JSONEncoder;
 import com.google.common.collect.ImmutableSet;
 
 import de.cosmocode.json.JSON;
+import de.cosmocode.json.JSONMapable;
 import de.cosmocode.json.JSONRenderer;
 import de.cosmocode.palava.bridge.MimeType;
 import de.cosmocode.palava.bridge.content.ContentConverter;
@@ -49,6 +50,9 @@ import de.cosmocode.palava.media.asset.AssetBase;
 import de.cosmocode.palava.media.directory.DirectoryBase;
 import de.cosmocode.palava.model.base.Copyable;
 import de.cosmocode.palava.model.base.EntityBase;
+import de.cosmocode.rendering.Renderer;
+import de.cosmocode.rendering.RenderingException;
+import de.cosmocode.rendering.RenderingLevel;
 
 /**
  * 
@@ -59,7 +63,7 @@ import de.cosmocode.palava.model.base.EntityBase;
  */
 @Deprecated
 @Entity
-public class Asset implements AssetBase, Copyable<Asset>, JSONEncoder, Convertible {
+public class Asset implements AssetBase, Copyable<Asset>, JSONMapable, JSONEncoder, Convertible {
     
     /**
      * @deprecated use {@code EntityBase.ORDER_BY_AGE.reverse()} instead
@@ -400,6 +404,11 @@ public class Asset implements AssetBase, Copyable<Asset>, JSONEncoder, Convertib
         return asset;
     }
 
+    @Override
+    public void render(Renderer renderer, RenderingLevel level) throws RenderingException {
+        throw new UnsupportedOperationException();
+    }
+    
     /**
      * object() and endObject() moved to parent context
      */
