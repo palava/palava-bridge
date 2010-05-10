@@ -36,7 +36,7 @@ public class ErrorContent extends AbstractContent {
     
     private final byte [] bytes;
 
-    private ErrorContent(Exception e) {
+    private ErrorContent(Throwable e) {
         super(MimeType.ERROR);
         
         // FIXME php is good enough to create the html itself, it's ugly here
@@ -72,7 +72,7 @@ public class ErrorContent extends AbstractContent {
         out.write(bytes, 0, bytes.length);
     }
     
-    public static ErrorContent create(Exception exception) {
+    public static ErrorContent create(Throwable exception) {
         Preconditions.checkNotNull(exception, "Exception");
         return new ErrorContent(exception);
     }
