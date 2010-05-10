@@ -47,8 +47,6 @@ abstract class AbstractCall extends AbstractScopeContext implements Call {
     
     private final HttpRequest request;
 
-    private final Command command;
-    
     private final Header header;
     
     private final InputStream stream;
@@ -57,12 +55,11 @@ abstract class AbstractCall extends AbstractScopeContext implements Call {
     
     private final Map<Object, Object> context = Maps.newHashMap();
 
-    AbstractCall(HttpRequest request, Command command, Header header, InputStream stream) {
+    AbstractCall(HttpRequest request, Header header, InputStream stream) {
         // TODO we need nullchecks here!
 //        this.request = Preconditions.checkNotNull(request, "Request");
 //        this.command = Preconditions.checkNotNull(command, "Command");
         this.request = request;
-        this.command = command;
         this.stream = new UnclosableInputStream(Preconditions.checkNotNull(stream, "Stream"));
         this.header = Preconditions.checkNotNull(header, "Header");
     }
@@ -80,11 +77,6 @@ abstract class AbstractCall extends AbstractScopeContext implements Call {
     @Override
     public IpcConnection getConnection() {
         return getHttpRequest();
-    }
-    
-    @Override
-    public Command getCommand() {
-        return command;
     }
     
     @Override

@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
 import de.cosmocode.palava.bridge.ConnectionLostException;
 import de.cosmocode.palava.bridge.Header;
 import de.cosmocode.palava.bridge.call.TextCall;
-import de.cosmocode.palava.bridge.command.Command;
 import de.cosmocode.palava.bridge.request.HttpRequest;
 
 /**
@@ -43,8 +42,8 @@ class SimpleTextCall extends AbstractCall implements TextCall {
     
     private String text;
 
-    SimpleTextCall(HttpRequest request, Command command, Header header, InputStream stream) {
-        super(request, command, header, stream);
+    SimpleTextCall(HttpRequest request, Header header, InputStream stream) {
+        super(request, header, stream);
     }
 
     public String getText() throws ConnectionLostException {

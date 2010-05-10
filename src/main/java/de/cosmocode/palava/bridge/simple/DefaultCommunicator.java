@@ -31,9 +31,6 @@ import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.Header;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.call.CallType;
-import de.cosmocode.palava.bridge.call.filter.FilterChain;
-import de.cosmocode.palava.bridge.call.filter.FilterChainFactory;
-import de.cosmocode.palava.bridge.call.filter.FilterException;
 import de.cosmocode.palava.bridge.command.Command;
 import de.cosmocode.palava.bridge.command.CommandException;
 import de.cosmocode.palava.bridge.command.CommandManager;
@@ -64,19 +61,16 @@ final class DefaultCommunicator implements Communicator {
     
     private final CommandManager commandManager;
     
-    private final FilterChainFactory chainFactory;
-    
     private final IpcCallScope callScope;
     
     @Inject
     public DefaultCommunicator(ProtocolAlgorithm algorithm, HttpSessionManager sessionManager,
         HttpRequestFactory requestFactory, CommandManager commandManager,
-        FilterChainFactory chainFactory, IpcCallScope callScope) {
+        IpcCallScope callScope) {
         this.algorithm = Preconditions.checkNotNull(algorithm, "Algorithm");
         this.sessionManager = Preconditions.checkNotNull(sessionManager, "SessionManager");
         this.requestFactory = Preconditions.checkNotNull(requestFactory, "RequestFactory");
         this.commandManager = Preconditions.checkNotNull(commandManager, "CommandManager");
-        this.chainFactory = Preconditions.checkNotNull(chainFactory, "ChainFactory");
         this.callScope = Preconditions.checkNotNull(callScope, "CallScope");
     }
     
@@ -140,23 +134,23 @@ final class DefaultCommunicator implements Communicator {
         
         switch (header.getCallType()) {
             case DATA: {
-                call = new SimpleDataCall(request, command, header, input);
+                call = new SimpleDataCall(request, header, input);
                 break;
             }
             case TEXT: {
-                call = new SimpleTextCall(request, command, header, input);
+                call = new SimpleTextCall(request, header, input);
                 break;
             }
             case JSON: {
-                call = new SimpleJsonCall(request, command, header, input);
+                call = new SimpleJsonCall(request, header, input);
                 break;
             }
             case BINARY: {
-                call = new SimpleBinaryCall(request, command, header, input);
+                call = new SimpleBinaryCall(request, header, input);
                 break;
             }
             case OPEN: {
-                call = new SimpleJsonCall(request, command, header, input);
+                call = new SimpleJsonCall(request, header, input);
                 break;
             }
             default: {
@@ -171,26 +165,14 @@ final class DefaultCommunicator implements Communicator {
         callScope.enter(call);
         Scopes.setCurrentCall(call);
         try {
-            return chainFactory.create(new FilterChain() {
-                
-                @Override
-                public Content filter(Call call) throws FilterException {
-                    try {
-                        return command.execute(call);
-                    } catch (CommandException e) {
-                        LOG.error("Command execution failed", e);
-                        return ErrorContent.create(e);
-                    }
-                }
-                
-            }).filter(call);
+            return command.execute(call);
         /*CHECKSTYLE:OFF*/
         } catch (RuntimeException e) {
         /*CHECKSTYLE:ON*/ 
             LOG.error("Command execution failed", e);
             return ErrorContent.create(e);
-        } catch (FilterException e) {
-            LOG.error("Filtering failed", e);
+        } catch (CommandException e) {
+            LOG.error("Command execution failed", e);
             return ErrorContent.create(e);
         } finally {
             try {

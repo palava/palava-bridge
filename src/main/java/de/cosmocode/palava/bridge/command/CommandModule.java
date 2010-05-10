@@ -30,7 +30,7 @@ import de.cosmocode.palava.bridge.inject.AbstractApplication;
 public final class CommandModule extends AbstractApplication {
 
     @Override
-    protected void configureApplication() {
+    protected void configure() {
         bind(CommandManager.class).to(DefaultCommandManager.class).in(Singleton.class);
 
         alias("de.cosmocode.palava.jobs").as("@palava");

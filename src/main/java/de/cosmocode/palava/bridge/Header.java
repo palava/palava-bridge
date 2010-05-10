@@ -16,23 +16,57 @@
 
 package de.cosmocode.palava.bridge;
 
+import java.nio.ByteBuffer;
+
 import de.cosmocode.palava.bridge.call.CallType;
 import de.cosmocode.patterns.Immutable;
 
 /**
- * 
+ * Protocol header definition.
  *
  * @author Willi Schoenborn
  */
 @Immutable
 public interface Header {
 
+    /**
+     * Retrieves the type of the corresponding call.
+     * 
+     * @since 1.0
+     * @return the call type
+     */
     CallType getCallType();
     
+    /**
+     * Retrieves the aliased name of the command.
+     * 
+     * @since 1.0
+     * @return the aliased command name
+     */
     String getAliasedName();
     
+    /**
+     * Retrievs the session id.
+     * 
+     * @since 1.0
+     * @return the aliased session id
+     */
     String getSessionId();
     
+    /**
+     * Retrieves the length of the provided content.
+     * 
+     * @since 1.0
+     * @return the content length
+     */
     int getContentLength();
+    
+    /**
+     * Retrieves the content of this request.
+     * 
+     * @since 1.0
+     * @return the content
+     */
+    ByteBuffer getContent();
     
 }

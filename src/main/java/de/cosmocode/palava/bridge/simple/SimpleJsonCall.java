@@ -33,7 +33,6 @@ import de.cosmocode.palava.bridge.Header;
 import de.cosmocode.palava.bridge.call.Arguments;
 import de.cosmocode.palava.bridge.call.JsonCall;
 import de.cosmocode.palava.bridge.call.MissingArgumentException;
-import de.cosmocode.palava.bridge.command.Command;
 import de.cosmocode.palava.bridge.request.HttpRequest;
 
 /**
@@ -50,8 +49,8 @@ class SimpleJsonCall extends SimpleTextCall implements JsonCall {
     private UtilityMap<String, Object> map;
     private Arguments arguments;
 
-    SimpleJsonCall(HttpRequest request, Command command, Header header, InputStream stream) {
-        super(request, command, header, stream);
+    SimpleJsonCall(HttpRequest request, Header header, InputStream stream) {
+        super(request, header, stream);
     }
 
     public final JSONObject getJSONObject() throws ConnectionLostException, JSONException {

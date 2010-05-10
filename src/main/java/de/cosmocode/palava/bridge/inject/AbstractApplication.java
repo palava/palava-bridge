@@ -16,23 +16,12 @@
 
 package de.cosmocode.palava.bridge.inject;
 
-import java.util.List;
-
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;
-import com.google.inject.Key;
-import com.google.inject.Module;
-import com.google.inject.TypeLiteral;
-import com.google.inject.internal.UniqueAnnotations;
 import com.google.inject.multibindings.Multibinder;
 
-import de.cosmocode.palava.bridge.call.filter.Filter;
-import de.cosmocode.palava.bridge.call.filter.definition.FilterDefinition;
 import de.cosmocode.palava.bridge.command.Alias;
 import de.cosmocode.palava.bridge.command.Aliases;
-import de.cosmocode.palava.bridge.command.Command;
 
 /**
  * Abstract module for applications.
@@ -40,39 +29,6 @@ import de.cosmocode.palava.bridge.command.Command;
  * @author Willi Schoenborn
  */
 public abstract class AbstractApplication extends AbstractModule {
-    
-    private final List<FilterDefinition> filterDefinitions = Lists.newArrayList();
-    
-    @Override
-    protected final void configure() {
-        configureApplication();
-        
-        final TypeLiteral<List<FilterDefinition>> literal = new TypeLiteral<List<FilterDefinition>>() { };
-        bind(Key.get(literal, UniqueAnnotations.create())).toInstance(filterDefinitions);
-    }
-    
-    /**
-     * Configures the applications.
-     * 
-     * <p>
-     *   It required to install implementations for all
-     *   core interfaces, e.g. by installing {@link CoreModule}.
-     * </p>
-     */
-    protected abstract void configureApplication();
-
-    /**
-     * Binds a filter.
-     * 
-     * @deprecated do not use
-     * 
-     * @param matcher the matcher the filter uses
-     * @return a {@link FilterBinder}
-     */
-    @Deprecated
-    protected final FilterBinder filter(Predicate<Command> matcher) {
-        return new InternalFilterBinder(matcher);
-    }
     
     /**
      * Binds an alias.
@@ -82,44 +38,6 @@ public abstract class AbstractApplication extends AbstractModule {
      */
     protected final AliasBinder alias(String packageName) {
         return new InternalAliasBinder(packageName);
-    }
-    
-    /**
-     * Private implementation of the {@link FilterBinder} interface
-     * which holds a reference to the enclosing {@link Module}.
-     *
-     * @author Willi Schoenborn
-     * @param <F> the generic filter type
-     */
-    private final class InternalFilterBinder implements FilterBinder {
-        
-        private final Predicate<Command> matcher;
-        
-        public InternalFilterBinder(Predicate<Command> matcher) {
-            this.matcher = Preconditions.checkNotNull(matcher, "Matcher");
-        }
-        
-        @Override
-        public void through(Class<? extends Filter> type) {
-            through(Key.get(type));
-        }
-        
-        @Override
-        public void through(final Key<? extends Filter> filterKey) {
-            filterDefinitions.add(new FilterDefinition() {
-                
-                @Override
-                public Key<? extends Filter> getKey() {
-                    return filterKey;
-                }
-                
-                @Override
-                public boolean appliesTo(Command command) {
-                    return matcher.apply(command);
-                }
-            });
-        }
-        
     }
     
     /**

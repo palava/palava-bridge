@@ -167,7 +167,7 @@ final class DefaultProtocolAlgorithm implements ProtocolAlgorithm {
     @Override
     public Map<String, String> open(Header header, InputStream input, OutputStream output) {
         
-        final JsonCall jsonCall = new SimpleJsonCall(null, null, header, input);
+        final JsonCall jsonCall = new SimpleJsonCall(null, header, input);
         
         final JSONObject object;
         

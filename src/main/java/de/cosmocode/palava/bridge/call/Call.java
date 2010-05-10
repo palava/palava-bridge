@@ -49,13 +49,6 @@ public interface Call extends IpcCall {
     HttpRequest getHttpRequest();
     
     /**
-     * Provide the command associated with this call.
-     * 
-     * @return the command scheduled for this call
-     */
-    Command getCommand();
-
-    /**
      * Provides an optional binary inputstream.
      * 
      * @return the inputstream

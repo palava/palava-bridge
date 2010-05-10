@@ -16,6 +16,8 @@
 
 package de.cosmocode.palava.bridge.simple;
 
+import java.nio.ByteBuffer;
+
 import com.google.common.base.Preconditions;
 
 import de.cosmocode.palava.bridge.Header;
@@ -60,6 +62,11 @@ final class SimpleHeader implements Header {
         return contentLength;
     }
 
+    @Override
+    public ByteBuffer getContent() {
+        throw new UnsupportedOperationException();
+    }
+    
     @Override
     public String toString() {
         return String.format("SimpleHeader [aliasedName=%s, contentLength=%s, requestType=%s, sessionId=%s]",

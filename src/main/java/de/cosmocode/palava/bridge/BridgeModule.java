@@ -19,7 +19,6 @@ package de.cosmocode.palava.bridge;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 
-import de.cosmocode.palava.bridge.call.filter.FilterModule;
 import de.cosmocode.palava.bridge.command.CommandModule;
 import de.cosmocode.palava.bridge.request.RequestModule;
 import de.cosmocode.palava.bridge.session.SessionModule;
@@ -34,7 +33,6 @@ public final class BridgeModule implements Module {
 
     @Override
     public void configure(Binder binder) {
-        binder.install(new FilterModule());
         binder.install(new CommandModule());
         binder.install(new RequestModule());
         binder.install(new IpcModule());
