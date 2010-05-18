@@ -253,11 +253,11 @@ final class DefaultProtocolAlgorithm implements ProtocolAlgorithm {
     
     private char readFrom(InputStream input) {
         try {
-            final char c = (char) input.read();
-            if (c == -1) {
+            final int b = input.read();
+            if (b == -1) {
                 throw new ConnectionLostException("Reached end of stream");
             }
-            return c;
+            return (char) b;
         } catch (IOException e) {
             throw new ConnectionLostException(e);
         }
