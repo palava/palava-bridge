@@ -35,6 +35,7 @@ import de.cosmocode.palava.bridge.MimeType;
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.call.DataCall;
+import de.cosmocode.palava.bridge.call.JsonCall;
 import de.cosmocode.palava.bridge.call.TextCall;
 import de.cosmocode.palava.bridge.command.Job;
 import de.cosmocode.palava.bridge.command.Response;
@@ -165,7 +166,9 @@ public abstract class CachableJob extends UtilityJobImpl implements Job {
         if (request instanceof DataCall) {
             return ((DataCall) request).getStringedArguments();
         } else if (request instanceof TextCall) {
-            return ((TextCall)request).getText();
+            return ((TextCall) request).getText();
+        } else if (request instanceof JsonCall) {
+            return JsonCall.class.cast(request).getArguments();
         } else {
             throw new UncachableException("unsupported request of type: " + request.getClass().getCanonicalName());
         }
