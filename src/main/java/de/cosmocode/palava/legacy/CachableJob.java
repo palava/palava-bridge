@@ -71,34 +71,42 @@ public abstract class CachableJob extends UtilityJobImpl {
     public final void process(Call call, Response response, HttpSession session, Server server,
         Map<String, Object> caddy) throws Exception {
 
-        final Arguments arguments = supportsArguments(call) ? call.getArguments() : null;
-        final String language = session.get("lang");
-        
-        final Builder<Object> builder = ImmutableSet.builder();
-        
-        builder.add(getClass());
-        
-        if (arguments != null && arguments.size() > 0) {
-            builder.add(arguments);
-        }
-        
-        if (StringUtils.isNotBlank(language)) {
-            builder.add(language);
-        }
-        
-        final Serializable key = builder.build();
-        final Content cached = service.read(key);
-        
-        if (cached == null) {
-            process(call, response, server, session, caddy);
-            assert response.hasContent() : "Expected content to be set";
-            final Content content = response.getContent();
-            LOG.debug("Storing {} into cache", content);
-            service.store(key, content);
+        if (isCachingEnabled()) {
+            final Arguments arguments = supportsArguments(call) ? call.getArguments() : null;
+            final String language = session.get("lang");
+            
+            final Builder<Object> builder = ImmutableSet.builder();
+            
+            builder.add(getClass());
+            
+            if (arguments != null && arguments.size() > 0) {
+                builder.add(arguments);
+            }
+            
+            if (StringUtils.isNotBlank(language)) {
+                builder.add(language);
+            }
+            
+            final Serializable key = builder.build();
+            final Content cached = service.read(key);
+            
+            if (cached == null) {
+                process(call, response, server, session, caddy);
+                assert response.hasContent() : "Expected content to be set";
+                final Content content = response.getContent();
+                LOG.debug("Storing {} into cache", content);
+                service.store(key, content);
+            } else {
+                LOG.debug("Retrieved content {} from cache", cached);
+                response.setContent(cached);
+            }
         } else {
-            LOG.debug("Retrieved content {} from cache", cached);
-            response.setContent(cached);
+            process(call, response, server, session, caddy);
         }
+    }
+    
+    protected boolean isCachingEnabled() {
+        return true;
     }
     
     private boolean supportsArguments(Call call) {
