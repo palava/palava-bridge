@@ -31,6 +31,11 @@
     </dependency>
     <dependency>
       <groupId>de.cosmocode.palava</groupId>
+      <artifactId>palava-ipc-cache</artifactId>
+      <version>[2.0-SNAPSHOT,3)</version>
+    </dependency>
+    <dependency>
+      <groupId>de.cosmocode.palava</groupId>
       <artifactId>palava-captcha</artifactId>
       <version>[2.0-SNAPSHOT,3)</version>
     </dependency>
