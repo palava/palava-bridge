@@ -36,6 +36,7 @@ import de.cosmocode.palava.bridge.call.JsonCall;
 import de.cosmocode.palava.bridge.command.Response;
 import de.cosmocode.palava.bridge.session.HttpSession;
 import de.cosmocode.palava.cache.CacheService;
+import de.cosmocode.palava.ipc.Ipc;
 
 /**
  * Abstract base class for caching concerns.
@@ -49,8 +50,12 @@ public abstract class CachableJob extends UtilityJobImpl {
     
     private static final Logger LOG = LoggerFactory.getLogger(CachableJob.class);
     
-    @Inject
     private CacheService service;
+    
+    @Inject
+    void setService(@Ipc CacheService service) {
+        this.service = service;
+    }
     
     /**
      * Process the job as it normally would be.
