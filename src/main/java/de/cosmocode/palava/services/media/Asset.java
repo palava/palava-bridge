@@ -49,7 +49,6 @@ import de.cosmocode.palava.media.asset.AbstractAsset;
 import de.cosmocode.palava.media.asset.AssetBase;
 import de.cosmocode.palava.media.directory.DirectoryBase;
 import de.cosmocode.palava.model.base.Copyable;
-import de.cosmocode.palava.model.base.EntityBase;
 import de.cosmocode.rendering.Renderer;
 import de.cosmocode.rendering.RenderingException;
 import de.cosmocode.rendering.RenderingLevel;
