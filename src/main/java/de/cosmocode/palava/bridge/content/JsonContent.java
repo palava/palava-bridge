@@ -40,9 +40,13 @@ import de.cosmocode.patterns.Immutable;
 @Immutable
 public class JsonContent extends AbstractContent {
 
-    public static final JsonContent EMPTY = new JsonContent(new JSONObject());
+    public static final JsonContent EMPTY;
     
     private static final byte[] NULL = "null".getBytes(CHARSET);
+    
+    static {
+        EMPTY = new JsonContent(new JSONObject());
+    }
     
     private final byte[] bytes;
     
