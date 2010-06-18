@@ -96,7 +96,11 @@ public abstract class CachableJob extends UtilityJobImpl {
             final Content cached = service.read(key);
             
             if (cached == null) {
-                process(call, response, server, session, caddy);
+                try {
+                    process(call, response, server, session, caddy);
+                } catch (UncachableException e) {
+                    return;
+                }
                 assert response.hasContent() : "Expected content to be set";
                 final Content content = response.getContent();
                 LOG.debug("Storing {} into cache", content);
