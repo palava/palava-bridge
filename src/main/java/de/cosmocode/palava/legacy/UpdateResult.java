@@ -31,17 +31,21 @@ import org.json.JSONObject;
 import org.json.extension.JSONConstructor;
 import org.json.extension.JSONEncoder;
 
+import com.google.gag.annotation.disclaimer.LegacySucks;
+
 import de.cosmocode.palava.bridge.content.ContentConverter;
 import de.cosmocode.palava.bridge.content.ConversionException;
 import de.cosmocode.palava.bridge.content.Convertible;
 import de.cosmocode.palava.bridge.content.KeyValueState;
 
 /**
- * 
+ * I don't know why this is here.
  *
  * @deprecated dont use this
  */
 @Deprecated
+@LegacySucks
+/* CHECKSTYLE:OFF */
 public class UpdateResult implements Convertible, JSONEncoder {
 
     public static final String ERR_NULL = "missing";
@@ -53,24 +57,26 @@ public class UpdateResult implements Convertible, JSONEncoder {
 
     private static final Pattern PHONE = Pattern.compile("^[+ 0-9()/]*$");
 
-    Map<String,List<String>> errors;
-    Object result;
-    Set<String> erroneousFields; // set of erroneous fields
-    Exception exception;
+    private Map<String, List<String>> errors;
+    private Object result;
+    private Set<String> erroneousFields;
+    private Exception exception;
     
     public boolean isError(){
         return errors != null || exception != null;
     }
-    public Map<String,List<String>> getErrors() {
+    
+    public Map<String, List<String>> getErrors() {
         return errors;
     }
+    
     public Set<String> getFields() {
         return erroneousFields;
     }
-    public boolean hasError( String field ) {
-        return erroneousFields != null && erroneousFields.contains( field );
-    }
     
+    public boolean hasError(String field) {
+        return erroneousFields != null && erroneousFields.contains(field);
+    }
     
     /** adds an error 
      * @param error a description of the error
@@ -328,3 +334,4 @@ public class UpdateResult implements Convertible, JSONEncoder {
         }
     }
 }
+/* CHECKSTYLE:ON */

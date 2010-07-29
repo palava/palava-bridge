@@ -18,68 +18,70 @@ package de.cosmocode.palava.legacy;
 
 import java.util.Map;
 
-import de.cosmocode.palava.bridge.ConnectionLostException;
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.call.DataCall;
 import de.cosmocode.palava.bridge.call.MissingArgumentException;
 import de.cosmocode.palava.bridge.command.Response;
+import de.cosmocode.palava.bridge.scope.Scopes;
 import de.cosmocode.palava.bridge.session.HttpSession;
 
 /**
- * @deprecated use Cache annotation
+ * {@link DataCall} based {@link CachableJob}.
  *
+ * @deprecated without substitution
  * @author Willi Schoenborn
  */
 @Deprecated
 public abstract class CachableDataJob extends CachableJob {
     
-    private Map<String, String> args;
-
     @Override
-    @SuppressWarnings("unchecked")
     public final void process(Call request, Response response, Server server, HttpSession session, 
-        Map<String, Object> caddy) throws ConnectionLostException, Exception {
+        Map<String, Object> caddy) throws  Exception {
         
-        DataCall dataRequest = (DataCall) request;
-        args = dataRequest.getStringedArguments();
+        final DataCall dataRequest = (DataCall) request;
         
-        process(args, response, session, server, caddy);
+        process(dataRequest.getStringedArguments(), response, session, server, caddy);
     }
-    
+
+    /**
+     * Process method for sub classes.
+     * 
+     * @param args arguments
+     * @param response response
+     * @param session http session
+     * @param server server
+     * @param caddy caddy
+     * @throws Exception if anything went wrong
+     */
     protected abstract void process(Map<String, String> args, Response response, HttpSession session, Server server, 
-        Map<String, Object> caddy) throws ConnectionLostException, Exception;
-    
-    
+        Map<String, Object> caddy) throws Exception;
     
     // methods implemented from UtilityJob
 
     @Override
     public String getMandatory(String key) throws MissingArgumentException {
-        if (args.containsKey(key)) return args.get(key);
-        else throw new MissingArgumentException(this, key);
+        return Scopes.getCurrentCall().getArguments().getString(key);
     }
 
     @Override
     public String getMandatory(String key, String argumentType) throws MissingArgumentException {
-        if (args.containsKey(key)) return args.get(key);
-        else throw new MissingArgumentException(this, key, argumentType);
+        return Scopes.getCurrentCall().getArguments().getString(key);
     }
 
     @Override
     public String getOptional(String key) {
-        return args.get(key);
+        return Scopes.getCurrentCall().getArguments().getString(key, null);
     }
 
     @Override
     public String getOptional(String key, String defaultValue) {
-        if (args.containsKey(key)) return args.get(key);
-        else return defaultValue;
+        return Scopes.getCurrentCall().getArguments().getString(key, defaultValue);
     }
 
     @Override
     public boolean hasArgument(String key) {
-        return args.containsKey(key);
+        return Scopes.getCurrentCall().getArguments().containsKey(key);
     }
     
 }

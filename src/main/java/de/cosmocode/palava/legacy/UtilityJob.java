@@ -19,13 +19,13 @@ package de.cosmocode.palava.legacy;
 import de.cosmocode.palava.bridge.call.MissingArgumentException;
 
 /**
- * 
+ * Utility interface offering useful validation methods.
  *
  * @deprecated without substitution
- * @since 
  * @author Willi Schoenborn
  */
 @Deprecated
+/* CHECKSTYLE:OFF */
 public interface UtilityJob {
     
     /**
@@ -33,42 +33,55 @@ public interface UtilityJob {
      * @param keys the arguments to check (keys in key-value-mapping)
      * @throws MissingArgumentException if at least one of the keys were not given as arguments to this job
      */
-    public void require(String... keys) throws MissingArgumentException, Exception;
+    void require(String... keys) throws Exception;
     
     /**
-     * Checks whether at least one of certain arguments were given to this job and throws a MissingArgumentException if not. 
+     * Checks whether at least one of certain arguments were given to this job
+     * and throws a MissingArgumentException if not. 
      * @param keys the arguments to check (keys in key-value-mapping)
      * @throws MissingArgumentException if none of the keys were given as arguments to this job
      */
-    public void requireOneOf(String... keys) throws MissingArgumentException, Exception;
+    void requireOneOf(String... keys) throws Exception;
     
     /**
-     * Returns true if this job was given a parameter named `key`
+     * Returns true if this job was given a parameter named `key`.
+     * 
      * @param key the name of the parameter (key in key-value-mapping)
-     * @return
+     * @return true if key exists, false otherwise
      */
-    public boolean hasArgument (String key);
+    boolean hasArgument(String key);
     
     /** 
-     * lookup a necessary argument named `key`.
+     * Looks up a necessary argument named `key`.
+     * 
      * @param key the name of the argument (key in key-value-mapping)
-     * @throws MissingArgumentException if no mapping for argument `key` exists (i.e., no argument named `key` was given to the job)
+     * @throws MissingArgumentException if no mapping for argument `key` exists
+     * @return value
      */
-    public String getMandatory (String key) throws MissingArgumentException, Exception;
+    String getMandatory(String key) throws Exception;
     
     /** 
      * lookup a necessary argument.
+     * 
      * @param key the name of the argument (key in key-value-mapping)
      * @param argumentType the type of the given argument. Only relevant for the thrown MissingArgumentException.
-     * @throws MissingArgumentException if no mapping for argument `key` exists (i.e., no argument named `key` was given to the job)
+     * @return value
      */
-    public String getMandatory (String key, String argumentType) throws MissingArgumentException, Exception;
+    String getMandatory(String key, String argumentType) throws Exception;
     
-    /** lookup an optional argument. Returns null if no mapping for argument `key` exists.  */
-    public String getOptional (String key);
+    /**
+     * lookup an optional argument. Returns null if no mapping for argument `key` exists.
+     * 
+     * @return null if no value exists
+     */
+    String getOptional(String key);
 
-    /** lookup an optional argument. Returns defaultValue if no mapping for argument `key` exists. */
-    public String getOptional (String key, String defaultValue);
+    /**
+     * lookup an optional argument. Returns defaultValue if no mapping for argument `key` exists.
+     * 
+     * @return value
+     */
+    String getOptional(String key, String defaultValue);
 
     /** 
      * lookup a necessary argument and parse it to bool.
@@ -79,9 +92,10 @@ public interface UtilityJob {
      * <tr><td>"", " ", ...</td>     <td>false</td></tr>
      * <tr><td>(everything else)</td><td>true</td></tr>
      * </table>
-     * @throws MissingArgumentException if no mapping for argument `key` exists (i.e., no argument named `key` was given to the job)
+     * @throws MissingArgumentException if no mapping for argument `key` exists
+     * @return the found boolean
      */
-    public boolean getBool (String key) throws MissingArgumentException, Exception;
+    boolean getBool(String key) throws Exception;
     
     
     /** lookup an optional boolean job-argument.
@@ -224,3 +238,4 @@ public interface UtilityJob {
     public int lookupOptionalInt (String key, int defaultValue);
 
 }
+/* CHECKSTYLE:OFF */

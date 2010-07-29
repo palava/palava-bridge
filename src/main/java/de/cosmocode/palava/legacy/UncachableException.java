@@ -16,6 +16,16 @@
 
 package de.cosmocode.palava.legacy;
 
+import com.google.gag.annotation.remark.OhNoYouDidnt;
+
+/**
+ * Used to indicate no caching is requested.
+
+ * @deprecated why?!
+ * @author Willi Schoenborn
+ */
+@Deprecated
+@OhNoYouDidnt
 public class UncachableException extends RuntimeException {
     
     private static final long serialVersionUID = -4123365865843473019L;

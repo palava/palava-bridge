@@ -23,7 +23,14 @@ import org.apache.commons.lang.StringUtils;
 import de.cosmocode.palava.bridge.call.MissingArgumentException;
 import de.cosmocode.palava.bridge.command.Job;
 
-
+/**
+ * Abstract implementation of {@link UtilityJob}. 
+ *
+ * @deprecated witout substitution
+ * @author Willi Schoenborn
+ */
+@Deprecated
+/* CHECKSTYLE:OFF */
 public abstract class UtilityJobImpl implements Job, UtilityJob {
     
     @Override
@@ -34,8 +41,7 @@ public abstract class UtilityJobImpl implements Job, UtilityJob {
     }
     
     @Override
-    public void requireOneOf(String... keys) throws MissingArgumentException,
-            Exception {
+    public void requireOneOf(String... keys) throws Exception {
         boolean anyArgumentGiven = false;
         for (String key : keys) {
             if (hasArgument(key)) anyArgumentGiven = true;
@@ -45,14 +51,16 @@ public abstract class UtilityJobImpl implements Job, UtilityJob {
 
     @Override
     public boolean getBool(String key) throws MissingArgumentException {
-        if (hasArgument(key))
+        if (hasArgument(key)) {
             return getOptBool(key);
-        else throw new MissingArgumentException(this, key, "boolean");
+        } else {
+            throw new MissingArgumentException(this, key, "boolean");
+        }
     }
     
     @Override
     public boolean getOptBool(String key) {
-        String param = getOptional(key);
+        final String param = getOptional(key);
         return StringUtils.isNotBlank(param) && !param.equalsIgnoreCase("false");
     }
     
@@ -69,9 +77,11 @@ public abstract class UtilityJobImpl implements Job, UtilityJob {
     
     @Override
     public int getInt(String key) throws MissingArgumentException {
-        if (hasArgument(key))
+        if (hasArgument(key)) {
             return Integer.parseInt(getOptional(key));
-        else throw new MissingArgumentException(this, key, "int");
+        } else {
+            throw new MissingArgumentException(this, key, "int");
+        }
     }
     
     @Override
@@ -94,9 +104,11 @@ public abstract class UtilityJobImpl implements Job, UtilityJob {
     
     @Override
     public long getLong(String key) throws MissingArgumentException {
-        if (hasArgument(key))
+        if (hasArgument(key)) {
             return Integer.parseInt(getOptional(key));
-        else throw new MissingArgumentException(this, key, "int");
+        } else {
+            throw new MissingArgumentException(this, key, "int");
+        }
     }
     
     @Override
@@ -114,7 +126,7 @@ public abstract class UtilityJobImpl implements Job, UtilityJob {
         }
         return defaultValue;
     }
-    
+
     public double optDouble(String key, double defaultValue) {
         if (hasArgument(key)) {
             final String val = getOptional(key);
@@ -130,7 +142,7 @@ public abstract class UtilityJobImpl implements Job, UtilityJob {
     
     // -----------------
     // alternative names
-    
+
     public boolean getOptionalBool(String key) {
         return getOptBool(key);
     }
@@ -192,4 +204,6 @@ public abstract class UtilityJobImpl implements Job, UtilityJob {
         return getOptInt(key, defaultValue);
     }
 
+
 }
+/* CHECKSTYLE:ON */

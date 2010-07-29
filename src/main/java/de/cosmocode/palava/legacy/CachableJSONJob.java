@@ -22,7 +22,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.cosmocode.palava.bridge.Server;
-import de.cosmocode.palava.bridge.call.Arguments;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.call.JsonCall;
 import de.cosmocode.palava.bridge.call.MissingArgumentException;
@@ -82,22 +81,12 @@ public abstract class CachableJSONJob extends CachableJob {
 
     @Override
     public String getMandatory(String key) throws MissingArgumentException, JSONException {
-        final Arguments arguments = Scopes.getCurrentCall().getArguments();
-        if (arguments.containsKey(key)) {
-            return arguments.getString(key);
-        } else {
-            throw new MissingArgumentException(this, key);
-        }
+        return Scopes.getCurrentCall().getArguments().getString(key);
     }
 
     @Override
     public String getMandatory(String key, String argumentType) throws MissingArgumentException, JSONException {
-        final Arguments arguments = Scopes.getCurrentCall().getArguments();
-        if (arguments.containsKey(key)) {
-            return arguments.getString(key);
-        } else {
-            throw new MissingArgumentException(this, key, argumentType);
-        }
+        return Scopes.getCurrentCall().getArguments().getString(key);
     }
 
     @Override
