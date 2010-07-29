@@ -36,9 +36,6 @@ import org.json.extension.JSONEncoder;
 
 import com.google.common.collect.ImmutableSet;
 
-import de.cosmocode.json.JSON;
-import de.cosmocode.json.JSONMapable;
-import de.cosmocode.json.JSONRenderer;
 import de.cosmocode.palava.bridge.MimeType;
 import de.cosmocode.palava.bridge.content.ContentConverter;
 import de.cosmocode.palava.bridge.content.ConversionException;
@@ -62,7 +59,7 @@ import de.cosmocode.rendering.RenderingLevel;
  */
 @Deprecated
 @Entity
-public class Asset implements AssetBase, Copyable<Asset>, JSONMapable, JSONEncoder, Convertible {
+public class Asset implements AssetBase, Copyable<Asset>, JSONEncoder, Convertible {
     
     /**
      * @deprecated use {@code EntityBase.ORDER_BY_AGE.reverse()} instead
@@ -445,16 +442,6 @@ public class Asset implements AssetBase, Copyable<Asset>, JSONMapable, JSONEncod
         converter.convertKeyValue (buf, "description", description, KeyValueState.LAST);
     }
 
-    @Override
-    public JSONRenderer renderAsMap(JSONRenderer renderer) {
-        try {
-            encodeJSON(JSON.asJSONConstructor(renderer));
-        } catch (JSONException e) {
-            throw new IllegalStateException(e);
-        }
-        return renderer;
-    }
-    
     @Override
     public int hashCode() {
         final int prime = 31;

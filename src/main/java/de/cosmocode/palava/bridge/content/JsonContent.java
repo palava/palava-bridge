@@ -26,7 +26,6 @@ import org.json.extension.JSONConstructor;
 import org.json.extension.JSONEncoder;
 
 import de.cosmocode.json.JSON;
-import de.cosmocode.json.JSONMapable;
 import de.cosmocode.json.JSONRenderer;
 import de.cosmocode.palava.bridge.MimeType;
 import de.cosmocode.patterns.Immutable;
@@ -68,11 +67,6 @@ public class JsonContent extends AbstractContent {
     public JsonContent(JSONConstructor constructor) {
         super(MimeType.JSON);
         bytes = constructor == null ? NULL : constructor.toString().getBytes(CHARSET);
-    }
-    
-    public JsonContent(JSONMapable mapable) {
-        super(MimeType.JSON);
-        bytes = mapable == null ? NULL : JSON.createJSONRenderer().object(mapable).toString().getBytes(CHARSET);
     }
     
     public JsonContent(JSONEncoder encoder) {

@@ -22,9 +22,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-import de.cosmocode.json.JSONMapable;
-import de.cosmocode.json.JSONRenderer;
 import de.cosmocode.palava.ipc.IpcSession;
+import de.cosmocode.rendering.Renderable;
+import de.cosmocode.rendering.Renderer;
+import de.cosmocode.rendering.RenderingException;
+import de.cosmocode.rendering.RenderingLevel;
 
 /**
  * A {@link HttpSession} represents an browser session,
@@ -32,7 +34,7 @@ import de.cosmocode.palava.ipc.IpcSession;
  *
  * @author Willi Schoenborn
  */
-public interface HttpSession extends IpcSession, JSONMapable {
+public interface HttpSession extends IpcSession, Renderable {
     
     String LANGUAGE = "lang";
     
@@ -152,6 +154,6 @@ public interface HttpSession extends IpcSession, JSONMapable {
      * </pre>
      */
     @Override
-    JSONRenderer renderAsMap(JSONRenderer renderer);
+    void render(Renderer renderer, RenderingLevel level) throws RenderingException;
     
 }

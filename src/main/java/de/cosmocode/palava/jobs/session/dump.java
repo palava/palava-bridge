@@ -16,14 +16,18 @@
 
 package de.cosmocode.palava.jobs.session;
 
+import java.util.Map;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
-import de.cosmocode.json.JSONMapable;
-import de.cosmocode.palava.bridge.Content;
-import de.cosmocode.palava.bridge.call.Call;
-import de.cosmocode.palava.bridge.command.Command;
-import de.cosmocode.palava.bridge.command.CommandException;
-import de.cosmocode.palava.bridge.content.JsonContent;
+import de.cosmocode.palava.ipc.IpcCall;
+import de.cosmocode.palava.ipc.IpcCommand;
+import de.cosmocode.palava.ipc.IpcCommandExecutionException;
+import de.cosmocode.palava.ipc.IpcSession;
+import de.cosmocode.rendering.MapRenderer;
+import de.cosmocode.rendering.Rendering;
 
 /**
  * debug job, dumping all session data.
@@ -31,11 +35,22 @@ import de.cosmocode.palava.bridge.content.JsonContent;
  * @author Detlef Hüttemann
  */
 @Singleton
-public class dump implements Command {
+public class dump implements IpcCommand {
+
+    private final Provider<MapRenderer> provider;
+    
+    @Inject
+    public dump(Provider<MapRenderer> provider) {
+        this.provider = provider;
+    }
 
     @Override
-    public Content execute(Call call) throws CommandException {
-        return new JsonContent(JSONMapable.class.cast(call.getHttpRequest().getHttpSession()));
+    public void execute(IpcCall call, Map<String, Object> result) throws IpcCommandExecutionException {
+        final MapRenderer renderer = provider.get();
+        final IpcSession session = call.getConnection().getSession();
+        renderer.value(session, Rendering.maxLevel());
+        final Map<String, Object> map = renderer.build();
+        result.putAll(map);
     }
     
 }

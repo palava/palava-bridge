@@ -40,9 +40,6 @@ import org.json.extension.JSONEncoder;
 
 import com.google.inject.internal.Lists;
 
-import de.cosmocode.json.JSON;
-import de.cosmocode.json.JSONMapable;
-import de.cosmocode.json.JSONRenderer;
 import de.cosmocode.palava.bridge.content.ContentConverter;
 import de.cosmocode.palava.bridge.content.ConversionException;
 import de.cosmocode.palava.bridge.content.Convertible;
@@ -78,7 +75,7 @@ import de.cosmocode.rendering.RenderingLevel;
     )
 })
 @Entity
-public class Directory implements DirectoryBase, JSONMapable, JSONEncoder, Convertible, Iterable<Asset> {
+public class Directory implements DirectoryBase, JSONEncoder, Convertible, Iterable<Asset> {
 
     public static final String BY_ASSET_ID = "Directory by Asset id";
     
@@ -206,16 +203,6 @@ public class Directory implements DirectoryBase, JSONMapable, JSONEncoder, Conve
     public void convert(StringBuffer buf, ContentConverter converter) throws ConversionException {
         converter.convertKeyValue(buf, "name", name, KeyValueState.START);
         converter.convertKeyValue(buf, "assets", assets, KeyValueState.LAST);
-    }
-    
-    @Override
-    public JSONRenderer renderAsMap(JSONRenderer renderer) {
-        try {
-            encodeJSON(JSON.asJSONConstructor(renderer));
-        } catch (JSONException e) {
-            throw new IllegalStateException(e);
-        }
-        return renderer;
     }
     
     public int getSize() {
