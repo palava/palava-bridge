@@ -48,7 +48,7 @@ public class dump implements IpcCommand {
     public void execute(IpcCall call, Map<String, Object> result) throws IpcCommandExecutionException {
         final MapRenderer renderer = provider.get();
         final IpcSession session = call.getConnection().getSession();
-        renderer.value(session, Rendering.maxLevel());
+        renderer.value((Object) session);
         final Map<String, Object> map = renderer.build();
         result.putAll(map);
     }
