@@ -21,12 +21,12 @@ import java.util.Map;
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.session.HttpSession;
-
+import de.cosmocode.palava.ipc.IpcCommand;
 
 /**
  * Legacy {@linkplain Command command}-style interface.
  * 
- * @deprecated <strong>Use {@link Command}!</strong>
+ * @deprecated use {@link IpcCommand}
  * 
  * @author Tobias Sarnowski
  * @author Oliver Lorenz 

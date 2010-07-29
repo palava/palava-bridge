@@ -24,9 +24,11 @@ import de.cosmocode.palava.bridge.MimeType;
 /**
  * Abstract base implementation of the {@link Content} interface.
  * 
+ * @deprecated without substitution
  * @author Detlef Hüttemann
  * @author Willi Schoenborn
  */
+@Deprecated
 abstract class AbstractContent implements Content {
     
     private final MimeType mimeType;

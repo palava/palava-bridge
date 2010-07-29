@@ -23,9 +23,11 @@ import de.cosmocode.palava.bridge.MimeType;
 
 /**
  * Plain text content.
- * 
+ *
+ * @deprecated without substitution
  * @author Detlef Hüttemann
  */
+@Deprecated
 public class TextContent extends AbstractContent {
 
     private final byte[] bytes;

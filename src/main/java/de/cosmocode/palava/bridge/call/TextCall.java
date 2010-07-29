@@ -16,9 +16,20 @@
 
 package de.cosmocode.palava.bridge.call;
 
-
+/**
+ * {@link Call} which uses a plain UTF-8 string as arguments. 
+ *
+ * @deprecated without substitution
+ * @author Willi Schoenborn
+ */
+@Deprecated
 public interface TextCall extends Call {
  
+    /**
+     * Returns the given text parameter.
+     * 
+     * @return the parameter text
+     */
     String getText();
     
 }

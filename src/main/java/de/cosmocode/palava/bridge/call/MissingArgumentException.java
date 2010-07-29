@@ -18,11 +18,15 @@ package de.cosmocode.palava.bridge.call;
 
 import java.util.List;
 
+import de.cosmocode.palava.ipc.IpcArgumentsMissingException;
+
 /**
  * Indicates a missing argument when invoking a command.
  *
+ * @deprecated use {@link IpcArgumentsMissingException}
  * @author Willi Schoenborn
  */
+@Deprecated
 public class MissingArgumentException extends RuntimeException {
 
     private static final long serialVersionUID = -4016565094430756701L;

@@ -21,17 +21,19 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.input.CountingInputStream;
+
+import com.google.common.io.LimitInputStream;
 
 import de.cosmocode.palava.bridge.MimeType;
-
 
 /**
  * General content to return streams.
  * 
+ * @deprecated without substitution
  * @author Tobias Sarnowski
  * @author Willi Schoenborn
  */
+@Deprecated
 public class StreamContent extends AbstractContent {
     
     private final InputStream stream;
@@ -62,35 +64,7 @@ public class StreamContent extends AbstractContent {
 
     @Override
     public void write(OutputStream out) throws IOException {
-        IOUtils.copy(new BlockingInputStream(stream), out);
-    }
-    
-    private class BlockingInputStream extends InputStream {
-
-        private final CountingInputStream stream;
-        
-        public BlockingInputStream(InputStream in) {
-            this.stream = new CountingInputStream(in);
-        }
-        
-        @Override
-        public int read() throws IOException {
-            if (stream.getCount() >= length) return -1;
-            return stream.read();
-        }
-        
-        @Override
-        public int read(byte[] b) throws IOException {
-            if (stream.getCount() >= length) return -1;
-            return stream.read(b);
-        }
-        
-        @Override
-        public int read(byte[] b, int off, int len) throws IOException {
-            if (stream.getCount() >= length) return -1;
-            return stream.read(b, off, len);
-        }
-        
+        IOUtils.copy(new LimitInputStream(stream, length), out);
     }
     
 }

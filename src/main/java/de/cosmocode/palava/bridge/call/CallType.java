@@ -19,9 +19,11 @@ package de.cosmocode.palava.bridge.call;
 /**
  * Defines the different types of calls.
  *
+ * @deprecated without substitution
  * @since 1.0
  * @author Willi Schoenborn
  */
+@Deprecated
 public enum CallType {
 
     DATA,

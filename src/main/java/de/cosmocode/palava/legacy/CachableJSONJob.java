@@ -21,79 +21,98 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.cosmocode.palava.bridge.ConnectionLostException;
 import de.cosmocode.palava.bridge.Server;
+import de.cosmocode.palava.bridge.call.Arguments;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.call.JsonCall;
 import de.cosmocode.palava.bridge.call.MissingArgumentException;
 import de.cosmocode.palava.bridge.command.Response;
+import de.cosmocode.palava.bridge.scope.Scopes;
 import de.cosmocode.palava.bridge.session.HttpSession;
 
 /**
+ * {@link JsonCall} based {@link CachableJob}.
  * 
  * @deprecated use Cache annotation
- *
  * @author Willi Schoenborn
  */
 @Deprecated
 public abstract class CachableJSONJob extends CachableJob {
     
-    private JSONObject json;
-
     @Override
     public final void process(Call request, Response response, Server server, HttpSession session, 
-        Map<String, Object> caddy) throws ConnectionLostException, Exception {
+        Map<String, Object> caddy) throws Exception {
 
-        JsonCall jRequest = (JsonCall) request;
-        json = jRequest.getJSONObject();
-        
-        process(json, response, session, server, caddy);
+        final JsonCall jRequest = (JsonCall) request;
+        process(jRequest.getJSONObject(), response, session, server, caddy);
     }
-    
+
+    /**
+     * Process method for sub classes.
+     * 
+     * @param json arguments
+     * @param response response
+     * @param session http session
+     * @param server server
+     * @param caddy caddy
+     * @throws Exception if anything went wrong
+     */
     protected abstract void process(JSONObject json, Response response, HttpSession session, Server server, 
-        Map<String, Object> caddy) throws ConnectionLostException, Exception;
+        Map<String, Object> caddy) throws Exception;
     
     @Override
     public final void require(String... keys) throws MissingArgumentException {
-        require(json, keys);
+        Scopes.getCurrentCall().getArguments().require(keys);
     }
-    
+
+    /**
+     * Valides the given arguments.
+     * 
+     * @param json the json object being validated
+     * @param keys the argument names
+     * @throws MissingArgumentException if any argument is missing
+     */
     protected final void require(JSONObject json, String... keys) throws MissingArgumentException {
         for (String key : keys) {
             if (!json.has(key)) throw new MissingArgumentException(key);
         }
     }
-    
 
     // methods implemented from UtilityJob
 
     @Override
     public String getMandatory(String key) throws MissingArgumentException, JSONException {
-        if (json.has(key)) return json.getString(key);
-        else throw new MissingArgumentException(this, key);
+        final Arguments arguments = Scopes.getCurrentCall().getArguments();
+        if (arguments.containsKey(key)) {
+            return arguments.getString(key);
+        } else {
+            throw new MissingArgumentException(this, key);
+        }
     }
 
     @Override
     public String getMandatory(String key, String argumentType) throws MissingArgumentException, JSONException {
-        if (json.has(key)) return json.getString(key);
-        else throw new MissingArgumentException(this, key, argumentType);
+        final Arguments arguments = Scopes.getCurrentCall().getArguments();
+        if (arguments.containsKey(key)) {
+            return arguments.getString(key);
+        } else {
+            throw new MissingArgumentException(this, key, argumentType);
+        }
     }
 
     @Override
     public String getOptional(String key) {
-        if (json.has(key)) return json.optString(key);
-        else return null;
+        return Scopes.getCurrentCall().getArguments().getString(key, null);
     }
 
     @Override
     public String getOptional(String key, String defaultValue) {
-        if (json.has(key)) return json.optString(key);
-        else return defaultValue;
+        return Scopes.getCurrentCall().getArguments().getString(key, defaultValue);
     }
 
     @Override
     public boolean hasArgument(String key) {
-        return json.has(key);
+        return Scopes.getCurrentCall().getArguments().containsKey(key);
     }
 
 }

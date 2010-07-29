@@ -18,7 +18,14 @@ package de.cosmocode.palava.legacy;
 
 import de.cosmocode.palava.bridge.call.MissingArgumentException;
 
-
+/**
+ * 
+ *
+ * @deprecated without substitution
+ * @since 
+ * @author Willi Schoenborn
+ */
+@Deprecated
 public interface UtilityJob {
     
     /**

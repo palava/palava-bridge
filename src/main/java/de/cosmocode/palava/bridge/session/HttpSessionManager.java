@@ -20,14 +20,16 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.inject.Provider;
 
-import de.cosmocode.palava.core.Service;
+import de.cosmocode.palava.ipc.IpcSessionProvider;
 
 /**
  * A manager for {@link HttpSession}s.
  *
+ * @deprecated use {@link IpcSessionProvider}
  * @author Willi Schoenborn
  */
-public interface HttpSessionManager extends Service, Provider<HttpSession> {
+@Deprecated
+public interface HttpSessionManager extends Provider<HttpSession> {
 
     /**
      * Destroys all sessions.

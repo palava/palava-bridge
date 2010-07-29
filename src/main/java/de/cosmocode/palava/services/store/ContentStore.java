@@ -18,14 +18,41 @@ package de.cosmocode.palava.services.store;
 
 import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.content.StreamContent;
-import de.cosmocode.palava.core.Service;
+import de.cosmocode.palava.store.Store;
 
-public interface ContentStore extends Service {
+/**
+ * Binary data storage.
+ *
+ * @deprecated use {@link Store}
+ * @since long time ago
+ * @author Willi Schoenborn
+ */
+@Deprecated
+public interface ContentStore {
 
+    /**
+     * Saves content.
+     * 
+     * @param content the content being saved
+     * @return string identifier
+     * @throws Exception if saving failed
+     */
     String store(Content content) throws Exception;
     
+    /**
+     * Reads content.
+     * 
+     * @param key the string identifier
+     * @return content being read
+     * @throws Exception if reading failed
+     */
     StreamContent load(String key) throws Exception;
 
+    /**
+     * Removes content.
+     * 
+     * @param key the string identifier
+     */
     void remove(String key);
     
 }

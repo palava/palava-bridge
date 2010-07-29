@@ -24,9 +24,9 @@ import de.cosmocode.palava.bridge.MimeType;
 /**
  * Content which uses PHP notation.
  * 
+ * @deprecated without substitution
  * @author Detlef Hüttemann
  * @author Willi Schoenborn
- * @deprecated use {@link JsonContent} instead
  */
 @Deprecated
 public class PhpContent extends AbstractContent {

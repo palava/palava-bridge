@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
+import javax.annotation.concurrent.Immutable;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.extension.JSONConstructor;
@@ -28,14 +30,15 @@ import org.json.extension.JSONEncoder;
 import de.cosmocode.json.JSON;
 import de.cosmocode.json.JSONRenderer;
 import de.cosmocode.palava.bridge.MimeType;
-import de.cosmocode.patterns.Immutable;
 
 /**
  * use the JSONConverter to produce JSON output of java objects.
  * 
+ * @deprecated without substitution
  * @author Detlef Hüttemann
  * @author Willi Schoenborn
  */
+@Deprecated
 @Immutable
 public class JsonContent extends AbstractContent {
 

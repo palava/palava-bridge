@@ -16,9 +16,13 @@
 
 package de.cosmocode.palava.bridge.call;
 
-
+/**
+ * {@link Call} which provides binary data.
+ *
+ * @deprecated use base64 encoded strings
+ * @author Willi Schoenborn
+ */
+@Deprecated
 public interface BinaryCall extends Call {
-    
-    
     
 }

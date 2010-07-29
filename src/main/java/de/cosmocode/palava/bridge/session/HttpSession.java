@@ -32,8 +32,10 @@ import de.cosmocode.rendering.RenderingLevel;
  * A {@link HttpSession} represents an browser session,
  * lasting for a specific period of time.
  *
+ * @deprecated use {@link IpcSession}
  * @author Willi Schoenborn
  */
+@Deprecated
 public interface HttpSession extends IpcSession, Renderable {
     
     String LANGUAGE = "lang";

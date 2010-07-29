@@ -17,11 +17,12 @@
 package de.cosmocode.palava.bridge.command;
 
 import de.cosmocode.palava.bridge.Content;
+import de.cosmocode.palava.ipc.IpcCommand;
 
 /**
  * Legacy content wrapper.
  * 
- * @deprecated use {@link Command} and return content
+ * @deprecated use {@link IpcCommand} and fill result map
  *
  * @author Willi Schoenborn
  */

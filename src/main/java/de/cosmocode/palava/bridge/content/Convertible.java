@@ -16,11 +16,13 @@
 
 package de.cosmocode.palava.bridge.content;
 
+import de.cosmocode.rendering.Renderable;
+
 /**
  * marks an object to be usable with a converter.
  * 
+ * @deprecated use {@link Renderable}
  * @author Detlef Hüttemann
- * @deprecated use JSONMapable instead
  */
 @Deprecated
 public interface Convertible {

@@ -16,13 +16,17 @@
 
 package de.cosmocode.palava.bridge.command;
 
+import com.google.inject.Injector;
+
 import de.cosmocode.palava.core.Service;
 
 /**
  * A service which handles command management.
  *
+ * @deprecated use {@link Injector}
  * @author Willi Schoenborn
  */
+@Deprecated
 public interface CommandManager extends Service {
 
     /**

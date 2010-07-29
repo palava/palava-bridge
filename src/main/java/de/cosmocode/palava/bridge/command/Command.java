@@ -18,13 +18,16 @@ package de.cosmocode.palava.bridge.command;
 
 import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.call.Call;
+import de.cosmocode.palava.ipc.IpcCommand;
 
 /**
  * A {@link Command} is very similiar to a {@link Servlet}. It represents
  * a unit of work which will handle an incoming call.
  *
+ * @deprecated use {@link IpcCommand}
  * @author Willi Schoenborn
  */
+@Deprecated
 public interface Command {
 
     /**

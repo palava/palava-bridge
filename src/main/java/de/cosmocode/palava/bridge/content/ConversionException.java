@@ -19,16 +19,24 @@ package de.cosmocode.palava.bridge.content;
 /**
  * used by the converter to indicate conversion problems.
  * 
+ * @deprecated without substitution
  * @author Detlef Hüttemann
- * @deprecated dont use
  */
 @Deprecated
 public class ConversionException extends Exception {
 
     private static final long serialVersionUID = 2345955837144390619L;
 
+    public ConversionException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     public ConversionException(String message) {
         super(message);
+    }
+
+    public ConversionException(Throwable cause) {
+        super(cause);
     }
     
 }

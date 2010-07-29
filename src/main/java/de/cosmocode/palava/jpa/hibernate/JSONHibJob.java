@@ -18,54 +18,54 @@ package de.cosmocode.palava.jpa.hibernate;
 
 import java.util.Map;
 
-import org.hibernate.Session;
 import org.json.JSONObject;
-
-import com.google.inject.Provider;
 
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.call.JsonCall;
 import de.cosmocode.palava.bridge.call.MissingArgumentException;
-import de.cosmocode.palava.bridge.command.Command;
 import de.cosmocode.palava.bridge.command.Response;
+import de.cosmocode.palava.bridge.scope.Scopes;
 import de.cosmocode.palava.bridge.session.HttpSession;
 
 /**
- * @deprecated use {@link Command} and an injected {@link Provider} for {@link Session}s 
- *
+ * {@link JsonCall} based {@link HibernateJob}.
+ *  
+ * @deprecated without substitution
  * @author Willi Schoenborn
  */
 @Deprecated
 public abstract class JSONHibJob extends HibernateJob {
     
-    private JSONObject json;
-
     @Override
     public final void process(Call request, Response response, HttpSession httpSession, Server server, 
         Map<String, Object> caddy, org.hibernate.Session session) throws Exception {
 
         final JsonCall jRequest = (JsonCall) request;
-        json = jRequest.getJSONObject();
         
-        process(json, response, httpSession, server, caddy, session);
+        process(jRequest.getJSONObject(), response, httpSession, server, caddy, session);
     }
-    
-    protected final void require(String... keys) throws MissingArgumentException {
-        for (String key : keys) {
-            if (!json.has(key)) throw new MissingArgumentException(key);
-        }
-    }
-    
+
     /**
+     * Valides the given arguments.
      * 
-     * @param json
-     * @param response
-     * @param httpSession
-     * @param server
-     * @param caddy
-     * @param session
-     * @throws Exception
+     * @param keys the argument names
+     * @throws MissingArgumentException if any argument is missing
+     */
+    protected final void require(String... keys) throws MissingArgumentException {
+        Scopes.getCurrentCall().getArguments().require(keys);
+    }
+
+    /**
+     * Process method for sub classes.
+     * 
+     * @param json arguments
+     * @param response response
+     * @param httpSession http session
+     * @param server server
+     * @param caddy caddy
+     * @param session hibernate session
+     * @throws Exception if anything went wrong
      */
     protected abstract void process(JSONObject json, Response response, HttpSession httpSession, Server server,
         Map<String, Object> caddy, org.hibernate.Session session) throws Exception;

@@ -39,10 +39,21 @@ package de.cosmocode.palava.bridge.call;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.cosmocode.palava.bridge.ConnectionLostException;
-
+/**
+ * {@link Call} which uses the json format.
+ *
+ * @deprecated without substitution
+ * @author Willi Schoenborn
+ */
+@Deprecated
 public interface JsonCall extends Call {
     
-    JSONObject getJSONObject() throws ConnectionLostException, JSONException;
+    /**
+     * Provides the underlying json object.
+     * 
+     * @return the json arguments
+     * @throws JSONException if parsing failed
+     */
+    JSONObject getJSONObject() throws JSONException;
     
 }

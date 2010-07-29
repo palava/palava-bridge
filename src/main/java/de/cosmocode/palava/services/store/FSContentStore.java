@@ -34,9 +34,11 @@ import de.cosmocode.palava.bridge.content.StreamContent;
 
 /**
  * File system base {@link ContentStore} implementation.
- *
+ * 
+ * @deprecated use FileSystemStore
  * @author Willi Schoenborn
  */
+@Deprecated
 public final class FSContentStore implements ContentStore {
     
     private static final Logger LOG = LoggerFactory.getLogger(FSContentStore.class);

@@ -19,8 +19,10 @@ package de.cosmocode.palava.bridge;
 /**
  * This is mostly an IOException because of a broken connection.
  * 
+ * @deprecated without substitution
  * @author Tobias Sarnowski
  */
+@Deprecated
 public class ConnectionLostException extends RuntimeException {
 
     private static final long serialVersionUID = 5394188472524842095L;

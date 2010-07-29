@@ -18,14 +18,17 @@ package de.cosmocode.palava.bridge;
 
 import java.nio.ByteBuffer;
 
+import javax.annotation.concurrent.Immutable;
+
 import de.cosmocode.palava.bridge.call.CallType;
-import de.cosmocode.patterns.Immutable;
 
 /**
  * Protocol header definition.
  *
+ * @deprecated without substitution
  * @author Willi Schoenborn
  */
+@Deprecated 
 @Immutable
 public interface Header {
 

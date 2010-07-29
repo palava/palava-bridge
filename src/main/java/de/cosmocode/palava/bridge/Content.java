@@ -20,17 +20,20 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 
+import com.google.common.base.Charsets;
 
 /**
  * A content can be seen as any kind
  * of data that can be "shipped over the wire"
  * to PHP.
  *
+ * @deprecated without substitution
  * @author Willi Schoenborn
  */
+@Deprecated
 public interface Content {
     
-    Charset CHARSET = Charset.forName("UTF-8");
+    Charset CHARSET = Charsets.UTF_8;
     
     /**
      * Provide the mimetype.

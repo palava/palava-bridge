@@ -18,14 +18,14 @@ package de.cosmocode.palava.bridge;
 
 import com.google.inject.Inject;
 
-import de.cosmocode.palava.core.Service;
-
 /**
  * Legacy central palava framework instance.
  *
+ * @deprecated use {@link Inject}
  * @author Willi Schoenborn
  */
-public interface Server extends Service {
+@Deprecated
+public interface Server {
 
     /**
      * Provides access to the service manager.

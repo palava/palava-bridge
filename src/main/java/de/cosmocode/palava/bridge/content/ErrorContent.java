@@ -25,21 +25,21 @@ import com.google.common.base.Preconditions;
 
 import de.cosmocode.palava.bridge.MimeType;
 
-
 /**
  * An error occured, this ships it to the browser.
  * 
+ * @deprecated without substitution
  * @author Tobias Sarnowski
  * @author Willi Schoenborn
  */
-public class ErrorContent extends AbstractContent {
+@Deprecated
+public final class ErrorContent extends AbstractContent {
     
     private final byte [] bytes;
 
     private ErrorContent(Throwable e) {
         super(MimeType.ERROR);
         
-        // FIXME php is good enough to create the html itself, it's ugly here
         final StringBuilder builder = new StringBuilder();
         builder.append("<div style='background-color: #ff0000 !important; margin: 20px; font-family: Lucida Grande, " +
             "Verdana, Sans-serif; font-size: 12px; color: #ffffff !important; border-color: #000000 !important; " +
@@ -72,6 +72,12 @@ public class ErrorContent extends AbstractContent {
         out.write(bytes, 0, bytes.length);
     }
     
+    /**
+     * Static factory method for {@link ErrorContent}.
+     * 
+     * @param exception the thrown exception
+     * @return error content
+     */
     public static ErrorContent create(Throwable exception) {
         Preconditions.checkNotNull(exception, "Exception");
         return new ErrorContent(exception);

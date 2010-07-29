@@ -23,18 +23,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.activation.MimetypesFileTypeMap;
+
 /**
  * can parse the mimetype from a file extension.
  * 
+ * @deprecated use {@link MimetypesFileTypeMap}
  * @author Detlef Hüttemann
  */
+@Deprecated
 public final class MimeTypes {
 
     public static final MimeTypes SINGLETON;
     
     static {
         try {
-            // TODO fixme
             SINGLETON = new MimeTypes("/etc/mime.types");
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);

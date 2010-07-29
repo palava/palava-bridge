@@ -16,15 +16,17 @@
 
 package de.cosmocode.palava.bridge.command;
 
-import com.google.common.base.Function;
+import javax.annotation.concurrent.Immutable;
 
-import de.cosmocode.patterns.Immutable;
+import com.google.common.base.Function;
 
 /**
  * An {@link Alias} is a short name for a package.
  *
+ * @deprecated without substitution
  * @author Willi Schoenborn
  */
+@Deprecated
 @Immutable
 public interface Alias extends Function<String, String> {
 

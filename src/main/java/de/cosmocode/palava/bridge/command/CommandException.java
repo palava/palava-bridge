@@ -21,8 +21,10 @@ import de.cosmocode.palava.ipc.IpcCommandExecutionException;
 /**
  * Indicates an error during {@link Command} executing.
  *
+ * @deprecated use {@link IpcCommandExecutionException}
  * @author Willi Schoenborn
  */
+@Deprecated
 public final class CommandException extends IpcCommandExecutionException {
 
     private static final long serialVersionUID = -7091237906330777228L;

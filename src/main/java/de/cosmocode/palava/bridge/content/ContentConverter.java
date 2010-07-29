@@ -21,13 +21,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import de.cosmocode.rendering.Renderer;
+
 /**
  * abstract, implements the convert() function.
  * 
+ * @deprecated use {@link Renderer}
  * @author Detlef Hüttemann
- * @deprecated use JSONRenderer instead
  */
 @Deprecated
+/* CHECKSTYLE:OFF */
 public abstract class ContentConverter {
 
     public void convert(StringBuffer buf, Object object) throws ConversionException {
@@ -69,3 +72,5 @@ public abstract class ContentConverter {
     public abstract void convertKeyValue(StringBuffer buf, String key, Object value, KeyValueState state) throws ConversionException;
 
 }
+
+/* CHECKSTYLE:ON */

@@ -28,6 +28,7 @@ import de.cosmocode.palava.bridge.command.Aliases;
  *
  * @author Willi Schoenborn
  */
+@SuppressWarnings("deprecation")
 public abstract class AbstractApplication extends AbstractModule {
     
     /**

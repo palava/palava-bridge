@@ -22,13 +22,14 @@ import java.io.IOException;
 
 import de.cosmocode.palava.bridge.MimeTypes;
 
-
 /**
  * send a local file to the browser.
  * 
+ * @deprecated without substitution
  * @author Tobias Sarnowski
  * @author Willi Schoenborn
  */
+@Deprecated
 public class FileContent extends StreamContent {
     
     public FileContent(File file) throws IOException {

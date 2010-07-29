@@ -25,28 +25,50 @@ import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.call.DataCall;
 import de.cosmocode.palava.bridge.call.MissingArgumentException;
 import de.cosmocode.palava.bridge.command.Response;
+import de.cosmocode.palava.bridge.scope.Scopes;
+import de.cosmocode.palava.bridge.session.HttpSession;
 
+/**
+ * {@link DataCall} based {@link HibernateJob}.
+ * 
+ * @deprecated without substitution
+ * @author Willi Schoenborn
+ */
+@Deprecated
 public abstract class DataHibJob extends HibernateJob {
 
-    private Map<String, String> args;
-    
     @Override
-    public final void process(Call request, Response response, de.cosmocode.palava.bridge.session.HttpSession s, Server server, 
+    public final void process(Call request, Response response, HttpSession s, Server server, 
         Map<String, Object> caddy, Session session) throws Exception {
 
-        DataCall dataRequest = (DataCall) request;
-        args = dataRequest.getStringedArguments();
+        final DataCall dataRequest = (DataCall) request;
+        final Map<String, String> args = dataRequest.getStringedArguments();
         
         process(args, response, s, server, caddy, session);
     }
     
+    /**
+     * Valides the given arguments.
+     * 
+     * @param keys the argument names
+     * @throws MissingArgumentException if any argument is missing
+     */
     protected final void validate(String... keys) throws MissingArgumentException {
-        for (String key : keys) {
-            if (!args.containsKey(key)) throw new MissingArgumentException(key);
-        }
+        Scopes.getCurrentCall().getArguments().require(keys);
     }
     
-    protected abstract void process(Map<String, String> args, Response response, de.cosmocode.palava.bridge.session.HttpSession s, Server server,
+    /**
+     * Process method for sub classes.
+     * 
+     * @param args arguments
+     * @param response response
+     * @param s http session
+     * @param server server
+     * @param caddy caddy
+     * @param session hibernate session
+     * @throws Exception if anything went wrong
+     */
+    protected abstract void process(Map<String, String> args, Response response, HttpSession s, Server server,
         Map<String, Object> caddy, Session session) throws Exception;
     
 }

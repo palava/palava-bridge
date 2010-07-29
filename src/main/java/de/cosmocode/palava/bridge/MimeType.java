@@ -16,16 +16,18 @@
 
 package de.cosmocode.palava.bridge;
 
-import com.google.common.base.Preconditions;
+import javax.annotation.concurrent.Immutable;
 
-import de.cosmocode.patterns.Immutable;
+import com.google.common.base.Preconditions;
 
 /**
  * MimeTypes define a content type.
  * 
+ * @deprecated use {@link javax.activation.MimeType}
  * @author Detlef Hüttemann
  * @author Willi Schoenborn
  */
+@Deprecated
 @Immutable
 public class MimeType {
     

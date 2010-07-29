@@ -20,12 +20,13 @@ import java.sql.Blob;
 
 import de.cosmocode.palava.bridge.MimeType;
 
-
 /**
  * SQL Blob stream content.
  * 
+ * @deprecated without substitution
  * @author Tobias Sarnowski
  */
+@Deprecated
 public final class BlobContent extends StreamContent {
     
     public BlobContent(Blob blob, MimeType mime) throws Exception {

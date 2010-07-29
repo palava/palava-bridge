@@ -25,8 +25,10 @@ import de.cosmocode.palava.ipc.IpcConnection;
 /**
  * Encapsulates http related data access and scoping issues.
  *
+ * @deprecated use {@link IpcConnection}
  * @author Willi Schoenborn
  */
+@Deprecated
 public interface HttpRequest extends IpcConnection {
 
     /**

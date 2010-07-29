@@ -18,12 +18,24 @@ package de.cosmocode.palava.bridge.call;
 
 import java.util.Map;
 
-
+/**
+ * {@link Call} which uses GET-style parameter encoding.
+ * 
+ * <p>
+ *   This call type now uses json.
+ * </p>
+ * 
+ * @deprecated without substitution
+ * @author Willi Schoenborn
+ */
+@Deprecated
 public interface DataCall extends Call {
  
     /**
-     * @deprecated use {@link Call#getArguments()} instead
-     * @return
+     * Returns the arguments.
+     * 
+     * @deprecated use {@link Call#getArguments()}
+     * @return map of arguments
      */
     @Deprecated
     Map<String, String> getStringedArguments();

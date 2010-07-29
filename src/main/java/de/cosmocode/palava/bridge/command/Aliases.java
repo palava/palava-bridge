@@ -21,8 +21,10 @@ import com.google.common.base.Preconditions;
 /**
  * Static factory/utility class for {@link Alias}es.
  *
+ * @deprecated without substitution
  * @author Willi Schoenborn
  */
+@Deprecated
 public final class Aliases {
 
     private Aliases() {

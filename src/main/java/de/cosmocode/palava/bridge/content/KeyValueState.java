@@ -21,7 +21,6 @@ package de.cosmocode.palava.bridge.content;
  * used by converters to identify the position in an array.
  * 
  * @deprecated Stop using it. Now!
- * 
  * @author Detlef Hüttemann
  */
 @Deprecated

@@ -16,15 +16,22 @@
 
 package de.cosmocode.palava.bridge.scope;
 
+import com.google.inject.Provider;
+
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.request.HttpRequest;
 import de.cosmocode.palava.bridge.session.HttpSession;
+import de.cosmocode.palava.ipc.IpcCall;
+import de.cosmocode.palava.ipc.IpcConnection;
+import de.cosmocode.palava.ipc.IpcSession;
 
 /**
  * Keeps track of thread bound {@link Call}s, {@link HttpRequest}s and {@link HttpSession}s.
  *
+ * @deprecated inject {@link Provider} for {@link IpcCall}, {@link IpcConnection} or {@link IpcSession}
  * @author Willi Schoenborn
  */
+@Deprecated
 public final class Scopes {
     
     private static final ThreadLocal<Call> CALL = new ThreadLocal<Call>();
@@ -43,6 +50,9 @@ public final class Scopes {
         CALL.set(call);
     }
     
+    /**
+     * Cleans up the scopes.
+     */
     public static void clean() {
         CALL.remove();
     }

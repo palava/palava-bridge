@@ -26,8 +26,10 @@ import de.cosmocode.palava.core.Service;
  * the proper execution of all lifecycle methods
  * as defined in the lifecycle package.
  *
+ * @deprecated use {@link Inject}
  * @author Willi Schoenborn
  */
+@Deprecated
 public interface ServiceManager extends Service {
 
     /**

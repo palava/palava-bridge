@@ -27,8 +27,10 @@ import de.cosmocode.palava.ipc.IpcCall;
 /**
  * A Call represents one single access.
  *
+ * @deprecated use {@link IpcCall}
  * @author Willi Schoenborn
  */
+@Deprecated
 public interface Call extends IpcCall {
 
     /**

@@ -22,8 +22,10 @@ import de.cosmocode.palava.ipc.IpcArguments;
  * Argument map providing useful methods for type checking
  * and converting.
  *
+ * @deprecated use {@link IpcArguments}
  * @author Willi Schoenborn
  */
+@Deprecated
 public interface Arguments extends IpcArguments {
 
     /**
