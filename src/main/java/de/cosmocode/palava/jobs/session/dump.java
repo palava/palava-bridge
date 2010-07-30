@@ -27,10 +27,8 @@ import de.cosmocode.palava.bridge.session.HttpSession;
 import de.cosmocode.palava.ipc.IpcCall;
 import de.cosmocode.palava.ipc.IpcCommand;
 import de.cosmocode.palava.ipc.IpcCommandExecutionException;
-import de.cosmocode.palava.ipc.IpcSession;
 import de.cosmocode.palava.ipc.session.Entries;
 import de.cosmocode.rendering.MapRenderer;
-import de.cosmocode.rendering.Rendering;
 
 /**
  * debug job, dumping all session data.
@@ -55,9 +53,9 @@ public class dump implements IpcCommand {
     @Override
     public void execute(IpcCall call, Map<String, Object> result) throws IpcCommandExecutionException {
         final MapRenderer renderer = rendererProvider.get();
-        final HttpSession session = sessionProvider.get();
-        // cast to Object is required to prevent treatment as Iterable
-        renderer.value((Object) session);
+        // Object is required to prevent treatment as Iterable
+        final Object session = sessionProvider.get();
+        renderer.value(session);
         result.putAll(renderer.build());
     }
     
