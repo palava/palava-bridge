@@ -34,6 +34,6 @@ public interface Convertible {
      * @param converter the {@linkplain ContentConverter content converter} used to convert this object
      * @throws ConversionException if conversion failed
      */
-    void convert(StringBuffer buf, ContentConverter converter) throws ConversionException;
+    void convert(StringBuilder buf, ContentConverter converter) throws ConversionException;
     
 }

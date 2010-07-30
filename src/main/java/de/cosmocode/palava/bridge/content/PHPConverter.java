@@ -29,10 +29,10 @@ import java.util.Map.Entry;
  * @author Detlef Hüttemann
  */
 @Deprecated
-/* CHECKSTYLE:OFF */
 public class PHPConverter extends ContentConverter {
 
-    public void convertMap( StringBuffer buf, Map<?, ?> map) throws ConversionException {
+    @Override
+    public void convertMap(StringBuilder buf, Map<?, ?> map) throws ConversionException {
         buf.append("array(");
         
         for (Entry<?, ?> e : map.entrySet()) {
@@ -44,7 +44,10 @@ public class PHPConverter extends ContentConverter {
         buf.append(")");
     }
 
-    public void convertKeyValue(StringBuffer buf, String key, Object value, KeyValueState state) throws ConversionException {
+    @Override
+    public void convertKeyValue(StringBuilder buf, String key, Object value, KeyValueState state) 
+        throws ConversionException {
+        
         if (state == KeyValueState.ZERO) {
             buf.append("array()");
             return;
@@ -52,7 +55,7 @@ public class PHPConverter extends ContentConverter {
             buf.append("array(");
         }
 
-        buf.append(key);
+        convertString(buf, key);
         buf.append("=>");
         convert(buf, value);
 
@@ -65,32 +68,30 @@ public class PHPConverter extends ContentConverter {
         }
     }
 
-    public void convertNull( StringBuffer buf ) throws ConversionException {
+    @Override
+    public void convertNull(StringBuilder buf) throws ConversionException {
         buf.append("null");
     }
 
-    public void convertString(StringBuffer buf, String s) throws ConversionException {
-        final String buffer = s.replace("\\", "\\\\").replace("'", "\\'");
-        buf.append("'").append(buffer).append("'");
+    @Override
+    public void convertString(StringBuilder buf, String s) throws ConversionException {
+        buf.append("'").append(s.replace("\\", "\\\\").replace("'", "\\'")).append("'");
     }
 
-    public void convertDate( StringBuffer buf, java.util.Date object ) throws ConversionException {
+    @Override
+    public void convertDate(StringBuilder buf, Date object) throws ConversionException {
         // java timestamp:  number of milliseconds since January 1, 1970, 00:00:00 GMT
         // php timestamp:   number of seconds since January 1, 1970, 00:00:00 GMT
         buf.append(object.getTime() / 1000);
     }
 
-    public static Date getJavaDate(String phpdate) {
-        if (phpdate == null) return null;
-        final long phptime = Long.parseLong(phpdate);
-        return new Date(phptime * 1000);
-    }
-
-    public void convertNumber(StringBuffer buf, Number object) throws ConversionException {
+    @Override
+    public void convertNumber(StringBuilder buf, Number object) throws ConversionException {
         buf.append(object);
     }
 
-    public void convertList( StringBuffer buf, List<?> object) throws ConversionException {
+    @Override
+    public void convertList(StringBuilder buf, List<?> object) throws ConversionException {
         buf.append("array(");
         final Iterator<?> i = object.iterator();
         
@@ -104,9 +105,9 @@ public class PHPConverter extends ContentConverter {
         buf.append(")");
     }
 
-    public void convertDefault(StringBuffer buf, Object object) throws ConversionException {
+    @Override
+    public void convertDefault(StringBuilder buf, Object object) throws ConversionException {
         convertString(buf, object.toString());
     }
 
 }
-/* CHECKSTYLE:ON */

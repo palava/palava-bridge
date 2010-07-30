@@ -48,7 +48,7 @@ public class PhpContent extends AbstractContent {
     public PhpContent(Object object) throws ConversionException {
         super(MimeType.PHP);
         final PHPConverter converter = new PHPConverter();
-        final StringBuffer buf = new StringBuffer();
+        final StringBuilder buf = new StringBuilder();
         converter.convert(buf, object);
         bytes = buf.toString().getBytes(CHARSET);
     }

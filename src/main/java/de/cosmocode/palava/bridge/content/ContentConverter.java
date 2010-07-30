@@ -33,7 +33,7 @@ import de.cosmocode.rendering.Renderer;
 /* CHECKSTYLE:OFF */
 public abstract class ContentConverter {
 
-    public void convert(StringBuffer buf, Object object) throws ConversionException {
+    public void convert(StringBuilder buf, Object object) throws ConversionException {
         if (object == null) {
             convertNull(buf);
         } else if (object instanceof String) {
@@ -55,21 +55,21 @@ public abstract class ContentConverter {
         }
     }
 
-    public abstract void convertNull(StringBuffer buf) throws ConversionException;
+    public abstract void convertNull(StringBuilder buf) throws ConversionException;
     
-    public abstract void convertString(StringBuffer buf, String object) throws ConversionException;
+    public abstract void convertString(StringBuilder buf, String object) throws ConversionException;
     
-    public abstract void convertDate(StringBuffer buf, java.util.Date object) throws ConversionException;
+    public abstract void convertDate(StringBuilder buf, java.util.Date object) throws ConversionException;
     
-    public abstract void convertNumber(StringBuffer buf, Number object) throws ConversionException;
+    public abstract void convertNumber(StringBuilder buf, Number object) throws ConversionException;
     
-    public abstract void convertList(StringBuffer buf, List<?> object) throws ConversionException;
+    public abstract void convertList(StringBuilder buf, List<?> object) throws ConversionException;
     
-    public abstract void convertMap(StringBuffer buf, Map<?, ?> object) throws ConversionException;
+    public abstract void convertMap(StringBuilder buf, Map<?, ?> object) throws ConversionException;
     
-    public abstract void convertDefault(StringBuffer buf, Object object) throws ConversionException;
+    public abstract void convertDefault(StringBuilder buf, Object object) throws ConversionException;
     
-    public abstract void convertKeyValue(StringBuffer buf, String key, Object value, KeyValueState state) throws ConversionException;
+    public abstract void convertKeyValue(StringBuilder buf, String key, Object value, KeyValueState state) throws ConversionException;
 
 }
 

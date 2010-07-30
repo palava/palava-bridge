@@ -120,7 +120,7 @@ public class UpdateResult implements Convertible, JSONEncoder {
     }
     
     @Override
-    public void convert(StringBuffer sb, ContentConverter converter)
+    public void convert(StringBuilder sb, ContentConverter converter)
             throws ConversionException {
     
         if ( errors == null && result == null && exception == null ) {

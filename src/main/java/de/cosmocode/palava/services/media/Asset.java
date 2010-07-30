@@ -427,7 +427,7 @@ public class Asset implements AssetBase, Copyable<Asset>, JSONEncoder, Convertib
         if (metaData != null) json.key("metaData").plain(metaData);
     }
 
-    public void convert( StringBuffer buf, ContentConverter converter ) throws ConversionException
+    public void convert( StringBuilder buf, ContentConverter converter ) throws ConversionException
     {
         converter.convertKeyValue (buf, "id", id, KeyValueState.START);
         converter.convertKeyValue (buf, "storeKey", storeKey, KeyValueState.INSIDE);

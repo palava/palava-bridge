@@ -200,7 +200,7 @@ public class Directory implements DirectoryBase, JSONEncoder, Convertible, Itera
     }
     
     @Override
-    public void convert(StringBuffer buf, ContentConverter converter) throws ConversionException {
+    public void convert(StringBuilder buf, ContentConverter converter) throws ConversionException {
         converter.convertKeyValue(buf, "name", name, KeyValueState.START);
         converter.convertKeyValue(buf, "assets", assets, KeyValueState.LAST);
     }
