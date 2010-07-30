@@ -16,10 +16,11 @@
 
 package de.cosmocode.palava.bridge.content;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
+import com.google.inject.internal.Lists;
 
 import de.cosmocode.rendering.Renderer;
 
@@ -38,18 +39,16 @@ public abstract class ContentConverter {
             convertNull(buf);
         } else if (object instanceof String) {
             convertString(buf, (String) object);
-        } else if (object instanceof java.util.Date) {
-            convertDate(buf, (java.util.Date) object);
+        } else if (object instanceof Date) {
+            convertDate(buf, (Date) object);
         } else if (object instanceof Number) {
             convertNumber(buf, (Number) object);
-        } else if (object instanceof List<?>) {
-            convertList(buf, List.class.cast(object));
-        } else if (object instanceof Set<?>) {
-            convertList(buf, new ArrayList<Object>((Set<?>) object));
-        } else if (object instanceof Map<?, ?>) {
-            convertMap(buf, Map.class.cast(object));
         } else if (object instanceof Convertible) {
             ((Convertible) object).convert(buf, this);
+        } else if (object instanceof Iterable<?>) {
+            convertList(buf, (Iterable<?>) object);
+        } else if (object instanceof Map<?, ?>) {
+            convertMap(buf, Map.class.cast(object));
         } else {
             convertDefault(buf, object);
         }
@@ -59,11 +58,11 @@ public abstract class ContentConverter {
     
     public abstract void convertString(StringBuilder buf, String object) throws ConversionException;
     
-    public abstract void convertDate(StringBuilder buf, java.util.Date object) throws ConversionException;
+    public abstract void convertDate(StringBuilder buf, Date object) throws ConversionException;
     
     public abstract void convertNumber(StringBuilder buf, Number object) throws ConversionException;
     
-    public abstract void convertList(StringBuilder buf, List<?> object) throws ConversionException;
+    public abstract void convertList(StringBuilder buf, Iterable<?> object) throws ConversionException;
     
     public abstract void convertMap(StringBuilder buf, Map<?, ?> object) throws ConversionException;
     

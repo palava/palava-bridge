@@ -19,6 +19,7 @@ package de.cosmocode.palava.bridge.content;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.MimeType;
 
 /**
@@ -29,7 +30,7 @@ import de.cosmocode.palava.bridge.MimeType;
  * @author Willi Schoenborn
  */
 @Deprecated
-public class PhpContent extends AbstractContent {
+public class PhpContent implements Content {
     
     public static final PhpContent OK;
     public static final PhpContent NOT_FOUND;
@@ -46,11 +47,15 @@ public class PhpContent extends AbstractContent {
     private final byte[] bytes;
     
     public PhpContent(Object object) throws ConversionException {
-        super(MimeType.PHP);
         final PHPConverter converter = new PHPConverter();
         final StringBuilder buf = new StringBuilder();
         converter.convert(buf, object);
         bytes = buf.toString().getBytes(CHARSET);
+    }
+    
+    @Override
+    public MimeType getMimeType() {
+        return MimeType.PHP;
     }
     
     @Override

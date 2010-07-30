@@ -55,7 +55,7 @@ public class PHPConverter extends ContentConverter {
             buf.append("array(");
         }
 
-        convertString(buf, key);
+        convert(buf, key);
         buf.append("=>");
         convert(buf, value);
 
@@ -91,7 +91,7 @@ public class PHPConverter extends ContentConverter {
     }
 
     @Override
-    public void convertList(StringBuilder buf, List<?> object) throws ConversionException {
+    public void convertList(StringBuilder buf, Iterable<?> object) throws ConversionException {
         buf.append("array(");
         final Iterator<?> i = object.iterator();
         

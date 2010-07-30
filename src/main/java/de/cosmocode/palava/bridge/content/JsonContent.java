@@ -29,6 +29,7 @@ import org.json.extension.JSONEncoder;
 
 import de.cosmocode.json.JSON;
 import de.cosmocode.json.JSONRenderer;
+import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.MimeType;
 
 /**
@@ -40,7 +41,7 @@ import de.cosmocode.palava.bridge.MimeType;
  */
 @Deprecated
 @Immutable
-public class JsonContent extends AbstractContent {
+public class JsonContent implements Content {
 
     public static final JsonContent EMPTY;
     
@@ -53,38 +54,36 @@ public class JsonContent extends AbstractContent {
     private final byte[] bytes;
     
     public JsonContent(JSONRenderer renderer) {
-        super(MimeType.JSON);
         bytes = renderer == null ? NULL : renderer.toString().getBytes(CHARSET);
     }
     
     public JsonContent(JSONObject object) {
-        super(MimeType.JSON);
         bytes = object == null ? NULL : object.toString().getBytes(CHARSET);
     }
     
     public JsonContent(JSONArray array) {
-        super(MimeType.JSON);
         bytes = array == null ? NULL : array.toString().getBytes(CHARSET);
     }
     
     public JsonContent(JSONConstructor constructor) {
-        super(MimeType.JSON);
         bytes = constructor == null ? NULL : constructor.toString().getBytes(CHARSET);
     }
     
     public JsonContent(JSONEncoder encoder) {
-        super(MimeType.JSON);
         bytes = encoder == null ? NULL : JSON.createJSONRenderer().object(encoder).toString().getBytes(CHARSET);
     }
     
     public <E> JsonContent(Iterable<E> iterable) {
-        super(MimeType.JSON);
         bytes = iterable == null ? NULL : JSON.createJSONRenderer().array(iterable).toString().getBytes(CHARSET);
     }
     
     public <K, V> JsonContent(Map<K, V> map) {
-        super(MimeType.JSON);
         bytes = map == null ? NULL : JSON.createJSONRenderer().object(map).toString().getBytes(CHARSET);
+    }
+    
+    @Override
+    public MimeType getMimeType() {
+        return MimeType.JSON;
     }
     
     @Override

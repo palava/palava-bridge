@@ -19,6 +19,7 @@ package de.cosmocode.palava.bridge.content;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.MimeType;
 
 /**
@@ -28,15 +29,19 @@ import de.cosmocode.palava.bridge.MimeType;
  * @author Detlef Hüttemann
  */
 @Deprecated
-public class TextContent extends AbstractContent {
+public class TextContent implements Content {
 
     private final byte[] bytes;
 
     public TextContent(String text) {
-        super(MimeType.TEXT);
         bytes = text == null ? "null".getBytes(CHARSET) : text.getBytes(CHARSET);
     }
 
+    @Override
+    public MimeType getMimeType() {
+        return MimeType.TEXT;
+    }
+    
     @Override
     public long getLength() {
         return bytes.length;

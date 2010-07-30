@@ -22,8 +22,10 @@ import java.io.OutputStream;
 
 import org.apache.commons.io.IOUtils;
 
+import com.google.common.base.Preconditions;
 import com.google.common.io.LimitInputStream;
 
+import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.MimeType;
 
 /**
@@ -34,22 +36,28 @@ import de.cosmocode.palava.bridge.MimeType;
  * @author Willi Schoenborn
  */
 @Deprecated
-public class StreamContent extends AbstractContent {
+public class StreamContent implements Content {
     
     private final InputStream stream;
     private final int length;
+    private final MimeType mimeType;
     
-    public StreamContent(InputStream stream, long length, MimeType mime) {
-        super(mime);
-        this.stream = stream;
+    public StreamContent(InputStream stream, long length, MimeType mimeType) {
+        this.stream = Preconditions.checkNotNull(stream, "Stream");
         this.length = (int) length;
+        this.mimeType = Preconditions.checkNotNull(mimeType, "MimeType");
+    }
+    
+    @Override
+    public MimeType getMimeType() {
+        return mimeType;
     }
     
     /** 
      * Returns the underlying inputstream.
      * 
      * note that if you read from the input stream manually, 
-     * the write StreamContent.write method will fail
+     * {@link StreamContent#write(OutputStream)} will fail
      *
      * @return InputStream
      */

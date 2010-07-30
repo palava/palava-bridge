@@ -23,6 +23,7 @@ import java.io.StringWriter;
 
 import com.google.common.base.Preconditions;
 
+import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.MimeType;
 
 /**
@@ -33,13 +34,11 @@ import de.cosmocode.palava.bridge.MimeType;
  * @author Willi Schoenborn
  */
 @Deprecated
-public final class ErrorContent extends AbstractContent {
+public final class ErrorContent implements Content {
     
     private final byte [] bytes;
 
     private ErrorContent(Throwable e) {
-        super(MimeType.ERROR);
-        
         final StringBuilder builder = new StringBuilder();
         builder.append("<div style='background-color: #ff0000 !important; margin: 20px; font-family: Lucida Grande, " +
             "Verdana, Sans-serif; font-size: 12px; color: #ffffff !important; border-color: #000000 !important; " +
@@ -58,6 +57,11 @@ public final class ErrorContent extends AbstractContent {
         bytes = builder.toString().getBytes(CHARSET);
     }
 
+    @Override
+    public MimeType getMimeType() {
+        return MimeType.ERROR;
+    }
+    
     private String htmlspecialchars(String text) {
         return text.replace("<", "&lt;").replace(">", "&gt;");
     }
