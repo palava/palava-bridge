@@ -34,6 +34,7 @@ import de.cosmocode.palava.services.media.Asset;
 import de.cosmocode.palava.services.media.Directory;
 import de.cosmocode.palava.services.media.ImageManager;
 import de.cosmocode.palava.services.media.ImageStore;
+import de.cosmocode.rendering.Renderer;
 
 public class getDirectoryLong extends HibernateJob {
 
@@ -55,7 +56,7 @@ public class getDirectoryLong extends HibernateJob {
 
         directory.sort(Asset.ByCreationDateComparator.INSTANCE);
         
-        JSONConstructor json = JSON.asJSONConstructor(JSON.createJSONRenderer());
+        final JSONConstructor json = JSON.newConstructor();
 
         List<Asset> assets = directory.getAssets();
         

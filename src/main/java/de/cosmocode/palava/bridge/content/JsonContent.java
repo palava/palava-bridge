@@ -28,9 +28,9 @@ import org.json.extension.JSONConstructor;
 import org.json.extension.JSONEncoder;
 
 import de.cosmocode.json.JSON;
-import de.cosmocode.json.JSONRenderer;
 import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.MimeType;
+import de.cosmocode.rendering.Renderer;
 
 /**
  * use the JSONConverter to produce JSON output of java objects.
@@ -53,10 +53,6 @@ public class JsonContent implements Content {
     
     private final byte[] bytes;
     
-    public JsonContent(JSONRenderer renderer) {
-        bytes = renderer == null ? NULL : renderer.toString().getBytes(CHARSET);
-    }
-    
     public JsonContent(JSONObject object) {
         bytes = object == null ? NULL : object.toString().getBytes(CHARSET);
     }
@@ -65,20 +61,24 @@ public class JsonContent implements Content {
         bytes = array == null ? NULL : array.toString().getBytes(CHARSET);
     }
     
+    public JsonContent(Renderer renderer) {
+        bytes = renderer == null ? NULL : renderer.build().toString().getBytes(CHARSET);
+    }
+    
     public JsonContent(JSONConstructor constructor) {
         bytes = constructor == null ? NULL : constructor.toString().getBytes(CHARSET);
     }
     
     public JsonContent(JSONEncoder encoder) {
-        bytes = encoder == null ? NULL : JSON.createJSONRenderer().object(encoder).toString().getBytes(CHARSET);
+        bytes = encoder == null ? NULL : JSON.newRenderer().value(encoder).build().toString().getBytes(CHARSET);
     }
     
     public <E> JsonContent(Iterable<E> iterable) {
-        bytes = iterable == null ? NULL : JSON.createJSONRenderer().array(iterable).toString().getBytes(CHARSET);
+        bytes = iterable == null ? NULL : JSON.newRenderer().value(iterable).build().toString().getBytes(CHARSET);
     }
     
     public <K, V> JsonContent(Map<K, V> map) {
-        bytes = map == null ? NULL : JSON.createJSONRenderer().object(map).toString().getBytes(CHARSET);
+        bytes = map == null ? NULL : JSON.newRenderer().value(map).build().toString().getBytes(CHARSET);
     }
     
     @Override

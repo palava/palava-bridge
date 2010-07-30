@@ -25,13 +25,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.cosmocode.json.JSON;
-import de.cosmocode.json.JSONRenderer;
 import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.call.Arguments;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.command.Command;
 import de.cosmocode.palava.bridge.command.CommandException;
 import de.cosmocode.palava.bridge.content.JsonContent;
+import de.cosmocode.rendering.Renderer;
 
 public class parseDate implements Command {
 
@@ -48,7 +48,7 @@ public class parseDate implements Command {
         final DateFormat dateFormat = new SimpleDateFormat(pattern);
         dateFormat.setLenient(false);
         
-        final JSONRenderer out = JSON.createJSONRenderer();
+        final Renderer out = JSON.newRenderer();
         
         Object returnValue = Boolean.FALSE;
         
@@ -59,9 +59,9 @@ public class parseDate implements Command {
             log.info("Parsing date " + source + " with pattern " + pattern + " failed.");
         }
         
-        out.object().
+        out.map().
                 key("date").value(returnValue).
-            endObject();
+            endMap();
         
         return new JsonContent(out);
     }
