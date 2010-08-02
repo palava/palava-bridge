@@ -18,6 +18,7 @@ package de.cosmocode.palava.legacy;
 
 import java.io.Serializable;
 
+import de.cosmocode.palava.ipc.cache.CacheKey;
 import org.apache.commons.lang.StringUtils;
 
 import com.google.common.collect.ImmutableSet;
@@ -39,25 +40,13 @@ import de.cosmocode.palava.ipc.cache.CacheKeyFactory;
 public final class LegacyCacheKeyFactory implements CacheKeyFactory {
 
     @Override
-    public Serializable create(IpcCall call, IpcCommand command) {
+    public CacheKey create(IpcCall call, IpcCommand command) {
 
         final IpcArguments arguments = call.getArguments();
         final IpcSession session = call.getConnection().getSession();
         final String language = session.get("lang");
-        
-        final Builder<Object> builder = ImmutableSet.builder();
-        
-        builder.add(command.getClass());
-        
-        if (arguments.size() > 0) {
-            builder.add(arguments);
-        }
-        
-        if (StringUtils.isNotBlank(language)) {
-            builder.add(language);
-        }
-        
-        return builder.build();
+
+        return new LegacyCacheKey(command.getClass(), arguments, language);
     }
 
 }
