@@ -16,18 +16,11 @@
 
 package de.cosmocode.palava.legacy;
 
-import java.io.Serializable;
-
-import de.cosmocode.palava.ipc.cache.CacheKey;
-import org.apache.commons.lang.StringUtils;
-
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSet.Builder;
-
 import de.cosmocode.palava.ipc.IpcArguments;
 import de.cosmocode.palava.ipc.IpcCall;
 import de.cosmocode.palava.ipc.IpcCommand;
 import de.cosmocode.palava.ipc.IpcSession;
+import de.cosmocode.palava.ipc.cache.CacheKey;
 import de.cosmocode.palava.ipc.cache.CacheKeyFactory;
 
 /**
