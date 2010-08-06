@@ -44,11 +44,11 @@ public class LegacyCacheKey implements CacheKey {
         this.language = language;
     }
 
-    public Class<? extends IpcCommand> getIpcCommand() {
+    public Class<? extends IpcCommand> getCommand() {
         return null;
     }
 
-    public IpcArguments getIpcArguments() {
+    public IpcArguments getArguments() {
         return null;
     }
 
