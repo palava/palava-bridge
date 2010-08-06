@@ -146,6 +146,7 @@ public class Directory implements DirectoryBase, JSONEncoder, Convertible, Itera
     }
     
     @Override
+    @SuppressWarnings("unchecked")
     public List<Asset> getAssets() {
         // TODO forward list and intercept add methods or use UniqueList
         return assets;
@@ -185,7 +186,7 @@ public class Directory implements DirectoryBase, JSONEncoder, Convertible, Itera
 
     @Override
     public void render(Renderer renderer, RenderingLevel level) throws RenderingException {
-        throw new UnsupportedOperationException();
+        renderer.value(assets);
     }
     
     @Override
