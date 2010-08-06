@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -70,8 +71,14 @@ public class upload0 implements Job {
         }
         
         asset.setExpirationDate(date);
-        asset.fillMetaData(map);
-                
+        
+        final Map<String, String> metaData = asset.getMetaData();
+        for (Entry<String, Object> entry : map.entrySet()) {
+            final String key = entry.getKey();
+            final String value = entry.getValue() == null ? null : entry.getValue().toString();
+            metaData.put(key, value);
+        }
+        
         call.getHttpRequest().set("asset", asset);
         call.getHttpRequest().set("mimetype", new MimeType(mimetype));
 

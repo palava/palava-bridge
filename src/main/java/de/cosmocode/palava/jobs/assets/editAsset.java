@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
@@ -86,8 +87,8 @@ public class editAsset extends HibernateJob {
             asset.setExpirationDate(date);
             asset.setExpiresNever(map.containsKey("expiresNever") && map.get("expiresNever").equals("true"));
             map.remove("expiresNever");
-            
-            asset.fillMetaData(map);
+
+            asset.getMetaData().putAll(map);
 
             if (ur.isError()) {
                 ur.setResult(asset);
