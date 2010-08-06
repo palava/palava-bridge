@@ -186,7 +186,10 @@ public class Directory implements DirectoryBase, JSONEncoder, Convertible, Itera
 
     @Override
     public void render(Renderer renderer, RenderingLevel level) throws RenderingException {
-        renderer.value(assets);
+        renderer.
+            key("id").value(getId()).
+            key("name").value(getName()).
+            key("assets").value(assets);
     }
     
     @Override

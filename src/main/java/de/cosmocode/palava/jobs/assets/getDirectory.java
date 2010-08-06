@@ -18,10 +18,13 @@ package de.cosmocode.palava.jobs.assets;
 
 import java.util.Map;
 
+import org.json.JSONStringer;
+import org.json.extension.JSONConstructor;
 import org.json.extension.JSONEncoder;
 
 import com.google.inject.Singleton;
 
+import de.cosmocode.json.JSON;
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.call.DataCall;
@@ -54,7 +57,9 @@ public class getDirectory extends HibernateJob {
         JSONEncoder dir = im.getDirectory(Long.parseLong(dirId));
 
 
-        resp.setContent( new JsonContent(dir) ) ;
+        final JSONConstructor json = JSON.asJSONConstructor(new JSONStringer());
+        dir.encodeJSON(json);
+        resp.setContent( new JsonContent(json) ) ;
         
     }
 
