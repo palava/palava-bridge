@@ -16,11 +16,12 @@
 
 package de.cosmocode.palava.legacy;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.cosmocode.palava.ipc.IpcArguments;
 import de.cosmocode.palava.ipc.IpcCommand;
 import de.cosmocode.palava.ipc.cache.CacheKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Legacy compatible {@link CacheKey} which uses

@@ -34,7 +34,6 @@ import de.cosmocode.palava.services.media.Asset;
 import de.cosmocode.palava.services.media.Directory;
 import de.cosmocode.palava.services.media.ImageManager;
 import de.cosmocode.palava.services.media.ImageStore;
-import de.cosmocode.rendering.Renderer;
 
 public class getDirectoryLong extends HibernateJob {
 
