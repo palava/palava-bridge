@@ -28,6 +28,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
@@ -149,9 +150,6 @@ public class Asset implements AssetBase, Copyable<Asset>, JSONEncoder, Convertib
      */
     private String metaData = "{}";
     
-    @ManyToMany(mappedBy = "assets", fetch = FetchType.LAZY)
-    private Set<Directory> directories = Sets.newHashSet();
-
     @Override
     public long getId() {
         return id;
@@ -288,7 +286,7 @@ public class Asset implements AssetBase, Copyable<Asset>, JSONEncoder, Convertib
     @Override
     @SuppressWarnings("unchecked")
     public Set<Directory> getDirectories() {
-        return directories;
+        throw new UnsupportedOperationException();
     }
     
     @Override
