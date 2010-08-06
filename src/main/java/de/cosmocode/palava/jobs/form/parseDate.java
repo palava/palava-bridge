@@ -24,6 +24,8 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.inject.Singleton;
+
 import de.cosmocode.json.JSON;
 import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.call.Arguments;
@@ -33,6 +35,7 @@ import de.cosmocode.palava.bridge.command.CommandException;
 import de.cosmocode.palava.bridge.content.JsonContent;
 import de.cosmocode.rendering.Renderer;
 
+@Singleton
 public class parseDate implements Command {
 
     private static final Logger log = LoggerFactory.getLogger(parseDate.class); 

@@ -22,6 +22,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.inject.Singleton;
+
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.call.DataCall;
@@ -35,6 +37,7 @@ import de.cosmocode.palava.services.media.Asset;
 import de.cosmocode.palava.services.media.ImageManager;
 import de.cosmocode.palava.services.media.ImageStore;
 
+@Singleton
 public class editAsset extends HibernateJob {
 
     @SuppressWarnings("unchecked")

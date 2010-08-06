@@ -20,6 +20,8 @@ import java.util.Map;
 
 import org.json.extension.JSONEncoder;
 
+import com.google.inject.Singleton;
+
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.call.DataCall;
@@ -31,6 +33,7 @@ import de.cosmocode.palava.jpa.hibernate.HibernateJob;
 import de.cosmocode.palava.services.media.ImageManager;
 import de.cosmocode.palava.services.media.ImageStore;
 
+@Singleton
 public class getDirectory extends HibernateJob {
 
     @Override

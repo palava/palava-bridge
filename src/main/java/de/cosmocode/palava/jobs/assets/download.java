@@ -18,6 +18,8 @@ package de.cosmocode.palava.jobs.assets;
 
 import java.util.Map;
 
+import com.google.inject.Singleton;
+
 import de.cosmocode.palava.bridge.ConnectionLostException;
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
@@ -31,6 +33,7 @@ import de.cosmocode.palava.services.media.Asset;
 import de.cosmocode.palava.services.media.ImageManager;
 import de.cosmocode.palava.services.media.ImageStore;
 
+@Singleton
 public class download extends HibernateJob {
 
     @Override

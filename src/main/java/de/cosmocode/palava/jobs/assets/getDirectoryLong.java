@@ -21,6 +21,8 @@ import java.util.Map;
 
 import org.json.extension.JSONConstructor;
 
+import com.google.inject.Singleton;
+
 import de.cosmocode.json.JSON;
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
@@ -35,6 +37,7 @@ import de.cosmocode.palava.services.media.Directory;
 import de.cosmocode.palava.services.media.ImageManager;
 import de.cosmocode.palava.services.media.ImageStore;
 
+@Singleton
 public class getDirectoryLong extends HibernateJob {
 
     @Override

@@ -36,8 +36,8 @@ import de.cosmocode.rendering.MapRenderer;
  * @deprecated use {@link Entries}
  * @author Detlef Hüttemann
  */
-@Singleton
 @Deprecated
+@Singleton
 public class dump implements IpcCommand {
 
     private final Provider<MapRenderer> rendererProvider;

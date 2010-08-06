@@ -27,6 +27,8 @@ import org.mozilla.javascript.Undefined;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.inject.Singleton;
+
 import de.cosmocode.palava.bridge.ConnectionLostException;
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
@@ -41,6 +43,7 @@ import de.cosmocode.palava.bridge.session.HttpSession;
  * 
  * @author Tobias Sarnowski
  */
+@Singleton
 public class console implements Job {
     
     private static final Logger LOG = LoggerFactory.getLogger(console.class);

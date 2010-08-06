@@ -16,9 +16,6 @@
 
 package de.cosmocode.palava.legacy;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import de.cosmocode.palava.ipc.IpcArguments;
 import de.cosmocode.palava.ipc.IpcCommand;
 import de.cosmocode.palava.ipc.cache.CacheKey;
@@ -32,24 +29,26 @@ import de.cosmocode.palava.ipc.cache.CacheKey;
  */
 public class LegacyCacheKey implements CacheKey {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LegacyCacheKey.class);
-
-    private Class<? extends IpcCommand> ipcCommand;
-    private IpcArguments ipcArguments;
+    private static final long serialVersionUID = 8404456285214048054L;
+    
+    private Class<? extends IpcCommand> command;
+    private IpcArguments arguments;
     private String language;
 
-    public LegacyCacheKey(Class<? extends IpcCommand> ipcCommand, IpcArguments ipcArguments, String language) {
-        this.ipcCommand = ipcCommand;
-        this.ipcArguments = ipcArguments;
+    public LegacyCacheKey(Class<? extends IpcCommand> command, IpcArguments arguments, String language) {
+        this.command = command;
+        this.arguments = arguments;
         this.language = language;
     }
 
+    @Override
     public Class<? extends IpcCommand> getCommand() {
-        return null;
+        return command;
     }
 
+    @Override
     public IpcArguments getArguments() {
-        return null;
+        return arguments;
     }
 
     @Override
@@ -59,8 +58,8 @@ public class LegacyCacheKey implements CacheKey {
 
         final LegacyCacheKey that = (LegacyCacheKey) o;
 
-        if (ipcArguments != null ? !ipcArguments.equals(that.ipcArguments) : that.ipcArguments != null) return false;
-        if (ipcCommand != null ? !ipcCommand.equals(that.ipcCommand) : that.ipcCommand != null) return false;
+        if (arguments != null ? !arguments.equals(that.arguments) : that.arguments != null) return false;
+        if (command != null ? !command.equals(that.command) : that.command != null) return false;
         if (language != null ? !language.equals(that.language) : that.language != null) return false;
 
         return true;
@@ -68,8 +67,8 @@ public class LegacyCacheKey implements CacheKey {
 
     @Override
     public int hashCode() {
-        int result = ipcCommand != null ? ipcCommand.hashCode() : 0;
-        result = 31 * result + (ipcArguments != null ? ipcArguments.hashCode() : 0);
+        int result = command != null ? command.hashCode() : 0;
+        result = 31 * result + (arguments != null ? arguments.hashCode() : 0);
         result = 31 * result + (language != null ? language.hashCode() : 0);
         return result;
     }

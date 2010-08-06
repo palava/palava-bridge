@@ -25,6 +25,8 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.google.inject.Singleton;
+
 import de.cosmocode.palava.bridge.MimeType;
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Arguments;
@@ -35,6 +37,7 @@ import de.cosmocode.palava.bridge.content.PhpContent;
 import de.cosmocode.palava.bridge.session.HttpSession;
 import de.cosmocode.palava.services.media.Asset;
 
+@Singleton
 public class upload0 implements Job {
 
     @Override

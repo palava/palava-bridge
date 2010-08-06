@@ -17,6 +17,7 @@
 package de.cosmocode.palava.jobs.captcha;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.call.Call;
@@ -34,6 +35,7 @@ import de.cosmocode.palava.captcha.Validate;
  * @author Willi Schoenborn
  */
 @Deprecated
+@Singleton
 public class validate implements Command {
 
     @Inject

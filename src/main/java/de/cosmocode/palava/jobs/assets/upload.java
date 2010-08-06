@@ -20,6 +20,7 @@ import java.util.Map;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import de.cosmocode.palava.bridge.MimeType;
 import de.cosmocode.palava.bridge.Server;
@@ -33,6 +34,7 @@ import de.cosmocode.palava.services.media.Asset;
 import de.cosmocode.palava.services.media.ImageManager;
 import de.cosmocode.palava.services.media.ImageStore;
 
+@Singleton
 public class upload extends HibernateJob {
 
     @Inject

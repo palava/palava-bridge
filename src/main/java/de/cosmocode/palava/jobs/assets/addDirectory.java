@@ -19,6 +19,7 @@ package de.cosmocode.palava.jobs.assets;
 import java.util.Map;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Arguments;
@@ -36,6 +37,7 @@ import de.cosmocode.palava.services.media.ImageStore;
  * @author Willi Schoenborn
  */
 @Deprecated
+@Singleton
 public class addDirectory extends HibernateJob {
 
     @Inject

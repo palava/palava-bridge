@@ -20,6 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.util.Map;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import de.cosmocode.palava.bridge.MimeType;
 import de.cosmocode.palava.bridge.Server;
@@ -40,6 +41,7 @@ import de.cosmocode.palava.captcha.Create;
  * @author Willi Schoenborn
  */
 @Deprecated
+@Singleton
 public class createCaptcha implements Job {
 
     @Inject
