@@ -24,13 +24,10 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -47,7 +44,6 @@ import com.google.common.base.Functions;
 import com.google.common.collect.Maps;
 import com.google.gag.annotation.disclaimer.LegacySucks;
 import com.google.inject.internal.Objects;
-import com.google.inject.internal.Sets;
 
 import de.cosmocode.collections.callback.Callback;
 import de.cosmocode.collections.callback.Callbacks;

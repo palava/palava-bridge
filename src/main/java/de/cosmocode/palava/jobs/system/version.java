@@ -16,13 +16,17 @@
 
 package de.cosmocode.palava.jobs.system;
 
+import java.util.Map;
+
 import com.google.inject.Singleton;
 
 import de.cosmocode.palava.bridge.Content;
+import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
-import de.cosmocode.palava.bridge.command.Command;
-import de.cosmocode.palava.bridge.command.CommandException;
+import de.cosmocode.palava.bridge.command.Job;
+import de.cosmocode.palava.bridge.command.Response;
 import de.cosmocode.palava.bridge.content.TextContent;
+import de.cosmocode.palava.bridge.session.HttpSession;
 
 /**
  * returns the server's version.
@@ -31,11 +35,13 @@ import de.cosmocode.palava.bridge.content.TextContent;
  * @author Willi Schoenborn
  */
 @Singleton
-public class version implements Command {
+public class version implements Job {
+    
+    private final Content content = new TextContent("1.4");
     
     @Override
-    public Content execute(Call call) throws CommandException {
-        return new TextContent("1.4");
+    public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy) {
+        response.setContent(content);
     }
 
 }

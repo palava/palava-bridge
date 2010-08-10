@@ -16,15 +16,17 @@
 
 package de.cosmocode.palava.jobs.session;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.inject.Singleton;
 
-import de.cosmocode.palava.bridge.Content;
+import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
-import de.cosmocode.palava.bridge.command.Command;
-import de.cosmocode.palava.bridge.command.CommandException;
+import de.cosmocode.palava.bridge.command.Job;
+import de.cosmocode.palava.bridge.command.Response;
 import de.cosmocode.palava.bridge.content.PhpContent;
 import de.cosmocode.palava.bridge.session.HttpSession;
 
@@ -34,20 +36,19 @@ import de.cosmocode.palava.bridge.session.HttpSession;
  * @author Tobias Sarnowski
  */
 @Singleton
-public class destroy implements Command {
+public class destroy implements Job {
 
     private static final Logger LOG = LoggerFactory.getLogger(destroy.class);
     
     @Override
-    public Content execute(Call call) throws CommandException {
-        final HttpSession session = call.getHttpRequest().getHttpSession();
+    public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy) {
         if (session == null) {
             LOG.warn("No session found, cant destroy.");
         } else {
             LOG.debug("Destroying sessiong {}", session);
             session.clear();
         }
-        return PhpContent.OK;
+        response.setContent(PhpContent.OK);
     }
     
 }

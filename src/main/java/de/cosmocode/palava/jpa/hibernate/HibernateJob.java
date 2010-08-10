@@ -25,7 +25,6 @@ import com.google.inject.Provider;
 
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
-import de.cosmocode.palava.bridge.command.Command;
 import de.cosmocode.palava.bridge.command.Job;
 import de.cosmocode.palava.bridge.command.Response;
 import de.cosmocode.palava.bridge.session.HttpSession;

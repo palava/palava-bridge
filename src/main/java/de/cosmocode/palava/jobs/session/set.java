@@ -16,14 +16,16 @@
 
 package de.cosmocode.palava.jobs.session;
 
+import java.util.Map;
+
 import com.google.common.base.Preconditions;
 import com.google.inject.Singleton;
 
-import de.cosmocode.palava.bridge.Content;
+import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Arguments;
 import de.cosmocode.palava.bridge.call.Call;
-import de.cosmocode.palava.bridge.command.Command;
-import de.cosmocode.palava.bridge.command.CommandException;
+import de.cosmocode.palava.bridge.command.Job;
+import de.cosmocode.palava.bridge.command.Response;
 import de.cosmocode.palava.bridge.content.PhpContent;
 import de.cosmocode.palava.bridge.session.HttpSession;
 
@@ -34,17 +36,16 @@ import de.cosmocode.palava.bridge.session.HttpSession;
  * @author Willi Schoenborn
  */
 @Singleton
-public class set implements Command {
+public class set implements Job {
 
     @Override
-    public Content execute(Call call) throws CommandException {
+    public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy) {
         final Arguments arguments = call.getArguments();
-        final HttpSession session = call.getHttpRequest().getHttpSession();
         Preconditions.checkNotNull(session, "Session");
         
         session.putAll(arguments);
         
-        return PhpContent.OK;
+        response.setContent(PhpContent.OK);
     }
 
 }

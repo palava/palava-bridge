@@ -16,14 +16,17 @@
 
 package de.cosmocode.palava.jobs.captcha;
 
+import java.util.Map;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import de.cosmocode.palava.bridge.Content;
+import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
-import de.cosmocode.palava.bridge.command.Command;
-import de.cosmocode.palava.bridge.command.CommandException;
+import de.cosmocode.palava.bridge.command.Job;
+import de.cosmocode.palava.bridge.command.Response;
 import de.cosmocode.palava.bridge.content.TextContent;
+import de.cosmocode.palava.bridge.session.HttpSession;
 import de.cosmocode.palava.captcha.CaptchaService;
 import de.cosmocode.palava.captcha.Validate;
 
@@ -36,17 +39,21 @@ import de.cosmocode.palava.captcha.Validate;
  */
 @Deprecated
 @Singleton
-public class validate implements Command {
+public class validate implements Job {
 
+    private final CaptchaService captcha;
+    
     @Inject
-    private CaptchaService captcha;
+    public validate(CaptchaService captcha) {
+        this.captcha = captcha;
+    }
     
     @Override
-    public Content execute(Call call) throws CommandException {
+    public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy) {
         final String userInput = call.getArguments().getString("code");
         final boolean result = captcha.validate(call.getHttpRequest().getHttpSession().getSessionId(), userInput);
         
-        return new TextContent(Boolean.toString(result));
+        response.setContent(new TextContent(Boolean.toString(result)));
     }
 
 }

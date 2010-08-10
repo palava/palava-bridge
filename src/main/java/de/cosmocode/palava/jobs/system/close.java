@@ -16,13 +16,16 @@
 
 package de.cosmocode.palava.jobs.system;
 
+import java.util.Map;
+
 import com.google.inject.Singleton;
 
-import de.cosmocode.palava.bridge.Content;
+import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
-import de.cosmocode.palava.bridge.command.Command;
-import de.cosmocode.palava.bridge.command.CommandException;
+import de.cosmocode.palava.bridge.command.Job;
+import de.cosmocode.palava.bridge.command.Response;
 import de.cosmocode.palava.bridge.content.PhpContent;
+import de.cosmocode.palava.bridge.session.HttpSession;
 
 
 /**
@@ -35,11 +38,11 @@ import de.cosmocode.palava.bridge.content.PhpContent;
  */
 @Deprecated
 @Singleton
-public class close implements Command {
+public class close implements Job {
     
     @Override
-    public Content execute(Call call) throws CommandException {
-        return PhpContent.OK;
+    public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy) {
+        response.setContent(PhpContent.OK);
     }
 
 }

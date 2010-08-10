@@ -16,14 +16,16 @@
 
 package de.cosmocode.palava.jobs.session;
 
+import java.util.Map;
+
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
-import de.cosmocode.palava.bridge.Content;
+import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Call;
-import de.cosmocode.palava.bridge.command.Command;
-import de.cosmocode.palava.bridge.command.CommandException;
+import de.cosmocode.palava.bridge.command.Job;
+import de.cosmocode.palava.bridge.command.Response;
 import de.cosmocode.palava.bridge.content.TextContent;
 import de.cosmocode.palava.bridge.session.HttpSession;
 
@@ -34,15 +36,18 @@ import de.cosmocode.palava.bridge.session.HttpSession;
  * @author Willi Schoenborn
  */
 @Singleton
-public class initialize implements Command {
+public final class initialize implements Job {
 
+    private final Provider<HttpSession> provider;
+    
     @Inject
-    private Provider<HttpSession> provider;
+    public initialize(Provider<HttpSession> provider) {
+        this.provider = provider;
+    }
 
     @Override
-    public Content execute(Call call) throws CommandException {
-        // TODO should fail
-        return new TextContent(provider.get().getSessionId());
+    public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy) {
+        response.setContent(new TextContent(provider.get().getSessionId()));
     }
     
 }

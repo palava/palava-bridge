@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,21 +28,23 @@ import org.slf4j.LoggerFactory;
 import com.google.inject.Singleton;
 
 import de.cosmocode.json.JSON;
-import de.cosmocode.palava.bridge.Content;
+import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Arguments;
 import de.cosmocode.palava.bridge.call.Call;
-import de.cosmocode.palava.bridge.command.Command;
-import de.cosmocode.palava.bridge.command.CommandException;
+import de.cosmocode.palava.bridge.command.Job;
+import de.cosmocode.palava.bridge.command.Response;
 import de.cosmocode.palava.bridge.content.JsonContent;
+import de.cosmocode.palava.bridge.session.HttpSession;
 import de.cosmocode.rendering.Renderer;
 
 @Singleton
-public class parseDate implements Command {
+public class parseDate implements Job {
 
     private static final Logger log = LoggerFactory.getLogger(parseDate.class); 
     
     @Override
-    public Content execute(Call call) throws CommandException {
+    public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy)
+            throws Exception {
         final Arguments arguments = call.getArguments();
         arguments.require("pattern", "source");
         
@@ -66,7 +69,7 @@ public class parseDate implements Command {
                 key("date").value(returnValue).
             endMap();
         
-        return new JsonContent(out);
+        response.setContent(new JsonContent(out));
     }
 
 }
