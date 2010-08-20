@@ -32,6 +32,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.IndexColumn;
 import org.json.JSONException;
@@ -75,6 +76,7 @@ import de.cosmocode.rendering.RenderingLevel;
     )
 })
 @Entity
+@Table(name = "ba_directory")
 public class Directory implements DirectoryBase, JSONEncoder, Convertible, Iterable<Asset> {
 
     public static final String BY_ASSET_ID = "Directory by Asset id";

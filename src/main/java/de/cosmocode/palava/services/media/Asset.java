@@ -28,6 +28,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -72,6 +73,7 @@ import de.cosmocode.rendering.RenderingLevel;
 @Deprecated
 @LegacySucks
 @Entity
+@Table(name = "ba_asset")
 public class Asset implements AssetBase, Copyable<Asset>, JSONEncoder, Convertible {
     
     private static final Logger LOG = LoggerFactory.getLogger(Asset.class);
