@@ -51,7 +51,7 @@ public class createCaptcha implements Job {
     public void process(Call request, Response response, HttpSession session,
             Server server, Map<String, Object> caddy) throws  Exception {
 
-        final byte [] bytes = captcha.getCaptcha(session.getSessionId());
+        final byte[] bytes = captcha.getCaptcha(session.getSessionId());
         
         final ByteArrayInputStream input = new ByteArrayInputStream(bytes);
         final StreamContent content = new StreamContent(input, bytes.length, MimeType.JPEG);
