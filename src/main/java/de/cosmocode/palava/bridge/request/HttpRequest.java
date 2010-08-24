@@ -39,7 +39,7 @@ public interface HttpRequest extends IpcConnection {
      *         available in this request
      * @throws IllegalArgumentException if the request uri is no valid {@link URI}
      */
-    URI getRequestUri();
+    String getRequestUri();
     
     /**
      * Provide the requested referer.
@@ -48,7 +48,7 @@ public interface HttpRequest extends IpcConnection {
      *         was no information about the referer available
      * @throws IllegalArgumentException if the referer is no valid {@link URL}
      */
-    URL getReferer();
+    String getReferer();
     
     /**
      * Provide the remote address of the user.
