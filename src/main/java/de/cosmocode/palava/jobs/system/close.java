@@ -27,7 +27,6 @@ import de.cosmocode.palava.bridge.command.Response;
 import de.cosmocode.palava.bridge.content.PhpContent;
 import de.cosmocode.palava.bridge.session.HttpSession;
 
-
 /**
  * Closes the connection.
  * 
