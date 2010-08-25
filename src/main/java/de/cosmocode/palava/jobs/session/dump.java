@@ -27,7 +27,6 @@ import de.cosmocode.palava.bridge.session.HttpSession;
 import de.cosmocode.palava.ipc.IpcCall;
 import de.cosmocode.palava.ipc.IpcCommand;
 import de.cosmocode.palava.ipc.IpcCommandExecutionException;
-import de.cosmocode.palava.ipc.session.Entries;
 import de.cosmocode.rendering.MapRenderer;
 
 /**
