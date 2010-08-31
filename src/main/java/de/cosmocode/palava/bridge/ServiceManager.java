@@ -18,8 +18,6 @@ package de.cosmocode.palava.bridge;
 
 import com.google.inject.Inject;
 
-import de.cosmocode.palava.core.Service;
-
 /**
  * A manager for all services running inside the palava
  * framework. The {@link ServiceManager} is responsible for
@@ -30,7 +28,7 @@ import de.cosmocode.palava.core.Service;
  * @author Willi Schoenborn
  */
 @Deprecated
-public interface ServiceManager extends Service {
+public interface ServiceManager {
 
     /**
      * Lookups a service by its specification.
