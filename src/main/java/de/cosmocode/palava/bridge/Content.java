@@ -57,4 +57,13 @@ public interface Content {
      */
     void write(OutputStream out) throws IOException;
     
+    /**
+     * Returns the encoded binary data of this content.
+     * 
+     * @since 2.2
+     * @return the binary data
+     * @throws IOException if collecting the bytes failed
+     */
+    byte[] getBytes() throws IOException;
+    
 }

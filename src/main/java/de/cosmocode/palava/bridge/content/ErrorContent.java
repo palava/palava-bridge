@@ -76,6 +76,11 @@ public final class ErrorContent implements Content {
         out.write(bytes, 0, bytes.length);
     }
     
+    @Override
+    public byte[] getBytes() throws IOException {
+        return bytes;
+    }
+    
     /**
      * Static factory method for {@link ErrorContent}.
      * 

@@ -29,7 +29,7 @@ import com.google.common.base.Preconditions;
  */
 @Deprecated
 @Immutable
-public class MimeType {
+public final class MimeType {
     
     public static final MimeType ERROR = new MimeType("application/error");
     public static final MimeType PHP = new MimeType("application/x-httpd-php");
@@ -40,43 +40,29 @@ public class MimeType {
     public static final MimeType IMAGE = new MimeType("image/*");
     public static final MimeType JPEG = new MimeType("image/jpeg");
     
-    private final String type;
+    private final String name;
 
     public MimeType(String type) {
-        this.type = Preconditions.checkNotNull(type, "MimeType");
-        final int slash = type.indexOf("/");
-        Preconditions.checkArgument(slash >= 0, "Type contains no /");
-        Preconditions.checkArgument(slash != type.length() - 1, "Type ends with /");
+        this.name = Preconditions.checkNotNull(type, "MimeType");
+        Preconditions.checkArgument(type.indexOf("/") >= 0, "Type contains no /");
+        Preconditions.checkArgument(type.indexOf("/") != type.length() - 1, "Type ends with /");
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((type == null) ? 0 : type.hashCode());
-        return result;
+        return 31 * 1 + name.hashCode();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object that) {
+        if (this == that) {
             return true;
-        }
-        if (obj == null) {
+        } else if (that instanceof MimeType) {
+            final MimeType other = MimeType.class.cast(that);
+            return name.equals(other.name);
+        } else {
             return false;
         }
-        if (!(obj instanceof MimeType)) {
-            return false;
-        }
-        final MimeType other = (MimeType) obj;
-        if (type == null) {
-            if (other.type != null) {
-                return false;
-            }
-        } else if (!type.equals(other.type)) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -85,12 +71,22 @@ public class MimeType {
      * @return the minor part
      */
     public String getMinor() {
-        return type.substring(type.indexOf("/") + 1);
+        return name.substring(name.indexOf("/") + 1);
     }
     
+    public String getName() {
+        return name;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * 
+     * @deprecated use {@link #getName()}
+     */
+    @Deprecated
     @Override
     public String toString() {
-        return type;
+        return name;
     }
 
 }

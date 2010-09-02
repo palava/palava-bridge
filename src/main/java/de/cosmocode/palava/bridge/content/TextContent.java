@@ -53,6 +53,11 @@ public class TextContent implements Content {
     }
     
     @Override
+    public byte[] getBytes() throws IOException {
+        return bytes;
+    }
+    
+    @Override
     public String toString() {
         return new String(bytes, CHARSET);
     }

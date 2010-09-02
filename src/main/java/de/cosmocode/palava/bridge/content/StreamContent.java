@@ -20,9 +20,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.apache.commons.io.IOUtils;
-
 import com.google.common.base.Preconditions;
+import com.google.common.io.ByteStreams;
 import com.google.common.io.LimitInputStream;
 
 import de.cosmocode.palava.bridge.Content;
@@ -72,7 +71,12 @@ public class StreamContent implements Content {
 
     @Override
     public void write(OutputStream out) throws IOException {
-        IOUtils.copy(new LimitInputStream(stream, length), out);
+        ByteStreams.copy(new LimitInputStream(stream, length), out);
+    }
+    
+    @Override
+    public byte[] getBytes() throws IOException {
+        return ByteStreams.toByteArray(new LimitInputStream(stream, length));
     }
     
 }
