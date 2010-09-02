@@ -4,14 +4,14 @@
   <groupId>de.cosmocode.palava</groupId>
   <artifactId>palava-bridge</artifactId>
   <name>Palava Bridge</name>
-  <version>2.2.0</version>
+  <version>2.3-SNAPSHOT</version>
   <parent>
     <artifactId>palava-parent</artifactId>
     <groupId>de.cosmocode.palava</groupId>
     <version>2.4.0</version>
   </parent>
   <scm>
-    <developerConnection>scm:svn:https://palava.svn.cosmocode.de/palava-bridge/tags/2.2.0</developerConnection>
+    <developerConnection>scm:svn:https://palava.svn.cosmocode.de/palava-bridge/trunk</developerConnection>
   </scm>
   <repositories>
     <repository>
