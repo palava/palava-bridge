@@ -20,8 +20,6 @@ import java.io.Serializable;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
@@ -47,8 +45,6 @@ import de.cosmocode.palava.ipc.Ipc;
  */
 @Deprecated
 public abstract class CachableJob extends UtilityJobImpl {
-    
-    private static final Logger LOG = LoggerFactory.getLogger(CachableJob.class);
     
     private CacheService service;
     
@@ -103,10 +99,8 @@ public abstract class CachableJob extends UtilityJobImpl {
                 }
                 assert response.hasContent() : "Expected content to be set";
                 final Content content = response.getContent();
-                LOG.debug("Storing {} into cache", content);
                 service.store(key, content);
             } else {
-                LOG.debug("Retrieved content {} from cache", cached);
                 response.setContent(cached);
             }
         } else {
