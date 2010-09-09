@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.extension.JSONConstructor;
 import org.json.extension.JSONEncoder;
+import org.json.extension.NoObjectContext;
 
 import com.google.gag.annotation.disclaimer.LegacySucks;
 
@@ -37,6 +38,7 @@ import de.cosmocode.palava.bridge.content.ContentConverter;
 import de.cosmocode.palava.bridge.content.ConversionException;
 import de.cosmocode.palava.bridge.content.Convertible;
 import de.cosmocode.palava.bridge.content.KeyValueState;
+import de.cosmocode.rendering.Renderable;
 
 /**
  * I don't know why this is here.
@@ -147,8 +149,12 @@ public class UpdateResult implements Convertible, JSONEncoder {
                 json.key("exception").value(exception.toString());
             if ( result != null ) {
                 json.key("result");
-                if ( result instanceof JSONEncoder )
+                if ( result instanceof JSONEncoder ) {
+                     final boolean objects = result instanceof NoObjectContext;
+                     if (objects) json.object();
                     ((JSONEncoder)result).encodeJSON(json);
+                    if (objects) json.endObject();
+                }
                 else
                     json.value( result ) ;
             } 
