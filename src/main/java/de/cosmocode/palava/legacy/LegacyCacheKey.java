@@ -16,6 +16,8 @@
 
 package de.cosmocode.palava.legacy;
 
+import com.google.inject.internal.Objects;
+
 import de.cosmocode.palava.ipc.IpcArguments;
 import de.cosmocode.palava.ipc.IpcCommand;
 import de.cosmocode.palava.ipc.cache.CacheKey;
@@ -27,7 +29,7 @@ import de.cosmocode.palava.ipc.cache.CacheKey;
  * @since 2.1
  * @author Oliver Lorenz
  */
-public class LegacyCacheKey implements CacheKey {
+final class LegacyCacheKey implements CacheKey {
 
     private static final long serialVersionUID = 8404456285214048054L;
     
@@ -52,24 +54,21 @@ public class LegacyCacheKey implements CacheKey {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        final LegacyCacheKey that = (LegacyCacheKey) o;
-
-        if (arguments != null ? !arguments.equals(that.arguments) : that.arguments != null) return false;
-        if (command != null ? !command.equals(that.command) : that.command != null) return false;
-        if (language != null ? !language.equals(that.language) : that.language != null) return false;
-
-        return true;
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        } else if (that instanceof LegacyCacheKey) {
+            final LegacyCacheKey other = LegacyCacheKey.class.cast(that);
+            return Objects.equal(command, other.command) &&
+                Objects.equal(arguments, other.arguments) &&
+                Objects.equal(language, other.language);
+        } else {
+            return false;
+        }
     }
 
     @Override
     public int hashCode() {
-        int result = command != null ? command.hashCode() : 0;
-        result = 31 * result + (arguments != null ? arguments.hashCode() : 0);
-        result = 31 * result + (language != null ? language.hashCode() : 0);
-        return result;
+        return Objects.hashCode(command, arguments, language);
     }
 }
