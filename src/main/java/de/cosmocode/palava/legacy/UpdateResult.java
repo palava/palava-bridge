@@ -56,6 +56,7 @@ public class UpdateResult implements Convertible, JSONEncoder {
     public static final String ERR_BADPASSWORD = "badpassword";
     public static final String ERR_NOTFOUND = "notfound";
     public static final String ERR_DUPLICATE = "duplicate";
+    public static final String ERR_COMBINATION = "combination";
 
     private static final Pattern PHONE = Pattern.compile("^[+ 0-9()/]*$");
 
