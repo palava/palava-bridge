@@ -38,7 +38,6 @@ import de.cosmocode.palava.bridge.content.ContentConverter;
 import de.cosmocode.palava.bridge.content.ConversionException;
 import de.cosmocode.palava.bridge.content.Convertible;
 import de.cosmocode.palava.bridge.content.KeyValueState;
-import de.cosmocode.rendering.Renderable;
 
 /**
  * I don't know why this is here.
