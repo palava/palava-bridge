@@ -11,7 +11,7 @@
     <version>2.4.0</version>
   </parent>
   <scm>
-    <developerConnection>scm:svn:https://palava.svn.cosmocode.de/palava-bridge/trunk</developerConnection>
+    <developerConnection>scm:git:git@github.com:palava/${project.artifactId}.git</developerConnection>
   </scm>
   <repositories>
     <repository>
