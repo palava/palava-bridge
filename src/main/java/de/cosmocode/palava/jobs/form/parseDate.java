@@ -37,14 +37,22 @@ import de.cosmocode.palava.bridge.content.JsonContent;
 import de.cosmocode.palava.bridge.session.HttpSession;
 import de.cosmocode.rendering.Renderer;
 
+/**
+ * Parses a date.
+ * 
+ * @deprecated with replacement
+ * @author Willi Schoenborn
+ */
+@Deprecated
 @Singleton
+/* CHECKSTYLE:OFF */
 public class parseDate implements Job {
+/* CHECKSTYLE:ON */
 
-    private static final Logger log = LoggerFactory.getLogger(parseDate.class); 
+    private static final Logger LOG = LoggerFactory.getLogger(parseDate.class); 
     
     @Override
-    public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy)
-            throws Exception {
+    public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy) {
         final Arguments arguments = call.getArguments();
         arguments.require("pattern", "source");
         
@@ -62,12 +70,12 @@ public class parseDate implements Job {
             final Date date = dateFormat.parse(source);
             returnValue = date.getTime() / 1000;
         } catch (ParseException e) {
-            log.info("Parsing date " + source + " with pattern " + pattern + " failed.");
+            LOG.info("Parsing date " + source + " with pattern " + pattern + " failed.");
         }
         
-        out.map().
-                key("date").value(returnValue).
-            endMap();
+        out.map();
+        out.key("date").value(returnValue);
+        out.endMap();
         
         response.setContent(new JsonContent(out));
     }

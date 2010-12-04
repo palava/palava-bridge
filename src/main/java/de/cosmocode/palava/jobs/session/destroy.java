@@ -33,10 +33,14 @@ import de.cosmocode.palava.bridge.session.HttpSession;
 /**
  * Deletes the actual session.
  * 
+ * @deprecated without replacement
  * @author Tobias Sarnowski
  */
+@Deprecated
 @Singleton
+/* CHECKSTYLE:OFF */
 public class destroy implements Job {
+/* CHECKSTYLE:ON */
 
     private static final Logger LOG = LoggerFactory.getLogger(destroy.class);
     

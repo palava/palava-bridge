@@ -26,19 +26,25 @@ import de.cosmocode.palava.bridge.call.Arguments;
 import de.cosmocode.palava.bridge.call.Call;
 import de.cosmocode.palava.bridge.command.Job;
 import de.cosmocode.palava.bridge.command.Response;
+import de.cosmocode.palava.bridge.content.ConversionException;
 import de.cosmocode.palava.bridge.content.PhpContent;
 import de.cosmocode.palava.bridge.session.HttpSession;
 
 /**
- * get a session data entry
+ * Get a session data entry.
+ * 
+ * @deprecated use {@link Get}
  * @author Detlef Hüttemann
  */
+@Deprecated
 @Singleton
+/* CHECKSTYLE:OFF */
 public class get implements Job {
+/* CHECKSTYLE:ON */
     
     @Override
-    public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy)
-            throws Exception {
+    public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy) 
+        throws ConversionException {
         final Arguments arguments = call.getArguments();
         arguments.require("key");
         

@@ -39,7 +39,9 @@ import de.cosmocode.palava.captcha.Validate;
  */
 @Deprecated
 @Singleton
+/* CHECKSTYLE:OFF */
 public class validate implements Job {
+/* CHECKSTYLE:ON */
 
     private final CaptchaService captcha;
     

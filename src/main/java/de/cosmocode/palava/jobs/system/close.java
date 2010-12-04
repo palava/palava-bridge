@@ -37,7 +37,9 @@ import de.cosmocode.palava.bridge.session.HttpSession;
  */
 @Deprecated
 @Singleton
+/* CHECKSTYLE:OFF */
 public class close implements Job {
+/* CHECKSTYLE:ON */
     
     @Override
     public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy) {

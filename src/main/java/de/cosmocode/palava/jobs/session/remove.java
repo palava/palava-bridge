@@ -32,10 +32,14 @@ import de.cosmocode.palava.bridge.session.HttpSession;
 /**
  * Removes a key from the session.
  *
+ * @deprecated use {@link Remove}
  * @author Willi Schoenborn
  */
+@Deprecated
 @Singleton
+/* CHECKSTYLE:OFF */
 public class remove implements Job {
+/* CHECKSTYLE:ON */
 
     @Override
     public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy) {

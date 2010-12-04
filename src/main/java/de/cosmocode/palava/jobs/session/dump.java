@@ -37,7 +37,9 @@ import de.cosmocode.rendering.MapRenderer;
  */
 @Deprecated
 @Singleton
+/* CHECKSTYLE:OFF */
 public class dump implements IpcCommand {
+/* CHECKSTYLE:ON */
 
     private final Provider<MapRenderer> rendererProvider;
 

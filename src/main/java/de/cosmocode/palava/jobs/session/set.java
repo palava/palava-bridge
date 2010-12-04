@@ -17,6 +17,7 @@
 package de.cosmocode.palava.jobs.session;
 
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Singleton;
@@ -30,13 +31,17 @@ import de.cosmocode.palava.bridge.content.PhpContent;
 import de.cosmocode.palava.bridge.session.HttpSession;
 
 /**
- * sets a session data entry.
+ * Sets a session data entry.
  * 
+ * @deprecated use {@link Set}
  * @author Detlef Hüttemann
  * @author Willi Schoenborn
  */
+@Deprecated
 @Singleton
+/* CHECKSTYLE:OFF */
 public class set implements Job {
+/* CHECKSTYLE:ON */
 
     @Override
     public void process(Call call, Response response, HttpSession session, Server server, Map<String, Object> caddy) {

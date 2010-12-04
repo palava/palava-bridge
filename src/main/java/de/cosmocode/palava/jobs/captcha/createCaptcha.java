@@ -42,7 +42,9 @@ import de.cosmocode.palava.captcha.Create;
  */
 @Deprecated
 @Singleton
+/* CHECKSTYLE:OFF */
 public class createCaptcha implements Job {
+/* CHECKSTYLE:ON */
 
     @Inject
     private CaptchaService captcha;

@@ -31,11 +31,15 @@ import de.cosmocode.palava.bridge.session.HttpSession;
 /**
  * returns the server's version.
  * 
+ * @deprecated no need to use this anymore
  * @author Tobias Sarnowski
  * @author Willi Schoenborn
  */
+@Deprecated
 @Singleton
+/* CHECKSTYLE:OFF */
 public class version implements Job {
+    /* CHECKSTYLE:ON */
     
     private final Content content = new TextContent("1.4");
     

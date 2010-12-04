@@ -32,11 +32,15 @@ import de.cosmocode.palava.bridge.session.HttpSession;
 /**
  * Checks whether a session exists and creates new if necessary.
  * 
+ * @deprecated no need to use this anymore, as there is always a session
  * @author Detlef Hüttemann
  * @author Willi Schoenborn
  */
+@Deprecated
 @Singleton
+/* CHECKSTYLE:OFF */
 public final class initialize implements Job {
+/* CHECKSTYLE:ON */
 
     private final Provider<HttpSession> provider;
     
