@@ -166,6 +166,7 @@ public interface UtilityJob {
      * @throws MissingArgumentException if the necessary parameter was omitted
      * @deprecated use getMandatory(String) instead
      */
+    @Deprecated
     public String lookup (String key) throws MissingArgumentException, Exception;
     
     /** 
@@ -174,6 +175,7 @@ public interface UtilityJob {
      * @throws MissingArgumentException if the necessary parameter was omitted
      * @deprecated use getMandatory(String, String) instead
      */
+    @Deprecated
     public String lookup (String key, String argumentType) throws MissingArgumentException, Exception;
     
     /**
@@ -181,12 +183,14 @@ public interface UtilityJob {
      * 
      * @deprecated use getOptional(String) instead
      */
+    @Deprecated
     public String lookupOptional (String key);
 
     /**
      * lookup an optional parameter. if it doesn't exist, defaultValue is returned.
      * @deprecated use getOptional(String, String) instead
      */
+    @Deprecated
     public String lookupOptional (String key, String defaultValue);
     
     /** 
@@ -201,6 +205,7 @@ public interface UtilityJob {
      * @throws MissingArgumentException if the necessary parameter was omitted
      * @deprecated use {@link #getBool(String)} instead
      */
+    @Deprecated
     public boolean lookupBool (String key) throws MissingArgumentException, Exception;
     
     /** lookup an optional bool.
@@ -213,6 +218,7 @@ public interface UtilityJob {
      * </table>
      * @deprecated use {@link #getOptBool(String)} instead
      */
+    @Deprecated
     public boolean lookupOptionalBool (String key);
     
     /**
@@ -222,18 +228,21 @@ public interface UtilityJob {
      * @throws MissingArgumentException if the parameter wasn't given to this job
      * @deprecated use {@link #getInt(String)} instead
      */
+    @Deprecated
     public int lookupInt (String key) throws MissingArgumentException, Exception;
     
     /** 
      * lookup an optional int. If the int isn't set, 0 is returned
      * @deprecated use {@link #getOptInt(String)} instead
      */
+    @Deprecated
     public int lookupOptionalInt (String key);
 
     /**
      * lookup an optional int. Returns defaultValue if it isn't given
      * @deprecated use {@link #getOptInt(String, int)} instead
      */
+    @Deprecated
     public int lookupOptionalInt (String key, int defaultValue);
 
 }
