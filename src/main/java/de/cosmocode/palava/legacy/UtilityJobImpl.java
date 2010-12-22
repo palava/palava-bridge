@@ -168,38 +168,55 @@ public abstract class UtilityJobImpl implements Job, UtilityJob {
     // -----------------
     
     @Deprecated
+    @Override
     public String lookup (String key) throws MissingArgumentException, Exception {
         return getMandatory(key);
     }
+    
     @Deprecated
+    @Override
     public String lookup (String key, String argumentType) throws MissingArgumentException, Exception {
         return getMandatory(key, argumentType);
     }
+    
     @Deprecated
+    @Override
     public String lookupOptional (String key) {
         return getOptional(key);
     }
+    
     @Deprecated
+    @Override
     public String lookupOptional (String key, String defaultValue) {
         return getOptional(key, defaultValue);
     }
+    
     @Deprecated
+    @Override
     public boolean lookupBool (String key) throws MissingArgumentException {
         return getBool(key);
     }
+    
     @Deprecated
+    @Override
     public boolean lookupOptionalBool (String key) {
         return getOptBool(key);
     }
+    
     @Deprecated
+    @Override
     public int lookupInt (String key) throws MissingArgumentException {
         return getInt(key);
     }
+    
     @Deprecated
+    @Override
     public int lookupOptionalInt (String key) {
         return getOptInt(key);
     }
+    
     @Deprecated
+    @Override
     public int lookupOptionalInt (String key, int defaultValue) {
         return getOptInt(key, defaultValue);
     }

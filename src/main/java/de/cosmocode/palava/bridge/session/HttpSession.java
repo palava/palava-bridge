@@ -47,6 +47,7 @@ public interface HttpSession extends IpcSession, Renderable {
      * 
      * @return the session id
      */
+    @Override
     String getSessionId();
     
     /**
@@ -58,6 +59,7 @@ public interface HttpSession extends IpcSession, Renderable {
      * @param value the value
      * @throws NullPointerException if key is null
      */
+    @Override
     <K, V> void set(K key, V value);
     
     /**
@@ -69,6 +71,7 @@ public interface HttpSession extends IpcSession, Renderable {
      * @return the value bound to the key or null if there
      *         is no value for the given key
      */
+    @Override
     <K, V> V get(K key);
     
     /**
@@ -79,6 +82,7 @@ public interface HttpSession extends IpcSession, Renderable {
      * @param key the key
      * @return true if the key is currently bound to a value
      */
+    @Override
     <K> boolean contains(K key);
     
     /**
@@ -90,6 +94,7 @@ public interface HttpSession extends IpcSession, Renderable {
      * @return the old value if the specified key was bound to a 
      *         value before, null otherwise
      */
+    @Override
     <K, V> V remove(K key);
     
     /**
@@ -100,6 +105,7 @@ public interface HttpSession extends IpcSession, Renderable {
      * @param map the map providing key-value bindings
      * @throws NullPointerException if map is null
      */
+    @Override
     <K, V> void putAll(Map<? extends K, ? extends V> map);
     
     /**

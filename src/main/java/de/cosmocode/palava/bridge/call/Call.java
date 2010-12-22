@@ -40,6 +40,7 @@ public interface Call extends IpcCall {
      * @throws UnsupportedOperationException if this call does not support
      *         Arguments
      */
+    @Override
     Arguments getArguments();
     
     /**

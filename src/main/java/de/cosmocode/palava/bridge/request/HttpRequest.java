@@ -82,6 +82,7 @@ public interface HttpRequest extends IpcConnection {
      * @param key the key
      * @param value the value
      */
+    @Override
     <K, V> void set(K key, V value);
     
     /**
@@ -93,6 +94,7 @@ public interface HttpRequest extends IpcConnection {
      * @return true of this request contains a binding to the specified
      *         key
      */
+    @Override
     <K> boolean contains(K key);
     
     /**
@@ -104,6 +106,7 @@ public interface HttpRequest extends IpcConnection {
      * @return the value associated to the specified key or null if
      *         there is no such binding
      */
+    @Override
     <K, V> V get(K key);
     
 }

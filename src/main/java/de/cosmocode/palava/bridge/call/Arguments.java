@@ -34,6 +34,7 @@ public interface Arguments extends IpcArguments {
      * @param keys the required keys
      * @throws MissingArgumentException if any key is missing
      */
+    @Override
     void require(String... keys) throws MissingArgumentException;
     
 }

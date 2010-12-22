@@ -136,6 +136,8 @@ public class UpdateResult implements Convertible, JSONEncoder {
             converter.convertKeyValue(sb, "result", result, KeyValueState.LAST);            
         }
     }
+    
+    @Override
     public void encodeJSON (JSONConstructor json) throws JSONException {
         
         json.object();
