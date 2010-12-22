@@ -43,15 +43,15 @@ public class MissingArgumentException extends RuntimeException {
         super(message, cause);
     }
 
-    public MissingArgumentException(Object ignored, String missingArgument) {
+    public MissingArgumentException(@SuppressWarnings("unused") Object ignored, String missingArgument) {
         this(missingArgument);
     }
     
-    public MissingArgumentException(Object ignored, String missingArgument, String type) {
+    public MissingArgumentException(@SuppressWarnings("unused") Object ignored, String missingArgument, String type) {
         super(missingArgument + " (" + type + ")");
     }
     
-    public MissingArgumentException(Object ignored, List<String> missingArguments) {
+    public MissingArgumentException(@SuppressWarnings("unused") Object ignored, List<String> missingArguments) {
         this(missingArguments.toString());
     }
     
