@@ -42,7 +42,7 @@ public class PhpContent implements Content {
         } catch (ConversionException e) {
             throw new ExceptionInInitializerError(e);
         }
-    };
+    }
     
     private final byte[] bytes;
     

@@ -42,7 +42,7 @@ public final class MimeTypes {
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);
         }
-    };
+    }
 
     private final Map<String, MimeType> mimeTypes;
 

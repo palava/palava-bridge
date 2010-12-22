@@ -36,4 +36,4 @@ public enum KeyValueState {
     
     SINGLE
     
-};
+}
