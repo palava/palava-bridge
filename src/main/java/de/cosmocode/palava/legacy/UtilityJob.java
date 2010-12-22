@@ -162,6 +162,7 @@ public interface UtilityJob {
     
     /** 
      * lookup a necessary parameter.
+     * 
      * @throws MissingArgumentException if the necessary parameter was omitted
      * @deprecated use getMandatory(String) instead
      */
@@ -169,6 +170,7 @@ public interface UtilityJob {
     
     /** 
      * lookup a necessary parameter.
+     * 
      * @throws MissingArgumentException if the necessary parameter was omitted
      * @deprecated use getMandatory(String, String) instead
      */
@@ -176,6 +178,7 @@ public interface UtilityJob {
     
     /**
      * lookup an optional parameter (equivalent to args.get(key))
+     * 
      * @deprecated use getOptional(String) instead
      */
     public String lookupOptional (String key);
