@@ -34,6 +34,6 @@ public enum KeyValueState {
     
     ZERO,
     
-    SINGLE
+    SINGLE;
     
 }
