@@ -160,10 +160,6 @@ public interface UtilityJob {
     /** lookup an optional argument of type long. If hasArgument(key)==false then 0 is returned */
     public long getOptLong (String key, long defaultValue);
     
-    
-    
-    // deprecated, old names
-    
     /** 
      * lookup a necessary parameter.
      * @throws MissingArgumentException if the necessary parameter was omitted
