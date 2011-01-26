@@ -25,6 +25,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 import com.google.inject.Inject;
 
+import de.cosmocode.commons.Strings;
 import de.cosmocode.palava.bridge.Content;
 import de.cosmocode.palava.bridge.Server;
 import de.cosmocode.palava.bridge.call.Arguments;
@@ -74,7 +75,7 @@ public abstract class CachableJob extends UtilityJobImpl {
 
         if (isCachingEnabled()) {
             final Arguments arguments = supportsArguments(call) ? call.getArguments() : null;
-            final String language = session.get("lang");
+            final String language = Strings.toString(session.get("lang"));
             
             final Builder<Object> builder = ImmutableSet.builder();
             

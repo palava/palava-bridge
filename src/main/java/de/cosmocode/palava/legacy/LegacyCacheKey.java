@@ -16,7 +16,7 @@
 
 package de.cosmocode.palava.legacy;
 
-import com.google.inject.internal.Objects;
+import com.google.common.base.Objects;
 
 import de.cosmocode.palava.ipc.IpcArguments;
 import de.cosmocode.palava.ipc.IpcCommand;

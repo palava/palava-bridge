@@ -16,6 +16,7 @@
 
 package de.cosmocode.palava.legacy;
 
+import de.cosmocode.commons.Strings;
 import de.cosmocode.palava.ipc.IpcArguments;
 import de.cosmocode.palava.ipc.IpcCall;
 import de.cosmocode.palava.ipc.IpcCommand;
@@ -37,7 +38,7 @@ public final class LegacyCacheKeyFactory implements CacheKeyFactory {
 
         final IpcArguments arguments = call.getArguments();
         final IpcSession session = call.getConnection().getSession();
-        final String language = session.get("lang");
+        final String language = Strings.toString(session.get("lang"));
 
         return new LegacyCacheKey(command.getClass(), arguments, language);
     }

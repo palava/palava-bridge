@@ -74,39 +74,4 @@ public interface HttpRequest extends IpcConnection {
      */
     HttpSession getHttpSession();
     
-    /**
-     * Sets an attribute in this request.
-     * 
-     * @param <K> the key type
-     * @param <V> the value type
-     * @param key the key
-     * @param value the value
-     */
-    @Override
-    <K, V> void set(K key, V value);
-    
-    /**
-     * Checks for the presence of a binding to the specified
-     * key.
-     * 
-     * @param <K> the key type
-     * @param key the key
-     * @return true of this request contains a binding to the specified
-     *         key
-     */
-    @Override
-    <K> boolean contains(K key);
-    
-    /**
-     * Retrieves the value bound the specified key. 
-     * 
-     * @param <K> the key type
-     * @param <V> the value type
-     * @param key the key
-     * @return the value associated to the specified key or null if
-     *         there is no such binding
-     */
-    @Override
-    <K, V> V get(K key);
-    
 }
